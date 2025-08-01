@@ -1,10 +1,8 @@
 "use client";
-import IntroSection from "@/components/content/IntroSection";
-import ProgramSection from "@/components/content/ProgramSection";
-import ReviewSection from "@/components/content/ReviewSection";
 import LocationSection from "@/components/content/LocationSection";
-import { HeroSection } from "@/components/common";
-import SuccessStories from "@/components/landing/success-stories";
+import UrbanHero from "@/components/hero/urban-hero";
+import UrbanPrograms from "@/components/sections/urban-programs";
+import UrbanTestimonials from "@/components/sections/urban-testimonials";
 import WhyChooseUs from "@/components/landing/why-choose-us";
 import TrainerRecruitment from "@/components/landing/trainer-recruitment";
 import sample from "@/data/sample.json";
@@ -23,13 +21,11 @@ export default function Home() {
   
   return (
     <div className="min-h-screen bg-background">
-      <HeroSection />
-      <SuccessStories />
+      <UrbanHero />
+      <UrbanPrograms />
+      <UrbanTestimonials />
       <WhyChooseUs />
-      <IntroSection {...sample.intro} />
-      <ProgramSection {...sample.programs} />
       <TrainerRecruitment />
-      <ReviewSection {...sample.reviews} />
       <LocationSection {...sample.location} />
       
       {/* 고객 중심 CTA 섹션 */}

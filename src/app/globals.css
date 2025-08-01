@@ -210,4 +210,25 @@
   .fitness-glow {
     box-shadow: 0 0 20px color-mix(in oklch, var(--fitness-primary), transparent 60%);
   }
+  
+  /* Urban Field 스타일 타이포그래피 */
+  .urban-text-gradient {
+    background: linear-gradient(135deg, #16a34a, #22c55e);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  
+  .urban-shadow {
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.1);
+  }
+  
+  .urban-hover {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  .urban-hover:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 32px 64px rgba(0, 0, 0, 0.15);
+  }
 }

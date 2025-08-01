@@ -8,7 +8,7 @@ import {
   WebsiteStructuredData, 
   OrganizationStructuredData 
 } from '@/components/seo/structured-data';
-import { MainNav } from '@/components/navigation/main-nav';
+import { UrbanNav } from '@/components/navigation/urban-nav';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -119,10 +119,10 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         <OrganizationStructuredData />
         
         {/* 메인 네비게이션 */}
-        <MainNav />
+        <UrbanNav />
         
         {/* 메인 콘텐츠 */}
-        <main className="pt-16">
+        <main>
           {children}
         </main>
         
