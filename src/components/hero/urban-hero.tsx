@@ -27,7 +27,8 @@ export default function UrbanHero() {
             <p className="text-stone-500 text-sm">센터 소개 영상</p>
           </div>
         </div>
-        <div className="absolute inset-0 bg-gradient-to-b from-stone-900/20 via-stone-900/60 to-stone-900/80" />
+        {/* 영상 오버레이 - 투명도 높여서 텍스트 가독성 개선 */}
+        <div className="absolute inset-0 bg-gradient-to-b from-stone-900/70 via-stone-900/85 to-stone-900/95" />
       </motion.div>
 
       {/* Main content */}
@@ -44,7 +45,7 @@ export default function UrbanHero() {
             animate={{ opacity: 1 }}
             transition={{ duration: 0.8, delay: 0.3 }}
           >
-            <div className="bg-stone-800/50 backdrop-blur-sm border border-stone-700 rounded-2xl p-6 max-w-3xl mx-auto">
+            <div className="bg-stone-900/90 backdrop-blur-md border border-stone-700 rounded-2xl p-6 max-w-3xl mx-auto shadow-2xl">
               <p className="text-xl md:text-2xl text-amber-400 font-bold text-center mb-2">
                 &ldquo;운동은 했는데, 왜 내 몸은 그대로일까?&rdquo;
               </p>
@@ -54,29 +55,31 @@ export default function UrbanHero() {
             </div>
           </motion.div>
 
-          {/* Main headline - 체형교정·통증개선 중심 */}
-          <motion.h1 
-            className="text-3xl md:text-5xl lg:text-6xl font-bold text-white leading-[1.1] tracking-tight mb-6"
+          {/* Main headline with background */}
+          <motion.div
+            className="bg-stone-900/60 backdrop-blur-sm rounded-3xl p-8 mb-8"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.4 }}
           >
-            <span className="block text-stone-300 text-lg md:text-xl font-medium mb-4">
-              30~50대 여성의
-            </span>
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-300 to-amber-500">
-              체형교정·통증개선
-            </span>
-            <span className="block text-stone-200 text-xl md:text-2xl font-medium mt-2 mb-3">
-              에 특화된
-            </span>
-            <span className="text-white">
-              스테이피트니스의 1:1 맞춤 트레이닝
-            </span>
-            <span className="block text-stone-300 text-lg md:text-xl font-medium mt-3">
-              으로 &lsquo;진짜 내 몸&rsquo;의 변화를 경험해보세요.
-            </span>
-          </motion.h1>
+            <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold text-white leading-[1.1] tracking-tight">
+              <span className="block text-stone-300 text-lg md:text-xl font-medium mb-4">
+                30~50대 여성의
+              </span>
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-300 to-amber-500">
+                체형교정·통증개선
+              </span>
+              <span className="block text-stone-200 text-xl md:text-2xl font-medium mt-2 mb-3">
+                에 특화된
+              </span>
+              <span className="text-white">
+                스테이피트니스의 1:1 맞춤 트레이닝
+              </span>
+              <span className="block text-stone-300 text-lg md:text-xl font-medium mt-3">
+                으로 &lsquo;진짜 내 몸&rsquo;의 변화를 경험해보세요.
+              </span>
+            </h1>
+          </motion.div>
 
           {/* Target audience section */}
           <motion.div 
@@ -85,7 +88,7 @@ export default function UrbanHero() {
             animate={{ opacity: 1 }}
             transition={{ duration: 0.8, delay: 0.5 }}
           >
-            <div className="bg-stone-800/40 backdrop-blur-sm border border-stone-700 rounded-2xl p-8 mb-8">
+            <div className="bg-stone-900/90 backdrop-blur-md border border-stone-700 rounded-2xl p-8 mb-8 shadow-2xl">
               <h3 className="text-2xl font-bold text-amber-400 text-center mb-6">
                 이런 분이라면 꼭 오세요
               </h3>
@@ -131,7 +134,7 @@ export default function UrbanHero() {
 
             {/* Differentiation points */}
             <div className="grid md:grid-cols-3 gap-6 text-center">
-              <div className="p-6 bg-stone-800/30 rounded-xl backdrop-blur-sm">
+              <div className="p-6 bg-stone-900/80 rounded-xl backdrop-blur-md border border-stone-700/50">
                 <div className="text-amber-400 text-3xl mb-3">🎯</div>
                 <h3 className="text-white font-bold mb-3">1:1 맞춤 분석</h3>
                 <p className="text-stone-300 text-sm leading-relaxed">
@@ -139,7 +142,7 @@ export default function UrbanHero() {
                   <span className="text-amber-400 font-semibold">내 몸에 꼭 맞는</span> 운동 처방
                 </p>
               </div>
-              <div className="p-6 bg-stone-800/30 rounded-xl backdrop-blur-sm">
+              <div className="p-6 bg-stone-900/80 rounded-xl backdrop-blur-md border border-stone-700/50">
                 <div className="text-amber-400 text-3xl mb-3">🏥</div>
                 <h3 className="text-white font-bold mb-3">통증 해결 전문</h3>
                 <p className="text-stone-300 text-sm leading-relaxed">
@@ -147,7 +150,7 @@ export default function UrbanHero() {
                   <span className="text-amber-400 font-semibold">체형교정 + 통증개선</span> 프로그램
                 </p>
               </div>
-              <div className="p-6 bg-stone-800/30 rounded-xl backdrop-blur-sm">
+              <div className="p-6 bg-stone-900/80 rounded-xl backdrop-blur-md border border-stone-700/50">
                 <div className="text-amber-400 text-3xl mb-3">💪</div>
                 <h3 className="text-white font-bold mb-3">지속 가능한 변화</h3>
                 <p className="text-stone-300 text-sm leading-relaxed">
