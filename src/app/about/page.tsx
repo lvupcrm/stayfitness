@@ -86,7 +86,7 @@ export default function AboutPage() {
                 <span className="text-stone-300">건강이 머무는 공간</span>
               </h1>
               <p className="text-xl text-stone-300 mb-8 leading-relaxed">
-                운동을 '도전'이 아니라 '일상'으로 만드는 곳. 
+                운동을 &lsquo;도전&rsquo;이 아니라 &lsquo;일상&rsquo;으로 만드는 곳. 
                 누구나 편하게 찾아와 오래 머물 수 있는 피트니스, 
                 당신의 건강이 자연스럽게 습관이 되는 공간입니다.
               </p>
@@ -281,7 +281,7 @@ export default function AboutPage() {
             transition={{ duration: 0.6, delay: 0.1 }}
             viewport={{ once: true }}
           >
-            &ldquo;운동은 '잠깐 하는 것'이 아니라, 삶의 일부가 되어야 한다고 믿습니다. 
+            &ldquo;운동은 &lsquo;잠깐 하는 것&rsquo;이 아니라, 삶의 일부가 되어야 한다고 믿습니다. 
             누구나 부담 없이 찾아오고, 자연스럽게 운동을 지속할 수 있는 공간을 만듭니다.&rdquo;
           </motion.p>
           <motion.p 
