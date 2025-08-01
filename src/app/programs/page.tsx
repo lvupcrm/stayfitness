@@ -27,7 +27,7 @@ export default function ProgramsPage() {
       <section className="py-16">
         <div className="container mx-auto px-4">
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {sample.programs.programs.map((program, index) => (
+            {sample.programs.programs.map((program) => (
               <Card key={program.name} className="group hover:shadow-lg transition-all duration-300 overflow-hidden">
                 <div className="relative h-48 overflow-hidden">
                   <Image 

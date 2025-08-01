@@ -14,7 +14,8 @@ import {
   GraduationCap,
   Coffee,
   MessageSquare,
-  CheckCircle
+  CheckCircle,
+  Star
 } from 'lucide-react'
 import { useForm, Resolver } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
