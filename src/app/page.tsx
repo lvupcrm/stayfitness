@@ -4,6 +4,9 @@ import ProgramSection from "@/components/content/ProgramSection";
 import ReviewSection from "@/components/content/ReviewSection";
 import LocationSection from "@/components/content/LocationSection";
 import { HeroSection } from "@/components/common";
+import SuccessStories from "@/components/landing/success-stories";
+import WhyChooseUs from "@/components/landing/why-choose-us";
+import TrainerRecruitment from "@/components/landing/trainer-recruitment";
 import sample from "@/data/sample.json";
 import { useEffect } from "react";
 import { usePathname } from "next/navigation";
@@ -21,8 +24,11 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-background">
       <HeroSection />
+      <SuccessStories />
+      <WhyChooseUs />
       <IntroSection {...sample.intro} />
       <ProgramSection {...sample.programs} />
+      <TrainerRecruitment />
       <ReviewSection {...sample.reviews} />
       <LocationSection {...sample.location} />
       

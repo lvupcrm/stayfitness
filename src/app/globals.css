@@ -83,6 +83,7 @@
   --fitness-accent: oklch(0.75 0.12 45);
   --fitness-success: oklch(0.55 0.16 120);
   --fitness-warning: oklch(0.75 0.18 60);
+  --fitness-light: oklch(0.85 0.05 160);
   
   /* 반응형 브레이크포인트 변수 */
   --mobile-breakpoint: 768px;
