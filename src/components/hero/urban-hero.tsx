@@ -43,7 +43,7 @@ export default function UrbanHero() {
           >
             <h1 className="stay-heading-xl text-white mb-6">
               <span className="block mb-2">Not just fitness,</span>
-              <span className="stay-text-gradient">It's transformation</span>
+              <span className="stay-text-gradient">It&apos;s transformation</span>
             </h1>
             
             <motion.p 
@@ -54,7 +54,7 @@ export default function UrbanHero() {
             >
               체형교정과 통증개선의 새로운 기준<br />
               <span className="text-slate-300">스테이피트니스에서 시작하세요</span>
-            </p>
+            </motion.p>
 
             <motion.div
               className="flex flex-col sm:flex-row gap-4 justify-center items-center"
