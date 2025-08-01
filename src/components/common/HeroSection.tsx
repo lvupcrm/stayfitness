@@ -187,7 +187,7 @@ export default function HeroSection() {
             <span className="text-sm font-medium">TRUSTED BY PROFESSIONALS</span>
           </div>
           <p className="text-white/80 text-lg">
-            강남구 최고의 기업 웰니스 파트너 | 삼성, LG, 네이버 임직원이 선택한 피트니스
+            강남구 프리미엄 피트니스 | 500+ 회원이 선택한 건강한 변화의 시작
           </p>
         </motion.div>
       </div>

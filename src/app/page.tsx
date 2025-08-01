@@ -13,7 +13,7 @@ import { usePathname } from "next/navigation";
 import { trackPageView } from "@/lib/analytics";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
-import { ArrowRight, Users, Calendar, Building2, MessageSquare, MapPin } from "lucide-react";
+import { ArrowRight, Users, Calendar, MessageSquare, MapPin, Sparkles, Trophy } from "lucide-react";
 
 export default function Home() {
   const pathname = usePathname();
@@ -32,15 +32,15 @@ export default function Home() {
       <ReviewSection {...sample.reviews} />
       <LocationSection {...sample.location} />
       
-      {/* 현대적인 CTA 섹션 */}
+      {/* 고객 중심 CTA 섹션 */}
       <section className="py-20 bg-gradient-to-br from-fitness-primary/5 to-fitness-secondary/5">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
             <h2 className="text-3xl font-bold text-foreground mb-4">
-              지금 바로 <span className="text-fitness-primary">시작하세요</span>
+              당신의 <span className="text-fitness-primary">변화</span>를 시작하세요
             </h2>
             <p className="text-lg text-muted-foreground">
-              스테이피트니스와 함께하는 건강한 변화의 첫걸음
+              전문가와 함께하는 맞춤형 피트니스 솔루션
             </p>
           </div>
           
@@ -64,7 +64,7 @@ export default function Home() {
                 <div className="w-12 h-12 bg-fitness-secondary/10 rounded-lg flex items-center justify-center mb-4 group-hover:bg-fitness-secondary/20 transition-colors">
                   <Calendar className="w-6 h-6 text-fitness-secondary" />
                 </div>
-                <h3 className="text-xl font-semibold mb-2">1:1 상담 예약</h3>
+                <h3 className="text-xl font-semibold mb-2">무료 상담 예약</h3>
                 <p className="text-muted-foreground mb-4">전문가와 맞춤 상담을 받아보세요</p>
                 <div className="flex items-center text-fitness-secondary group-hover:translate-x-1 transition-transform">
                   <span className="font-medium">상담 예약하기</span>
@@ -73,29 +73,15 @@ export default function Home() {
               </div>
             </Link>
             
-            <Link href="/corporate" className="group">
+            <Link href="#success-stories" className="group">
               <div className="p-6 bg-white rounded-xl shadow-sm hover:shadow-lg transition-all duration-200 border hover:border-fitness-accent/20">
                 <div className="w-12 h-12 bg-fitness-accent/10 rounded-lg flex items-center justify-center mb-4 group-hover:bg-fitness-accent/20 transition-colors">
-                  <Building2 className="w-6 h-6 text-fitness-accent" />
+                  <Trophy className="w-6 h-6 text-fitness-accent" />
                 </div>
-                <h3 className="text-xl font-semibold mb-2">기업 웰니스</h3>
-                <p className="text-muted-foreground mb-4">직원 건강관리 솔루션</p>
+                <h3 className="text-xl font-semibold mb-2">성공 스토리</h3>
+                <p className="text-muted-foreground mb-4">실제 회원들의 놀라운 변화</p>
                 <div className="flex items-center text-fitness-accent group-hover:translate-x-1 transition-transform">
-                  <span className="font-medium">문의하기</span>
-                  <ArrowRight className="w-4 h-4 ml-2" />
-                </div>
-              </div>
-            </Link>
-            
-            <Link href="/careers" className="group">
-              <div className="p-6 bg-white rounded-xl shadow-sm hover:shadow-lg transition-all duration-200 border hover:border-fitness-success/20">
-                <div className="w-12 h-12 bg-fitness-success/10 rounded-lg flex items-center justify-center mb-4 group-hover:bg-fitness-success/20 transition-colors">
-                  <MessageSquare className="w-6 h-6 text-fitness-success" />
-                </div>
-                <h3 className="text-xl font-semibold mb-2">트레이너 지원</h3>
-                <p className="text-muted-foreground mb-4">함께 성장할 전문가를 찾습니다</p>
-                <div className="flex items-center text-fitness-success group-hover:translate-x-1 transition-transform">
-                  <span className="font-medium">지원하기</span>
+                  <span className="font-medium">스토리 보기</span>
                   <ArrowRight className="w-4 h-4 ml-2" />
                 </div>
               </div>
@@ -115,17 +101,32 @@ export default function Home() {
               </div>
             </Link>
             
+            <Link href="/reviews" className="group">
+              <div className="p-6 bg-white rounded-xl shadow-sm hover:shadow-lg transition-all duration-200 border hover:border-fitness-success/20">
+                <div className="w-12 h-12 bg-fitness-success/10 rounded-lg flex items-center justify-center mb-4 group-hover:bg-fitness-success/20 transition-colors">
+                  <MessageSquare className="w-6 h-6 text-fitness-success" />
+                </div>
+                <h3 className="text-xl font-semibold mb-2">고객 후기</h3>
+                <p className="text-muted-foreground mb-4">실제 회원들의 생생한 후기</p>
+                <div className="flex items-center text-fitness-success group-hover:translate-x-1 transition-transform">
+                  <span className="font-medium">후기 보기</span>
+                  <ArrowRight className="w-4 h-4 ml-2" />
+                </div>
+              </div>
+            </Link>
+            
             <div className="md:col-span-2 lg:col-span-1">
               <div className="p-6 bg-gradient-to-r from-fitness-primary to-fitness-secondary rounded-xl text-white h-full flex flex-col justify-center">
-                <h3 className="text-xl font-semibold mb-2">지금 시작하세요!</h3>
-                <p className="mb-4 opacity-90">건강한 변화의 첫걸음을 함께해요</p>
+                <Sparkles className="w-8 h-8 mb-3 opacity-90" />
+                <h3 className="text-xl font-semibold mb-2">첫 방문 혜택!</h3>
+                <p className="mb-4 opacity-90">무료 체성분 분석 + 1:1 맞춤 상담</p>
                 <Button 
                   asChild 
                   variant="secondary" 
                   className="bg-white text-fitness-primary hover:bg-gray-50 w-fit"
                 >
                   <Link href="/consultation">
-                    무료 상담 예약
+                    지금 예약하기
                     <Calendar className="w-4 h-4 ml-2" />
                   </Link>
                 </Button>

@@ -5,13 +5,12 @@ import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { Button } from '@/components/ui/button'
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet'
-import { Menu, X, Dumbbell, Calendar, Users, Phone, Home, Building2 } from 'lucide-react'
+import { Menu, X, Dumbbell, Calendar, Users, Phone, Home } from 'lucide-react'
 import { cn } from '@/lib/utils'
 
 const navigation = [
   { name: '홈', href: '/', icon: Home },
   { name: '프로그램', href: '/programs', icon: Dumbbell },
-  { name: '기업 웰니스', href: '/corporate', icon: Building2 },
   { name: '상담예약', href: '/consultation', icon: Calendar },
   { name: '트레이너 지원', href: '/careers', icon: Users },
 ]
