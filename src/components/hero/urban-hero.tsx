@@ -3,12 +3,12 @@
 import Image from "next/image"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
-import { ArrowRight, ChevronDown } from "lucide-react"
+import { ArrowRight, ChevronDown, Calendar, Users, Trophy, Target } from "lucide-react"
 import { motion } from "framer-motion"
 
 export default function UrbanHero() {
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-black">
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-stone-900">
       {/* Background image with parallax effect */}
       <motion.div 
         className="absolute inset-0"
@@ -18,12 +18,12 @@ export default function UrbanHero() {
       >
         <Image
           src="/images/hero-main.jpg"
-          alt="스테이피트니스 메인"
+          alt="스테이피트니스 1:1 퍼스널 트레이닝"
           fill
-          className="object-cover opacity-50"
+          className="object-cover opacity-40"
           priority
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-black/50 to-black/70" />
+        <div className="absolute inset-0 bg-gradient-to-b from-stone-900/20 via-stone-900/60 to-stone-900/80" />
       </motion.div>
 
       {/* Main content */}
@@ -33,103 +33,144 @@ export default function UrbanHero() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.2 }}
         >
-          {/* Small tagline */}
-          <motion.p 
-            className="text-green-400 text-sm font-medium tracking-[0.2em] uppercase mb-6"
+          {/* Trust indicators */}
+          <motion.div 
+            className="flex justify-center items-center gap-6 mb-8"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ duration: 0.8, delay: 0.5 }}
-          >
-            Premium Fitness Experience
-          </motion.p>
-
-          {/* Main headline - Urban Field style */}
-          <motion.h1 
-            className="text-5xl md:text-7xl lg:text-8xl font-bold text-white leading-[0.9] tracking-tight mb-8"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.3 }}
           >
-            지속 가능한
+            <div className="flex items-center gap-2 text-stone-300">
+              <Trophy className="w-4 h-4 text-amber-400" />
+              <span className="text-sm">1000+ 성공사례</span>
+            </div>
+            <div className="w-1 h-1 bg-stone-400 rounded-full"></div>
+            <div className="flex items-center gap-2 text-stone-300">
+              <Users className="w-4 h-4 text-amber-400" />
+              <span className="text-sm">전문 트레이너 15명</span>
+            </div>
+            <div className="w-1 h-1 bg-stone-400 rounded-full"></div>
+            <div className="flex items-center gap-2 text-stone-300">
+              <Target className="w-4 h-4 text-amber-400" />
+              <span className="text-sm">95% 목표달성</span>
+            </div>
+          </motion.div>
+
+          {/* Main headline - 1:1 PT 중심 */}
+          <motion.h1 
+            className="text-4xl md:text-6xl lg:text-7xl font-bold text-white leading-[0.95] tracking-tight mb-6"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.4 }}
+          >
+            <span className="block text-stone-300 text-lg md:text-xl font-medium mb-4">
+              단 3개월만에 몸이 바뀝니다
+            </span>
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-stone-100 to-stone-300">
+              1:1 맞춤 PT
+            </span>
             <br />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-green-600">
-              건강한 변화
+            <span className="text-white">
+              체계적 변화
             </span>
           </motion.h1>
 
-          {/* Subtitle */}
-          <motion.p 
-            className="text-lg md:text-xl text-gray-300 max-w-2xl mx-auto mb-12 leading-relaxed"
+          {/* Value proposition */}
+          <motion.div 
+            className="max-w-3xl mx-auto mb-8"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ duration: 0.8, delay: 0.4 }}
+            transition={{ duration: 0.8, delay: 0.5 }}
           >
-            과학적 데이터와 전문 코칭이 만나는 곳,<br />
-            당신만의 피트니스 여정을 시작하세요
-          </motion.p>
+            <p className="text-xl md:text-2xl text-stone-200 mb-4 font-medium">
+              체성분 분석부터 식단 관리까지
+            </p>
+            <p className="text-lg text-stone-300 leading-relaxed">
+              전문 트레이너가 당신만을 위한 완전 맞춤 프로그램으로<br />
+              확실한 변화를 만들어드립니다
+            </p>
+          </motion.div>
 
-          {/* CTA Buttons - Urban Field style */}
+          {/* Urgency & offer */}
           <motion.div 
-            className="flex flex-col sm:flex-row gap-4 justify-center"
+            className="bg-stone-800/50 backdrop-blur-sm border border-stone-700 rounded-2xl p-6 mb-10 max-w-2xl mx-auto"
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.8, delay: 0.6 }}
+          >
+            <div className="text-amber-400 font-bold text-lg mb-2">
+              🔥 지금 시작하면 특별 혜택
+            </div>
+            <div className="text-white font-semibold text-xl mb-3">
+              첫 달 50% 할인 + 무료 체성분 분석
+            </div>
+            <div className="text-stone-300 text-sm">
+              ⏰ 이번 주 한정 • 선착순 20명
+            </div>
+          </motion.div>
+
+          {/* Primary CTA */}
+          <motion.div 
+            className="flex flex-col items-center gap-4 mb-12"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.5 }}
+            transition={{ duration: 0.8, delay: 0.7 }}
           >
             <Button 
               size="lg" 
-              className="h-14 px-8 text-base font-medium bg-green-600 hover:bg-green-700 text-white rounded-full transition-all duration-300 shadow-2xl shadow-green-600/30 hover:shadow-green-600/40 group"
+              className="h-16 px-12 text-lg font-bold bg-stone-700 hover:bg-stone-600 text-white rounded-full transition-all duration-300 shadow-2xl shadow-stone-700/40 hover:shadow-stone-600/50 group"
               asChild
             >
               <Link href="/consultation">
-                무료 상담 시작하기
-                <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
+                <Calendar className="w-6 h-6 mr-3" />
+                무료 체험 + 상담 예약하기
+                <ArrowRight className="w-6 h-6 ml-3 group-hover:translate-x-1 transition-transform" />
               </Link>
             </Button>
             
-            <Button 
-              size="lg"
-              variant="outline" 
-              className="h-14 px-8 text-base font-medium border-white/30 text-white hover:bg-white/10 backdrop-blur-sm rounded-full transition-all duration-300"
-              asChild
-            >
-              <Link href="/programs">
-                프로그램 살펴보기
-              </Link>
-            </Button>
+            <p className="text-stone-400 text-sm">
+              📞 전화상담: 02-0000-0000 | 💬 카톡상담 24시간 가능
+            </p>
           </motion.div>
 
-          {/* Stats - Urban Field style */}
+          {/* Social proof stats */}
           <motion.div 
-            className="grid grid-cols-3 gap-8 max-w-3xl mx-auto mt-20"
+            className="grid grid-cols-3 gap-8 max-w-4xl mx-auto"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ duration: 0.8, delay: 0.7 }}
+            transition={{ duration: 0.8, delay: 0.8 }}
           >
             <div className="text-center">
-              <div className="text-4xl md:text-5xl font-bold text-white mb-2">500+</div>
-              <div className="text-sm text-gray-400 uppercase tracking-wider">Active Members</div>
+              <div className="text-3xl md:text-4xl font-bold text-white mb-2">1000+</div>
+              <div className="text-sm text-stone-400 leading-tight">
+                성공적인<br />변화 사례
+              </div>
             </div>
-            <div className="text-center border-x border-white/10">
-              <div className="text-4xl md:text-5xl font-bold text-white mb-2">95%</div>
-              <div className="text-sm text-gray-400 uppercase tracking-wider">Success Rate</div>
+            <div className="text-center border-x border-stone-700">
+              <div className="text-3xl md:text-4xl font-bold text-white mb-2">-15kg</div>
+              <div className="text-sm text-stone-400 leading-tight">
+                평균 체중<br />감량 효과
+              </div>
             </div>
             <div className="text-center">
-              <div className="text-4xl md:text-5xl font-bold text-white mb-2">24/7</div>
-              <div className="text-sm text-gray-400 uppercase tracking-wider">Expert Support</div>
+              <div className="text-3xl md:text-4xl font-bold text-white mb-2">4.9/5</div>
+              <div className="text-sm text-stone-400 leading-tight">
+                고객 만족도<br />평점
+              </div>
             </div>
           </motion.div>
         </motion.div>
       </div>
 
-      {/* Scroll indicator - Urban Field style */}
+      {/* Scroll indicator */}
       <motion.div 
         className="absolute bottom-8 left-1/2 transform -translate-x-1/2"
         animate={{ y: [0, 10, 0] }}
         transition={{ repeat: Infinity, duration: 2 }}
       >
         <div className="flex flex-col items-center space-y-2">
-          <span className="text-xs text-white/60 uppercase tracking-wider">Scroll</span>
-          <ChevronDown className="w-5 h-5 text-white/60" />
+          <span className="text-xs text-stone-400 uppercase tracking-wider">성공사례 보기</span>
+          <ChevronDown className="w-5 h-5 text-stone-400" />
         </div>
       </motion.div>
     </section>
