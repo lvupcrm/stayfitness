@@ -3,6 +3,14 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import KakaoFloatingButton from "@/components/kakao-banner/KakaoFloatingButton";
 import { ReactNode } from 'react';
+import { 
+  BusinessStructuredData, 
+  WebsiteStructuredData, 
+  OrganizationStructuredData 
+} from '@/components/seo/structured-data';
+import { MainNav } from '@/components/navigation/main-nav';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -15,23 +23,56 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: '스테이피트니스 - 모바일 PT센터 랜딩',
-  description: '스테이피트니스에서 프로그램, 후기, 상담을 한눈에! 모바일 최적화 랜딩페이지',
+  metadataBase: new URL('https://stayfitness.com'),
+  title: {
+    default: '스테이피트니스 - 피트니스의 새 기준',
+    template: '%s | 스테이피트니스'
+  },
+  description: '전문 퍼스널 트레이닝과 그룹 클래스를 제공하는 프리미엄 피트니스 센터. 당신만의 피트니스 여정을 시작하세요.',
+  keywords: ['피트니스', '헬스장', '퍼스널 트레이닝', 'PT', '그룹 클래스', '운동', '다이어트', '근력 운동', '스테이피트니스'],
+  authors: [{ name: '스테이피트니스' }],
+  creator: '스테이피트니스',
+  publisher: '스테이피트니스',
+  formatDetection: {
+    email: false,
+    address: false,
+    telephone: false,
+  },
   openGraph: {
-    title: '스테이피트니스 - 모바일 PT센터 랜딩',
-    description: '스테이피트니스에서 프로그램, 후기, 상담을 한눈에! 모바일 최적화 랜딩페이지',
+    type: 'website',
+    locale: 'ko_KR',
     url: 'https://stayfitness.com',
     siteName: '스테이피트니스',
+    title: '스테이피트니스 - 피트니스의 새 기준',
+    description: '전문 퍼스널 트레이닝과 그룹 클래스를 제공하는 프리미엄 피트니스 센터',
     images: [
       {
-        url: 'https://stayfitness.com/og-image.png',
+        url: '/images/og-image.png',
         width: 1200,
         height: 630,
-        alt: '스테이피트니스 OG 이미지',
+        alt: '스테이피트니스 - 피트니스의 새 기준',
       },
     ],
-    locale: 'ko_KR',
-    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: '스테이피트니스 - 피트니스의 새 기준',
+    description: '전문 퍼스널 트레이닝과 그룹 클래스를 제공하는 프리미엄 피트니스 센터',
+    images: ['/images/og-image.png'],
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+  },
+  verification: {
+    google: 'your-google-verification-code',
   },
 };
 
@@ -39,18 +80,13 @@ export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="ko">
       <head>
-        <title>스테이피트니스 - 모바일 PT센터 랜딩</title>
-        <meta name="description" content="스테이피트니스에서 프로그램, 후기, 상담을 한눈에! 모바일 최적화 랜딩페이지" />
-        <meta property="og:title" content="스테이피트니스 - 모바일 PT센터 랜딩" />
-        <meta property="og:description" content="스테이피트니스에서 프로그램, 후기, 상담을 한눈에! 모바일 최적화 랜딩페이지" />
-        <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://stayfitness.com" />
-        <meta property="og:site_name" content="스테이피트니스" />
-        <meta property="og:image" content="https://stayfitness.com/og-image.png" />
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="스테이피트니스 - 모바일 PT센터 랜딩" />
-        <meta name="twitter:description" content="스테이피트니스에서 프로그램, 후기, 상담을 한눈에! 모바일 최적화 랜딩페이지" />
-        <meta name="twitter:image" content="https://stayfitness.com/og-image.png" />
+        {/* Urban Field 스타일 성능 최적화 */}
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+        <meta name="theme-color" content="#1a1a1a" />
+        <meta name="color-scheme" content="light dark" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        
         {/* GA4 스크립트 */}
         {process.env.NEXT_PUBLIC_GA_ID && (
           <>
@@ -61,7 +97,13 @@ export default function RootLayout({ children }: { children: ReactNode }) {
                   window.dataLayer = window.dataLayer || [];
                   function gtag(){dataLayer.push(arguments);}
                   gtag('js', new Date());
-                  gtag('config', '${process.env.NEXT_PUBLIC_GA_ID}', { page_path: window.location.pathname });
+                  gtag('config', '${process.env.NEXT_PUBLIC_GA_ID}', { 
+                    page_path: window.location.pathname,
+                    custom_map: {
+                      'custom_parameter_consultation': 'consultation_type',
+                      'custom_parameter_trainer_application': 'application_type'
+                    }
+                  });
                 `,
               }}
             />
@@ -71,8 +113,35 @@ export default function RootLayout({ children }: { children: ReactNode }) {
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        {children}
+        {/* Urban Field 스타일 구조화 데이터 */}
+        <BusinessStructuredData />
+        <WebsiteStructuredData />
+        <OrganizationStructuredData />
+        
+        {/* 메인 네비게이션 */}
+        <MainNav />
+        
+        {/* 메인 콘텐츠 */}
+        <main className="pt-16">
+          {children}
+        </main>
+        
+        {/* 플로팅 요소들 */}
         <KakaoFloatingButton />
+        
+        {/* 토스트 알림 */}
+        <ToastContainer
+          position="bottom-right"
+          autoClose={5000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+          theme="light"
+        />
       </body>
     </html>
   );

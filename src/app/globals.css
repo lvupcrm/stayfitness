@@ -76,6 +76,29 @@
   --sidebar-accent-foreground: oklch(0.21 0.034 264.665);
   --sidebar-border: oklch(0.928 0.006 264.531);
   --sidebar-ring: oklch(0.707 0.022 261.325);
+  
+  /* Urban Field 스타일 성능 최적화 변수 */
+  --fitness-primary: oklch(0.45 0.18 142);
+  --fitness-secondary: oklch(0.65 0.15 210);
+  --fitness-accent: oklch(0.75 0.12 45);
+  --fitness-success: oklch(0.55 0.16 120);
+  --fitness-warning: oklch(0.75 0.18 60);
+  
+  /* 반응형 브레이크포인트 변수 */
+  --mobile-breakpoint: 768px;
+  --tablet-breakpoint: 1024px;
+  --desktop-breakpoint: 1280px;
+  
+  /* 애니메이션 성능 변수 */
+  --transition-fast: 0.15s ease-out;
+  --transition-normal: 0.3s ease-out;
+  --transition-slow: 0.5s ease-out;
+  
+  /* 커스텀 스크롤바 변수 */
+  --scrollbar-width: 8px;
+  --scrollbar-track: oklch(0.967 0.003 264.542);
+  --scrollbar-thumb: oklch(0.707 0.022 261.325);
+  --scrollbar-thumb-hover: oklch(0.551 0.027 264.364);
 }
 
 .dark {
@@ -118,5 +141,72 @@
   }
   body {
     @apply bg-background text-foreground;
+  }
+  
+  /* Urban Field 스타일 커스텀 스크롤바 */
+  ::-webkit-scrollbar {
+    width: var(--scrollbar-width);
+  }
+  
+  ::-webkit-scrollbar-track {
+    background: var(--scrollbar-track);
+    border-radius: calc(var(--scrollbar-width) / 2);
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    background: var(--scrollbar-thumb);
+    border-radius: calc(var(--scrollbar-width) / 2);
+    border: 2px solid transparent;
+    background-clip: content-box;
+  }
+  
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--scrollbar-thumb-hover);
+    background-clip: content-box;
+  }
+  
+  /* 성능 최적화를 위한 will-change */
+  .animate-scroll {
+    will-change: transform;
+  }
+  
+  .animate-fade {
+    will-change: opacity;
+  }
+  
+  /* 반응형 컨테이너 */
+  .container-mobile {
+    max-width: var(--mobile-breakpoint);
+  }
+  
+  .container-tablet {
+    max-width: var(--tablet-breakpoint);
+  }
+  
+  .container-desktop {
+    max-width: var(--desktop-breakpoint);
+  }
+}
+
+/* Urban Field 스타일 애니메이션 클래스 */
+@layer utilities {
+  .transition-fast {
+    transition: all var(--transition-fast);
+  }
+  
+  .transition-normal {
+    transition: all var(--transition-normal);
+  }
+  
+  .transition-slow {
+    transition: all var(--transition-slow);
+  }
+  
+  .fitness-gradient {
+    background: linear-gradient(135deg, var(--fitness-primary), var(--fitness-secondary));
+  }
+  
+  .fitness-glow {
+    box-shadow: 0 0 20px color-mix(in oklch, var(--fitness-primary), transparent 60%);
   }
 }
