@@ -364,8 +364,42 @@ export default function LocationsPage() {
               </div>
             </div>
 
+            {/* Facilities Section */}
+            <div className="mt-16">
+              <div className="text-center mb-12">
+                <h3 className="text-3xl font-bold text-stone-900 mb-4">
+                  {activeLocation.name} 시설 안내
+                </h3>
+                <p className="text-lg text-stone-600">
+                  최고의 서비스를 위한 프리미엄 시설을 만나보세요
+                </p>
+              </div>
+
+              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {activeLocation.facilities.map((facility, index) => (
+                  <motion.div
+                    key={index}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: index * 0.1 }}
+                    className="bg-white rounded-xl p-6 shadow-sm hover:shadow-lg transition-all duration-300 border border-stone-100"
+                  >
+                    <div className="w-12 h-12 bg-stone-100 rounded-lg flex items-center justify-center mb-4">
+                      <facility.icon className="w-6 h-6 text-stone-700" />
+                    </div>
+                    <h4 className="text-lg font-bold text-stone-900 mb-2">
+                      {facility.name}
+                    </h4>
+                    <p className="text-stone-600 text-sm leading-relaxed">
+                      {facility.description}
+                    </p>
+                  </motion.div>
+                ))}
+              </div>
+            </div>
+
             {/* Trainers Section */}
-            <div>
+            <div className="mt-20">
               <div className="text-center mb-12">
                 <h3 className="text-3xl font-bold text-stone-900 mb-4">
                   {activeLocation.name} 전문 트레이너
@@ -448,39 +482,6 @@ export default function LocationsPage() {
               </div>
             </div>
 
-            {/* Facilities Section */}
-            <div className="mt-20">
-              <div className="text-center mb-12">
-                <h3 className="text-3xl font-bold text-stone-900 mb-4">
-                  {activeLocation.name} 시설 안내
-                </h3>
-                <p className="text-lg text-stone-600">
-                  최고의 서비스를 위한 프리미엄 시설을 만나보세요
-                </p>
-              </div>
-
-              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {activeLocation.facilities.map((facility, index) => (
-                  <motion.div
-                    key={index}
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: index * 0.1 }}
-                    className="bg-white rounded-xl p-6 shadow-sm hover:shadow-lg transition-all duration-300 border border-stone-100"
-                  >
-                    <div className="w-12 h-12 bg-stone-100 rounded-lg flex items-center justify-center mb-4">
-                      <facility.icon className="w-6 h-6 text-stone-700" />
-                    </div>
-                    <h4 className="text-lg font-bold text-stone-900 mb-2">
-                      {facility.name}
-                    </h4>
-                    <p className="text-stone-600 text-sm leading-relaxed">
-                      {facility.description}
-                    </p>
-                  </motion.div>
-                ))}
-              </div>
-            </div>
           </div>
         </motion.section>
       </AnimatePresence>
