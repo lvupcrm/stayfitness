@@ -13,7 +13,6 @@ const navigation = [
   { name: '소개', href: '/about' },
   { name: '프로그램', href: '/programs' },
   { name: '지점', href: '/locations' },
-  { name: '트레이너', href: '/trainers' },
   { name: '시설', href: '/space' },
   { name: '후기', href: '/reviews' },
 ]
@@ -55,11 +54,11 @@ export function UrbanNav() {
             >
               <span className={cn(
                 "transition-colors duration-300",
-                isScrolled ? "text-gray-900" : "text-white"
+                isScrolled ? "text-stone-900" : "text-white"
               )}>
                 STAY
               </span>
-              <span className="text-gray-600">FITNESS</span>
+              <span className="text-stone-600">FITNESS</span>
             </motion.div>
           </Link>
 
@@ -77,10 +76,10 @@ export function UrbanNav() {
                     'text-[15px] font-medium tracking-wide transition-colors duration-300',
                     isScrolled
                       ? isActive 
-                        ? 'text-gray-800' 
-                        : 'text-gray-700 hover:text-gray-900'
+                        ? 'text-stone-800' 
+                        : 'text-stone-700 hover:text-stone-900'
                       : isActive
-                        ? 'text-gray-200'
+                        ? 'text-stone-200'
                         : 'text-white/90 hover:text-white'
                   )}>
                     {item.name}
@@ -89,7 +88,7 @@ export function UrbanNav() {
                   {/* Active indicator */}
                   {isActive && (
                     <motion.div
-                      className="absolute bottom-0 left-5 right-5 h-0.5 bg-gray-700"
+                      className="absolute bottom-0 left-5 right-5 h-0.5 bg-stone-700"
                       layoutId="navbar-indicator"
                       transition={{ type: "spring", bounce: 0.3, duration: 0.6 }}
                     />
@@ -118,7 +117,7 @@ export function UrbanNav() {
               className={cn(
                 "text-[15px] font-medium px-6 h-11 rounded-full transition-all duration-300",
                 isScrolled
-                  ? "text-gray-700 hover:text-gray-900 hover:bg-gray-100"
+                  ? "text-stone-700 hover:text-stone-900 hover:bg-stone-100"
                   : "text-white hover:bg-white/10"
               )}
               asChild
@@ -128,7 +127,7 @@ export function UrbanNav() {
             
             <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
               <Button 
-                className="text-[15px] font-medium px-6 h-11 rounded-full bg-gray-800 hover:bg-gray-900 text-white shadow-lg shadow-gray-800/20 transition-all duration-300"
+                className="text-[15px] font-medium px-6 h-11 rounded-full bg-stone-800 hover:bg-stone-900 text-white shadow-lg shadow-stone-800/20 transition-all duration-300"
                 asChild
               >
                 <Link href="/careers">트레이너 지원</Link>
@@ -145,7 +144,7 @@ export function UrbanNav() {
                   size="icon"
                   className={cn(
                     "rounded-full transition-colors duration-300",
-                    isScrolled ? "text-gray-900" : "text-white"
+                    isScrolled ? "text-stone-900" : "text-white"
                   )}
                 >
                   <Menu className="w-6 h-6" />
@@ -160,8 +159,8 @@ export function UrbanNav() {
                   {/* Mobile header */}
                   <div className="flex items-center justify-between px-6 py-6 border-b">
                     <div className="text-2xl font-bold tracking-tight">
-                      <span className="text-gray-900">STAY</span>
-                      <span className="text-gray-600">FITNESS</span>
+                      <span className="text-stone-900">STAY</span>
+                      <span className="text-stone-600">FITNESS</span>
                     </div>
                     <Button 
                       variant="ghost" 
@@ -191,8 +190,8 @@ export function UrbanNav() {
                               className={cn(
                                 'block px-4 py-3 text-lg font-medium rounded-xl transition-all duration-300',
                                 isActive
-                                  ? 'bg-gray-100 text-gray-800'
-                                  : 'text-gray-700 hover:bg-gray-50'
+                                  ? 'bg-stone-100 text-stone-800'
+                                  : 'text-stone-700 hover:bg-stone-50'
                               )}
                             >
                               {item.name}
@@ -215,7 +214,7 @@ export function UrbanNav() {
                       </Link>
                     </Button>
                     <Button 
-                      className="w-full h-12 rounded-full bg-gray-800 hover:bg-gray-900 text-white text-base font-medium"
+                      className="w-full h-12 rounded-full bg-stone-800 hover:bg-stone-900 text-white text-base font-medium"
                       asChild
                     >
                       <Link href="/careers" onClick={closeSheet}>
@@ -226,7 +225,7 @@ export function UrbanNav() {
 
                   {/* Contact info */}
                   <div className="px-6 py-4 bg-gray-50">
-                    <p className="text-sm text-gray-600 text-center">
+                    <p className="text-sm text-stone-600 text-center">
                       문의: 02-0000-0000<br />
                       평일 06:00-23:00 | 주말 08:00-22:00
                     </p>

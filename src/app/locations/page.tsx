@@ -121,9 +121,9 @@ export default function LocationsPage() {
   const activeLocation = locations.find(l => l.id === selectedLocation) || locations[0]
 
   return (
-    <div className="min-h-screen bg-gray-50 pt-20">
+    <div className="min-h-screen bg-stone-50 pt-20">
       {/* Hero Section */}
-      <section className="py-16 bg-gradient-to-br from-gray-900 to-gray-800">
+      <section className="py-16 bg-gradient-to-br from-stone-900 to-stone-800">
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
           <div className="text-center">
             <motion.h1 
@@ -135,7 +135,7 @@ export default function LocationsPage() {
               지점 안내
             </motion.h1>
             <motion.p 
-              className="text-xl text-gray-300 max-w-3xl mx-auto"
+              className="text-xl text-stone-300 max-w-3xl mx-auto"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.6, delay: 0.1 }}
@@ -147,7 +147,7 @@ export default function LocationsPage() {
       </section>
 
       {/* Location Tabs */}
-      <section className="py-12 bg-white border-b border-gray-200">
+      <section className="py-12 bg-white border-b border-stone-200">
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
           <div className="flex flex-wrap justify-center gap-4">
             {locations.map((location) => (
@@ -156,8 +156,8 @@ export default function LocationsPage() {
                 onClick={() => setSelectedLocation(location.id)}
                 className={`px-8 py-4 rounded-full text-base font-medium transition-all duration-300 ${
                   selectedLocation === location.id
-                    ? 'bg-gray-900 text-white shadow-lg'
-                    : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                    ? 'bg-stone-900 text-white shadow-lg'
+                    : 'bg-stone-100 text-stone-700 hover:bg-stone-200'
                 }`}
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
@@ -200,31 +200,31 @@ export default function LocationsPage() {
               {/* Details */}
               <div className="space-y-8">
                 <div>
-                  <h3 className="text-2xl font-bold text-gray-900 mb-6">지점 정보</h3>
+                  <h3 className="text-2xl font-bold text-stone-900 mb-6">지점 정보</h3>
                   
                   <div className="space-y-4">
                     <div className="flex items-start space-x-3">
-                      <MapPin className="w-5 h-5 text-gray-500 mt-0.5" />
+                      <MapPin className="w-5 h-5 text-stone-500 mt-0.5" />
                       <div>
-                        <p className="font-medium text-gray-900">주소</p>
-                        <p className="text-gray-600">{activeLocation.address}</p>
+                        <p className="font-medium text-stone-900">주소</p>
+                        <p className="text-stone-600">{activeLocation.address}</p>
                       </div>
                     </div>
                     
                     <div className="flex items-start space-x-3">
-                      <Phone className="w-5 h-5 text-gray-500 mt-0.5" />
+                      <Phone className="w-5 h-5 text-stone-500 mt-0.5" />
                       <div>
-                        <p className="font-medium text-gray-900">전화번호</p>
-                        <p className="text-gray-600">{activeLocation.phone}</p>
+                        <p className="font-medium text-stone-900">전화번호</p>
+                        <p className="text-stone-600">{activeLocation.phone}</p>
                       </div>
                     </div>
                     
                     <div className="flex items-start space-x-3">
-                      <Clock className="w-5 h-5 text-gray-500 mt-0.5" />
+                      <Clock className="w-5 h-5 text-stone-500 mt-0.5" />
                       <div>
-                        <p className="font-medium text-gray-900">운영시간</p>
-                        <p className="text-gray-600">{activeLocation.hours}</p>
-                        <p className="text-sm text-gray-500">연중무휴</p>
+                        <p className="font-medium text-stone-900">운영시간</p>
+                        <p className="text-stone-600">{activeLocation.hours}</p>
+                        <p className="text-sm text-stone-500">연중무휴</p>
                       </div>
                     </div>
                   </div>
@@ -232,12 +232,12 @@ export default function LocationsPage() {
 
                 {/* Features */}
                 <div>
-                  <h4 className="text-lg font-semibold text-gray-900 mb-4">시설 특징</h4>
+                  <h4 className="text-lg font-semibold text-stone-900 mb-4">시설 특징</h4>
                   <div className="grid grid-cols-2 gap-3">
                     {activeLocation.features.map((feature, index) => (
                       <div key={index} className="flex items-center space-x-2">
-                        <div className="w-2 h-2 bg-gray-600 rounded-full" />
-                        <span className="text-gray-700 text-sm">{feature}</span>
+                        <div className="w-2 h-2 bg-stone-600 rounded-full" />
+                        <span className="text-stone-700 text-sm">{feature}</span>
                       </div>
                     ))}
                   </div>
@@ -246,7 +246,7 @@ export default function LocationsPage() {
                 {/* CTA */}
                 <div className="flex flex-col sm:flex-row gap-4">
                   <Button 
-                    className="h-12 px-8 bg-gray-900 hover:bg-gray-800 text-white rounded-full"
+                    className="h-12 px-8 bg-stone-900 hover:bg-gray-800 text-white rounded-full"
                     asChild
                   >
                     <Link href="/consultation">
@@ -256,7 +256,7 @@ export default function LocationsPage() {
                   </Button>
                   <Button 
                     variant="outline"
-                    className="h-12 px-8 border-gray-300 text-gray-700 hover:bg-gray-50 rounded-full"
+                    className="h-12 px-8 border-stone-300 text-stone-700 hover:bg-stone-50 rounded-full"
                     asChild
                   >
                     <Link href="/contact">
@@ -271,10 +271,10 @@ export default function LocationsPage() {
             {/* Trainers Section */}
             <div>
               <div className="text-center mb-12">
-                <h3 className="text-3xl font-bold text-gray-900 mb-4">
+                <h3 className="text-3xl font-bold text-stone-900 mb-4">
                   {activeLocation.name} 전문 트레이너
                 </h3>
-                <p className="text-lg text-gray-600">
+                <p className="text-lg text-stone-600">
                   검증된 자격증과 풍부한 경험을 바탕으로 최고의 서비스를 제공합니다
                 </p>
               </div>
@@ -286,7 +286,7 @@ export default function LocationsPage() {
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: index * 0.1 }}
-                    className="bg-white rounded-2xl p-6 shadow-sm hover:shadow-lg transition-all duration-300 border border-gray-100"
+                    className="bg-white rounded-2xl p-6 shadow-sm hover:shadow-lg transition-all duration-300 border border-stone-100"
                   >
                     {/* Trainer Image */}
                     <div className="relative w-24 h-24 mx-auto mb-4">
@@ -296,16 +296,16 @@ export default function LocationsPage() {
                         fill
                         className="object-cover rounded-full"
                       />
-                      <div className="absolute -bottom-1 -right-1 w-8 h-8 bg-gray-900 rounded-full flex items-center justify-center">
+                      <div className="absolute -bottom-1 -right-1 w-8 h-8 bg-stone-900 rounded-full flex items-center justify-center">
                         <Award className="w-4 h-4 text-white" />
                       </div>
                     </div>
 
                     {/* Trainer Info */}
                     <div className="text-center mb-4">
-                      <h4 className="text-xl font-bold text-gray-900 mb-1">{trainer.name}</h4>
-                      <p className="text-gray-600 mb-2">{trainer.specialty}</p>
-                      <div className="flex items-center justify-center space-x-4 text-sm text-gray-500 mb-3">
+                      <h4 className="text-xl font-bold text-stone-900 mb-1">{trainer.name}</h4>
+                      <p className="text-stone-600 mb-2">{trainer.specialty}</p>
+                      <div className="flex items-center justify-center space-x-4 text-sm text-stone-500 mb-3">
                         <span className="flex items-center">
                           <Users className="w-4 h-4 mr-1" />
                           {trainer.experience}
@@ -319,12 +319,12 @@ export default function LocationsPage() {
 
                     {/* Certifications */}
                     <div className="mb-4">
-                      <p className="text-sm font-medium text-gray-900 mb-2">자격증</p>
+                      <p className="text-sm font-medium text-stone-900 mb-2">자격증</p>
                       <div className="flex flex-wrap gap-1">
                         {trainer.certifications.map((cert, certIndex) => (
                           <span
                             key={certIndex}
-                            className="px-2 py-1 bg-gray-100 text-gray-700 text-xs rounded-full"
+                            className="px-2 py-1 bg-stone-100 text-stone-700 text-xs rounded-full"
                           >
                             {cert}
                           </span>
@@ -334,13 +334,13 @@ export default function LocationsPage() {
 
                     {/* Achievements */}
                     <div className="mb-6">
-                      <p className="text-sm font-medium text-gray-900 mb-1">주요 경력</p>
-                      <p className="text-sm text-gray-600">{trainer.achievements}</p>
+                      <p className="text-sm font-medium text-stone-900 mb-1">주요 경력</p>
+                      <p className="text-sm text-stone-600">{trainer.achievements}</p>
                     </div>
 
                     {/* CTA */}
                     <Button 
-                      className="w-full h-10 bg-gray-900 hover:bg-gray-800 text-white rounded-full text-sm"
+                      className="w-full h-10 bg-stone-900 hover:bg-gray-800 text-white rounded-full text-sm"
                       asChild
                     >
                       <Link href={`/consultation?trainer=${trainer.id}`}>
@@ -356,18 +356,18 @@ export default function LocationsPage() {
       </AnimatePresence>
 
       {/* Bottom CTA */}
-      <section className="py-16 bg-gray-900">
+      <section className="py-16 bg-stone-900">
         <div className="max-w-7xl mx-auto px-6 lg:px-8 text-center">
           <h3 className="text-3xl font-bold text-white mb-4">
             가장 가까운 지점에서 시작하세요
           </h3>
-          <p className="text-gray-300 mb-8 max-w-2xl mx-auto">
+          <p className="text-stone-300 mb-8 max-w-2xl mx-auto">
             전 지점 동일한 프리미엄 서비스로 당신의 피트니스 목표를 달성해보세요
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button 
               size="lg"
-              className="h-14 px-8 bg-white text-gray-900 hover:bg-gray-100 rounded-full"
+              className="h-14 px-8 bg-white text-stone-900 hover:bg-stone-100 rounded-full"
               asChild
             >
               <Link href="/consultation">

@@ -77,15 +77,15 @@
   --sidebar-border: oklch(0.928 0.006 264.531);
   --sidebar-ring: oklch(0.707 0.022 261.325);
   
-  /* Gray Tone 피트니스 브랜드 컬러 시스템 */
-  --fitness-primary: oklch(0.25 0.02 240);     /* 다크 그레이 */
-  --fitness-secondary: oklch(0.45 0.03 240);   /* 미디움 그레이 */
-  --fitness-accent: oklch(0.65 0.04 120);      /* 그린 그레이 액센트 */
-  --fitness-success: oklch(0.55 0.08 140);     /* 성공 그린 그레이 */
-  --fitness-warning: oklch(0.70 0.06 80);      /* 경고 옐로우 그레이 */
-  --fitness-light: oklch(0.95 0.01 240);       /* 라이트 그레이 */
-  --fitness-dark: oklch(0.15 0.02 240);        /* 딥 다크 그레이 */
-  --fitness-neutral: oklch(0.85 0.01 240);     /* 뉴트럴 그레이 */
+  /* 따뜻한 그레이 피트니스 브랜드 컬러 시스템 */
+  --fitness-primary: oklch(0.30 0.015 45);     /* 따뜻한 다크 그레이 */
+  --fitness-secondary: oklch(0.50 0.020 45);   /* 따뜻한 미디움 그레이 */
+  --fitness-accent: oklch(0.65 0.025 35);      /* 따뜻한 베이지 그레이 액센트 */
+  --fitness-success: oklch(0.55 0.030 60);     /* 따뜻한 성공 그레이 */
+  --fitness-warning: oklch(0.70 0.025 50);     /* 따뜻한 경고 그레이 */
+  --fitness-light: oklch(0.96 0.008 40);       /* 따뜻한 라이트 그레이 */
+  --fitness-dark: oklch(0.20 0.018 45);        /* 따뜻한 딥 다크 그레이 */
+  --fitness-neutral: oklch(0.88 0.012 40);     /* 따뜻한 뉴트럴 그레이 */
   
   /* 반응형 브레이크포인트 변수 */
   --mobile-breakpoint: 768px;

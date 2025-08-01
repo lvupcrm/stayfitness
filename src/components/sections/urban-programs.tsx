@@ -24,7 +24,7 @@ const programs = [
       '영양 및 라이프스타일 코칭',
       '주기적인 진도 체크 및 프로그램 조정'
     ],
-    color: 'from-gray-700 to-gray-800'
+    color: 'from-stone-700 to-stone-800'
   },
   {
     id: 'group',
@@ -42,7 +42,7 @@ const programs = [
       '소규모 정원으로 개인 케어',
       '커뮤니티 형성 및 동기부여'
     ],
-    color: 'from-gray-600 to-gray-700'
+    color: 'from-stone-600 to-stone-700'
   },
   {
     id: 'premium',
@@ -61,7 +61,7 @@ const programs = [
       '월간 건강 검진 및 리포트',
       'VIP 라운지 이용'
     ],
-    color: 'from-gray-800 to-gray-900'
+    color: 'from-stone-800 to-stone-900'
   }
 ]
 
@@ -75,7 +75,7 @@ export default function UrbanPrograms() {
         {/* Section header - Urban Field style */}
         <div className="text-center mb-16">
           <motion.h2 
-            className="text-4xl md:text-5xl font-bold text-gray-900 mb-4"
+            className="text-4xl md:text-5xl font-bold text-stone-900 mb-4"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
@@ -84,7 +84,7 @@ export default function UrbanPrograms() {
             프로그램
           </motion.h2>
           <motion.p 
-            className="text-lg text-gray-600 max-w-2xl mx-auto"
+            className="text-lg text-stone-600 max-w-2xl mx-auto"
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             transition={{ duration: 0.6, delay: 0.1 }}
@@ -103,7 +103,7 @@ export default function UrbanPrograms() {
               className={`px-8 py-3 rounded-full text-sm font-medium transition-all duration-300 ${
                 selectedProgram === program.id
                   ? 'bg-gray-900 text-white'
-                  : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                  : 'bg-gray-100 text-stone-700 hover:bg-gray-200'
               }`}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
@@ -136,7 +136,7 @@ export default function UrbanPrograms() {
                 {/* Price badge */}
                 <div className="absolute top-6 left-6">
                   <div className="bg-white/90 backdrop-blur-sm rounded-full px-6 py-3">
-                    <p className="text-2xl font-bold text-gray-900">{activeProgram.price}</p>
+                    <p className="text-2xl font-bold text-stone-900">{activeProgram.price}</p>
                   </div>
                 </div>
               </div>
@@ -144,26 +144,26 @@ export default function UrbanPrograms() {
               {/* Right: Content */}
               <div className="space-y-8">
                 <div>
-                  <p className="text-gray-600 font-medium mb-2">{activeProgram.subtitle}</p>
-                  <h3 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+                  <p className="text-stone-600 font-medium mb-2">{activeProgram.subtitle}</p>
+                  <h3 className="text-3xl md:text-4xl font-bold text-stone-900 mb-4">
                     {activeProgram.title}
                   </h3>
-                  <p className="text-lg text-gray-600 leading-relaxed">
+                  <p className="text-lg text-stone-600 leading-relaxed">
                     {activeProgram.description}
                   </p>
                 </div>
 
                 {/* Program info */}
                 <div className="flex flex-wrap gap-4">
-                  <div className="flex items-center space-x-2 text-gray-700">
+                  <div className="flex items-center space-x-2 text-stone-700">
                     <Clock className="w-5 h-5 text-gray-400" />
                     <span className="font-medium">{activeProgram.duration}</span>
                   </div>
-                  <div className="flex items-center space-x-2 text-gray-700">
+                  <div className="flex items-center space-x-2 text-stone-700">
                     <Users className="w-5 h-5 text-gray-400" />
                     <span className="font-medium">{activeProgram.type}</span>
                   </div>
-                  <div className="flex items-center space-x-2 text-gray-700">
+                  <div className="flex items-center space-x-2 text-stone-700">
                     <Zap className="w-5 h-5 text-gray-400" />
                     <span className="font-medium">{activeProgram.level}</span>
                   </div>
@@ -171,7 +171,7 @@ export default function UrbanPrograms() {
 
                 {/* Features */}
                 <div className="space-y-3">
-                  <h4 className="text-lg font-semibold text-gray-900">프로그램 특징</h4>
+                  <h4 className="text-lg font-semibold text-stone-900">프로그램 특징</h4>
                   <ul className="space-y-2">
                     {activeProgram.features.map((feature, index) => (
                       <motion.li
@@ -182,7 +182,7 @@ export default function UrbanPrograms() {
                         transition={{ delay: index * 0.1 }}
                       >
                         <span className="w-1.5 h-1.5 bg-gray-600 rounded-full mt-2 flex-shrink-0" />
-                        <span className="text-gray-700">{feature}</span>
+                        <span className="text-stone-700">{feature}</span>
                       </motion.li>
                     ))}
                   </ul>
@@ -191,7 +191,7 @@ export default function UrbanPrograms() {
                 {/* CTA */}
                 <div className="flex flex-col sm:flex-row gap-4">
                   <Button 
-                    className="h-12 px-8 bg-gray-900 hover:bg-gray-800 text-white rounded-full font-medium"
+                    className="h-12 px-8 bg-stone-900 hover:bg-stone-800 text-white rounded-full font-medium"
                     asChild
                   >
                     <Link href="/consultation">
@@ -201,7 +201,7 @@ export default function UrbanPrograms() {
                   </Button>
                   <Button 
                     variant="outline"
-                    className="h-12 px-8 border-gray-300 rounded-full font-medium"
+                    className="h-12 px-8 border-stone-300 rounded-full font-medium"
                     asChild
                   >
                     <Link href="/programs">
