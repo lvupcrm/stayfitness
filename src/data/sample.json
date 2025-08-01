@@ -1,0 +1,50 @@
+{
+  "intro": {
+    "title": "스테이피트니스에 오신 것을 환영합니다",
+    "description": "스테이피트니스는 최신 시설, 전문 트레이너, 다양한 맞춤형 프로그램으로 건강한 라이프스타일을 지원합니다. 모바일 중심의 쉽고 빠른 상담, 체계적인 회원 관리, 쾌적한 환경에서 운동의 즐거움을 경험하세요.",
+    "image": {
+      "src": "/next.svg",
+      "alt": "센터 대표 이미지",
+      "width": 180,
+      "height": 38
+    }
+  },
+  "programs": {
+    "title": "프로그램 안내",
+    "programs": [
+      {
+        "name": "PT 1:1 맞춤 트레이닝",
+        "description": "개인별 목표에 맞춘 1:1 트레이닝 프로그램",
+        "image": { "src": "/file.svg", "alt": "PT 이미지", "width": 80, "height": 80 },
+        "price": "월 30만원~"
+      },
+      {
+        "name": "그룹 요가/필라테스",
+        "description": "소규모 그룹으로 진행되는 요가 및 필라테스 수업",
+        "image": { "src": "/globe.svg", "alt": "요가 이미지", "width": 80, "height": 80 },
+        "price": "월 15만원~"
+      },
+      {
+        "name": "다이어트·체형교정",
+        "description": "전문가와 함께하는 체형 분석 및 다이어트 프로그램",
+        "image": { "src": "/window.svg", "alt": "다이어트 이미지", "width": 80, "height": 80 },
+        "price": "월 20만원~"
+      }
+    ]
+  },
+  "reviews": {
+    "title": "회원 후기",
+    "reviews": [
+      { "name": "김지은", "content": "트레이너가 정말 친절하고, 시설이 깨끗해서 만족합니다!" },
+      { "name": "박민수", "content": "프로그램이 다양해서 지루하지 않고, 효과도 좋아요." },
+      { "name": "이수진", "content": "위치가 좋아서 출퇴근길에 들르기 편해요." }
+    ]
+  },
+  "location": {
+    "title": "오시는 길",
+    "address": "서울시 강남구 테헤란로 123, 3층",
+    "parking": "주차 가능",
+    "subway": "지하철 2호선 역 도보 3분",
+    "image": { "src": "/vercel.svg", "alt": "지도 이미지", "width": 180, "height": 38 }
+  }
+} 
