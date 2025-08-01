@@ -4,7 +4,7 @@ import { useState } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { Button } from '@/components/ui/button'
-import { MapPin, Phone, Clock, Star, Users, Award, Calendar } from 'lucide-react'
+import { MapPin, Phone, Clock, Star, Users, Award, Calendar, Dumbbell, Waves, Car, Coffee, Wifi, Shield } from 'lucide-react'
 import { motion, AnimatePresence } from 'framer-motion'
 
 const locations = [
@@ -17,6 +17,38 @@ const locations = [
     image: '/images/locations/gangnam.jpg',
     description: '최신 시설과 프리미엄 서비스를 제공하는 플래그십 지점',
     features: ['최신 장비', 'VIP 라운지', '사우나', '주차 가능'],
+    facilities: [
+      {
+        icon: Dumbbell,
+        name: '최신 운동기구',
+        description: '프리미엄 브랜드의 최신 웨이트 및 유산소 운동기구 완비'
+      },
+      {
+        icon: Waves,
+        name: '사우나 & 스파',
+        description: '핀란드식 건식 사우나와 휴식 공간으로 운동 후 완벽한 휴식'
+      },
+      {
+        icon: Car,
+        name: '전용 주차장',
+        description: '지하 2층 120대 규모의 넓고 안전한 전용 주차공간'
+      },
+      {
+        icon: Coffee,
+        name: 'VIP 라운지',
+        description: '프리미엄 회원 전용 휴식공간과 음료 서비스'
+      },
+      {
+        icon: Wifi,
+        name: '고속 WiFi',
+        description: '전 구역 기가급 무선 인터넷으로 편리한 이용'
+      },
+      {
+        icon: Shield,
+        name: '24시간 보안',
+        description: 'CCTV와 출입통제 시스템으로 안전한 운동 환경'
+      }
+    ],
     trainers: [
       {
         id: 1,
@@ -59,6 +91,38 @@ const locations = [
     image: '/images/locations/hongdae.jpg',
     description: '젊고 활기찬 분위기의 트레이닝 공간',
     features: ['그룹 클래스', '요가 스튜디오', '라운지', '샤워실'],
+    facilities: [
+      {
+        icon: Users,
+        name: '그룹 클래스룸',
+        description: '요가, 필라테스, 스피닝 등 다양한 그룹 프로그램 전용 공간'
+      },
+      {
+        icon: Dumbbell,
+        name: '크로스핏 존',
+        description: '기능성 운동과 고강도 훈련을 위한 전용 크로스핏 공간'
+      },
+      {
+        icon: Coffee,
+        name: '커뮤니티 라운지',
+        description: '회원들의 소통과 휴식을 위한 개방형 라운지 공간'
+      },
+      {
+        icon: Waves,
+        name: '프리미엄 샤워실',
+        description: '개별 샤워부스와 화장실, 락커룸 완비'
+      },
+      {
+        icon: Wifi,
+        name: '무료 WiFi',
+        description: '전 구역 고속 무선 인터넷 서비스'
+      },
+      {
+        icon: Shield,
+        name: '보안 시스템',
+        description: '디지털 도어락과 CCTV로 안전한 이용 환경'
+      }
+    ],
     trainers: [
       {
         id: 4,
@@ -91,6 +155,38 @@ const locations = [
     image: '/images/locations/jamsil.jpg',
     description: '가족 단위 이용객을 위한 편리한 시설',
     features: ['키즈존', '패밀리 라운지', '넓은 주차장', '카페'],
+    facilities: [
+      {
+        icon: Users,
+        name: '키즈 놀이방',
+        description: '부모님 운동 시간 동안 아이들이 안전하게 놀 수 있는 전용 공간'
+      },
+      {
+        icon: Coffee,
+        name: '패밀리 카페',
+        description: '가족 단위 이용객을 위한 넓은 카페 및 휴게 공간'
+      },
+      {
+        icon: Car,
+        name: '대형 주차장',
+        description: '지상 3층 200대 규모의 넓고 편리한 주차 시설'
+      },
+      {
+        icon: Dumbbell,
+        name: '시니어 전용구역',
+        description: '중장년층을 위한 저강도 운동기구와 재활 운동 공간'
+      },
+      {
+        icon: Waves,
+        name: '패밀리 샤워실',
+        description: '가족 단위 이용 가능한 넓은 샤워실과 탈의실'
+      },
+      {
+        icon: Shield,
+        name: '안전 시설',
+        description: '어린이 안전을 위한 특별 설계된 보안 및 안전 시설'
+      }
+    ],
     trainers: [
       {
         id: 6,
@@ -351,6 +447,40 @@ export default function LocationsPage() {
                 ))}
               </div>
             </div>
+
+            {/* Facilities Section */}
+            <div className="mt-20">
+              <div className="text-center mb-12">
+                <h3 className="text-3xl font-bold text-stone-900 mb-4">
+                  {activeLocation.name} 시설 안내
+                </h3>
+                <p className="text-lg text-stone-600">
+                  최고의 서비스를 위한 프리미엄 시설을 만나보세요
+                </p>
+              </div>
+
+              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {activeLocation.facilities.map((facility, index) => (
+                  <motion.div
+                    key={index}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: index * 0.1 }}
+                    className="bg-white rounded-xl p-6 shadow-sm hover:shadow-lg transition-all duration-300 border border-stone-100"
+                  >
+                    <div className="w-12 h-12 bg-stone-100 rounded-lg flex items-center justify-center mb-4">
+                      <facility.icon className="w-6 h-6 text-stone-700" />
+                    </div>
+                    <h4 className="text-lg font-bold text-stone-900 mb-2">
+                      {facility.name}
+                    </h4>
+                    <p className="text-stone-600 text-sm leading-relaxed">
+                      {facility.description}
+                    </p>
+                  </motion.div>
+                ))}
+              </div>
+            </div>
           </div>
         </motion.section>
       </AnimatePresence>
@@ -378,7 +508,7 @@ export default function LocationsPage() {
             <Button 
               size="lg"
               variant="outline"
-              className="h-14 px-8 border-gray-600 text-white hover:bg-gray-800 rounded-full"
+              className="h-14 px-8 border-stone-600 text-white hover:bg-stone-800 rounded-full"
               asChild
             >
               <Link href="/programs">

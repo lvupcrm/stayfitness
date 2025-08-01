@@ -13,7 +13,6 @@ const navigation = [
   { name: '소개', href: '/about' },
   { name: '프로그램', href: '/programs' },
   { name: '지점', href: '/locations' },
-  { name: '시설', href: '/space' },
   { name: '후기', href: '/reviews' },
 ]
 
