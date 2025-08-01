@@ -1,16 +1,15 @@
 "use client";
-import LocationSection from "@/components/content/LocationSection";
 import UrbanHero from "@/components/hero/urban-hero";
-import UrbanPrograms from "@/components/sections/urban-programs";
-import UrbanTestimonials from "@/components/sections/urban-testimonials";
-import WhyChooseUs from "@/components/landing/why-choose-us";
-import sample from "@/data/sample.json";
+import { 
+  ProblemAwarenessSection,
+  SolutionSection,
+  SocialProofSection,
+  UrgencySection,
+  FAQSection
+} from "@/components/sections/conversion-sections";
 import { useEffect } from "react";
 import { usePathname } from "next/navigation";
 import { trackPageView } from "@/lib/analytics";
-import { Button } from "@/components/ui/button";
-import Link from "next/link";
-import { ArrowRight, Users, Calendar, MessageSquare, MapPin, Sparkles, Trophy } from "lucide-react";
 
 export default function Home() {
   const pathname = usePathname();
@@ -20,115 +19,23 @@ export default function Home() {
   
   return (
     <div className="min-h-screen bg-background">
+      {/* 히어로 섹션 - 센터 영상이 들어갈 예정 */}
       <UrbanHero />
-      <UrbanPrograms />
-      <UrbanTestimonials />
-      <WhyChooseUs />
-      <LocationSection {...sample.location} />
       
-      {/* 고객 중심 CTA 섹션 */}
-      <section className="py-20 bg-gradient-to-br from-stone-50 to-stone-100">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-foreground mb-4">
-              당신의 <span className="gray-text-gradient">변화</span>를 시작하세요
-            </h2>
-            <p className="text-lg text-muted-foreground">
-              전문가와 함께하는 맞춤형 피트니스 솔루션
-            </p>
-          </div>
-          
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
-            <Link href="/programs" className="group">
-              <div className="p-6 bg-white rounded-xl shadow-sm hover:shadow-lg transition-all duration-200 border hover:border-stone-300">
-                <div className="w-12 h-12 bg-stone-100 rounded-lg flex items-center justify-center mb-4 group-hover:bg-stone-200 transition-colors">
-                  <Users className="w-6 h-6 text-stone-700" />
-                </div>
-                <h3 className="text-xl font-semibold mb-2">프로그램 둘러보기</h3>
-                <p className="text-muted-foreground mb-4">다양한 프로그램을 확인해보세요</p>
-                <div className="flex items-center text-stone-700 group-hover:translate-x-1 transition-transform">
-                  <span className="font-medium">자세히 보기</span>
-                  <ArrowRight className="w-4 h-4 ml-2" />
-                </div>
-              </div>
-            </Link>
-            
-            <Link href="/consultation" className="group">
-              <div className="p-6 bg-white rounded-xl shadow-sm hover:shadow-lg transition-all duration-200 border hover:border-stone-300">
-                <div className="w-12 h-12 bg-stone-100 rounded-lg flex items-center justify-center mb-4 group-hover:bg-stone-200 transition-colors">
-                  <Calendar className="w-6 h-6 text-stone-700" />
-                </div>
-                <h3 className="text-xl font-semibold mb-2">무료 상담 예약</h3>
-                <p className="text-muted-foreground mb-4">전문가와 맞춤 상담을 받아보세요</p>
-                <div className="flex items-center text-stone-700 group-hover:translate-x-1 transition-transform">
-                  <span className="font-medium">상담 예약하기</span>
-                  <ArrowRight className="w-4 h-4 ml-2" />
-                </div>
-              </div>
-            </Link>
-            
-            <Link href="#success-stories" className="group">
-              <div className="p-6 bg-white rounded-xl shadow-sm hover:shadow-lg transition-all duration-200 border hover:border-stone-300">
-                <div className="w-12 h-12 bg-stone-100 rounded-lg flex items-center justify-center mb-4 group-hover:bg-stone-200 transition-colors">
-                  <Trophy className="w-6 h-6 text-stone-700" />
-                </div>
-                <h3 className="text-xl font-semibold mb-2">성공 스토리</h3>
-                <p className="text-muted-foreground mb-4">실제 회원들의 놀라운 변화</p>
-                <div className="flex items-center text-stone-700 group-hover:translate-x-1 transition-transform">
-                  <span className="font-medium">스토리 보기</span>
-                  <ArrowRight className="w-4 h-4 ml-2" />
-                </div>
-              </div>
-            </Link>
-            
-            <Link href="/locations" className="group">
-              <div className="p-6 bg-white rounded-xl shadow-sm hover:shadow-lg transition-all duration-200 border hover:border-stone-300">
-                <div className="w-12 h-12 bg-stone-100 rounded-lg flex items-center justify-center mb-4 group-hover:bg-stone-200 transition-colors">
-                  <MapPin className="w-6 h-6 text-stone-700" />
-                </div>
-                <h3 className="text-xl font-semibold mb-2">지점 안내</h3>
-                <p className="text-muted-foreground mb-4">가까운 지점을 확인해보세요</p>
-                <div className="flex items-center text-stone-700 group-hover:translate-x-1 transition-transform">
-                  <span className="font-medium">지점 보기</span>
-                  <ArrowRight className="w-4 h-4 ml-2" />
-                </div>
-              </div>
-            </Link>
-            
-            <Link href="/reviews" className="group">
-              <div className="p-6 bg-white rounded-xl shadow-sm hover:shadow-lg transition-all duration-200 border hover:border-stone-300">
-                <div className="w-12 h-12 bg-stone-100 rounded-lg flex items-center justify-center mb-4 group-hover:bg-stone-200 transition-colors">
-                  <MessageSquare className="w-6 h-6 text-stone-700" />
-                </div>
-                <h3 className="text-xl font-semibold mb-2">고객 후기</h3>
-                <p className="text-muted-foreground mb-4">실제 회원들의 생생한 후기</p>
-                <div className="flex items-center text-stone-700 group-hover:translate-x-1 transition-transform">
-                  <span className="font-medium">후기 보기</span>
-                  <ArrowRight className="w-4 h-4 ml-2" />
-                </div>
-              </div>
-            </Link>
-            
-            <div className="md:col-span-2 lg:col-span-1">
-              <div className="p-6 bg-gradient-to-r from-stone-800 to-stone-900 rounded-xl text-white h-full flex flex-col justify-center">
-                <Sparkles className="w-8 h-8 mb-3 opacity-90" />
-                <h3 className="text-xl font-semibold mb-2">첫 방문 혜택!</h3>
-                <p className="mb-4 opacity-90">무료 체성분 분석 + 1:1 맞춤 상담</p>
-                <Button 
-                  asChild 
-                  variant="secondary" 
-                  className="bg-white text-stone-900 hover:bg-stone-50 w-fit"
-                >
-                  <Link href="/consultation">
-                    지금 예약하기
-                    <Calendar className="w-4 h-4 ml-2" />
-                  </Link>
-                </Button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+      {/* 문제점 인식 섹션 */}
+      <ProblemAwarenessSection />
+      
+      {/* 솔루션 제시 섹션 */}
+      <SolutionSection />
+      
+      {/* 사회적 증명 섹션 */}
+      <SocialProofSection />
+      
+      {/* 긴급성/한정성 섹션 */}
+      <UrgencySection />
+      
+      {/* FAQ 섹션 */}
+      <FAQSection />
     </div>
   );
 }
