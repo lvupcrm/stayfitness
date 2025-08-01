@@ -14,8 +14,9 @@ module.exports = {
         secondary: '#F59E42', // Example secondary color
       },
       fontFamily: {
-        sans: ['var(--font-geist-sans)', 'Arial', 'sans-serif'],
-        mono: ['var(--font-geist-mono)', 'monospace'],
+        sans: ['var(--font-inter)', 'system-ui', 'sans-serif'],
+        mono: ['var(--font-jetbrains-mono)', 'monospace'],
+        heading: ['var(--font-outfit)', 'system-ui', 'sans-serif'],
       },
     },
   },

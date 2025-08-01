@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Inter, JetBrains_Mono, Outfit } from "next/font/google";
 import "./globals.css";
 import KakaoFloatingButton from "@/components/kakao-banner/KakaoFloatingButton";
 import { ReactNode } from 'react';
@@ -12,14 +12,25 @@ import { UrbanNav } from '@/components/navigation/urban-nav';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+// 메인 폰트 - 가독성과 현대적 느낌
+const interFont = Inter({
+  variable: "--font-inter",
   subsets: ["latin"],
+  display: "swap",
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+// 헤딩 폰트 - 강하고 임팩트 있는 피트니스 브랜드 느낌
+const outfitFont = Outfit({
+  variable: "--font-outfit",
   subsets: ["latin"],
+  display: "swap",
+});
+
+// 모노스페이스 폰트
+const jetBrainsMono = JetBrains_Mono({
+  variable: "--font-jetbrains-mono",
+  subsets: ["latin"],
+  display: "swap",
 });
 
 export const metadata: Metadata = {
@@ -111,7 +122,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         )}
       </head>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${interFont.variable} ${outfitFont.variable} ${jetBrainsMono.variable} antialiased`}
       >
         {/* Urban Field 스타일 구조화 데이터 */}
         <BusinessStructuredData />

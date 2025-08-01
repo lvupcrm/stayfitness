@@ -36,7 +36,7 @@ export function UrbanNav() {
     <nav className={cn(
       'fixed top-0 left-0 right-0 z-50 transition-all duration-500',
       isScrolled 
-        ? 'bg-white/95 backdrop-blur-xl border-b border-gray-100' 
+        ? 'bg-white/95 backdrop-blur-xl border-b border-slate-200 stay-glow-soft' 
         : 'bg-transparent'
     )}>
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
@@ -47,17 +47,20 @@ export function UrbanNav() {
             className="flex items-center space-x-2 group"
           >
             <motion.div
-              className="text-2xl font-bold tracking-tight"
+              className="text-2xl stay-heading tracking-tight"
               whileHover={{ scale: 1.05 }}
               transition={{ type: "spring", stiffness: 400 }}
             >
               <span className={cn(
                 "transition-colors duration-300",
-                isScrolled ? "text-stone-900" : "text-white"
+                isScrolled ? "stay-text-gradient" : "text-white"
               )}>
                 STAY
               </span>
-              <span className="text-stone-600">FITNESS</span>
+              <span className={cn(
+                "transition-colors duration-300",
+                isScrolled ? "text-slate-600" : "text-slate-300"
+              )}>FITNESS</span>
             </motion.div>
           </Link>
 
@@ -72,13 +75,13 @@ export function UrbanNav() {
                   className="relative px-5 py-2 group"
                 >
                   <span className={cn(
-                    'text-[15px] font-medium tracking-wide transition-colors duration-300',
+                    'stay-body-medium text-[15px] tracking-wide transition-colors duration-300',
                     isScrolled
                       ? isActive 
-                        ? 'text-stone-800' 
-                        : 'text-stone-700 hover:text-stone-900'
+                        ? 'text-slate-900' 
+                        : 'text-slate-700 hover:text-slate-900'
                       : isActive
-                        ? 'text-stone-200'
+                        ? 'text-white'
                         : 'text-white/90 hover:text-white'
                   )}>
                     {item.name}
@@ -87,7 +90,7 @@ export function UrbanNav() {
                   {/* Active indicator */}
                   {isActive && (
                     <motion.div
-                      className="absolute bottom-0 left-5 right-5 h-0.5 bg-stone-700"
+                      className="absolute bottom-0 left-5 right-5 h-0.5 stay-gradient-accent rounded-full"
                       layoutId="navbar-indicator"
                       transition={{ type: "spring", bounce: 0.3, duration: 0.6 }}
                     />
@@ -96,8 +99,8 @@ export function UrbanNav() {
                   {/* Hover effect */}
                   <motion.div
                     className={cn(
-                      "absolute bottom-0 left-5 right-5 h-0.5",
-                      isScrolled ? "bg-gray-900" : "bg-white"
+                      "absolute bottom-0 left-5 right-5 h-0.5 rounded-full",
+                      isScrolled ? "bg-slate-300" : "bg-white/50"
                     )}
                     initial={{ scaleX: 0 }}
                     whileHover={{ scaleX: 1 }}
@@ -112,12 +115,9 @@ export function UrbanNav() {
           {/* CTA Buttons */}
           <div className="hidden lg:flex items-center">
             <Button 
-              className={cn(
-                "text-[15px] font-medium px-6 h-11 rounded-full transition-all duration-300",
-                isScrolled
-                  ? "bg-stone-800 hover:bg-stone-900 text-white"
-                  : "bg-stone-700 hover:bg-stone-600 text-white"
-              )}
+              variant="primary"
+              size="lg"
+              className="stay-body-medium text-[15px] px-6 h-11 rounded-full hover:scale-105 transition-all duration-300"
               asChild
             >
               <Link href="/consultation">상담예약</Link>
@@ -132,8 +132,8 @@ export function UrbanNav() {
                   variant="ghost" 
                   size="icon"
                   className={cn(
-                    "rounded-full transition-colors duration-300",
-                    isScrolled ? "text-stone-900" : "text-white"
+                    "rounded-full transition-colors duration-300 hover:bg-white/10",
+                    isScrolled ? "text-slate-900 hover:bg-slate-100" : "text-white"
                   )}
                 >
                   <Menu className="w-6 h-6" />
@@ -146,16 +146,16 @@ export function UrbanNav() {
               >
                 <div className="flex flex-col h-full">
                   {/* Mobile header */}
-                  <div className="flex items-center justify-between px-6 py-6 border-b">
-                    <div className="text-2xl font-bold tracking-tight">
-                      <span className="text-stone-900">STAY</span>
-                      <span className="text-stone-600">FITNESS</span>
+                  <div className="flex items-center justify-between px-6 py-6 border-b border-slate-200">
+                    <div className="text-2xl stay-heading tracking-tight">
+                      <span className="stay-text-gradient">STAY</span>
+                      <span className="text-slate-600">FITNESS</span>
                     </div>
                     <Button 
                       variant="ghost" 
                       size="icon"
                       onClick={closeSheet}
-                      className="rounded-full"
+                      className="rounded-full text-slate-600 hover:bg-slate-100"
                     >
                       <X className="w-5 h-5" />
                     </Button>
@@ -177,10 +177,10 @@ export function UrbanNav() {
                               href={item.href}
                               onClick={closeSheet}
                               className={cn(
-                                'block px-4 py-3 text-lg font-medium rounded-xl transition-all duration-300',
+                                'block px-4 py-3 text-lg stay-body-medium rounded-xl transition-all duration-300',
                                 isActive
-                                  ? 'bg-stone-100 text-stone-800'
-                                  : 'text-stone-700 hover:bg-stone-50'
+                                  ? 'bg-slate-100 text-slate-900 stay-glow-soft'
+                                  : 'text-slate-700 hover:bg-slate-50'
                               )}
                             >
                               {item.name}
@@ -192,9 +192,11 @@ export function UrbanNav() {
                   </div>
 
                   {/* Mobile CTA */}
-                  <div className="px-6 py-6 border-t">
+                  <div className="px-6 py-6 border-t border-slate-200">
                     <Button 
-                      className="w-full h-12 rounded-full bg-stone-800 hover:bg-stone-900 text-white text-base font-medium"
+                      variant="primary"
+                      size="lg"
+                      className="w-full h-12 rounded-full text-base stay-body-medium"
                       asChild
                     >
                       <Link href="/consultation" onClick={closeSheet}>
@@ -204,8 +206,8 @@ export function UrbanNav() {
                   </div>
 
                   {/* Contact info */}
-                  <div className="px-6 py-4 bg-gray-50">
-                    <p className="text-sm text-stone-600 text-center">
+                  <div className="px-6 py-4 bg-slate-50">
+                    <p className="text-sm text-slate-600 text-center stay-body">
                       문의: 02-0000-0000<br />
                       평일 06:00-23:00 | 주말 08:00-22:00
                     </p>
