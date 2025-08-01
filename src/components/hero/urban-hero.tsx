@@ -3,7 +3,7 @@
 import Image from "next/image"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
-import { ArrowRight, ChevronDown, Calendar, Trophy, Target } from "lucide-react"
+import { ArrowRight, ChevronDown, Target } from "lucide-react"
 import { motion } from "framer-motion"
 
 export default function UrbanHero() {
