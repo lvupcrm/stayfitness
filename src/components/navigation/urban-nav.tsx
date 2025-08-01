@@ -11,8 +11,8 @@ import { motion } from 'framer-motion'
 
 const navigation = [
   { name: '소개', href: '/about' },
-  { name: '프로그램', href: '/programs' },
   { name: '지점', href: '/locations' },
+  { name: '프로그램', href: '/programs' },
   { name: '후기', href: '/reviews' },
 ]
 

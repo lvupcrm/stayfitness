@@ -3,7 +3,7 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import { Button } from '@/components/ui/button'
-import { MapPin, Users, Heart, Target, Zap, Calendar } from 'lucide-react'
+import { MapPin, Users, Heart, Target, Zap, Calendar, Phone, Mail, MessageCircle, Instagram, Globe } from 'lucide-react'
 import { motion } from 'framer-motion'
 
 const values = [
@@ -67,6 +67,72 @@ const stats = [
   { number: '직영', label: '모든 지점 운영' },
   { number: '3', label: '서울 내 지점' },
   { number: '일상', label: '운동을 만드는 공간' }
+]
+
+const mvc = [
+  {
+    title: 'Mission',
+    subtitle: '우리의 사명',
+    description: '끊임없는 발전과 일관된 고부가가치의 헬스케어를 제공함으로서 고객만족을 실현시킨다.',
+    icon: Target
+  },
+  {
+    title: 'Vision',
+    subtitle: '우리의 비전',
+    description: '피트니스 산업 내의 각 분야의 전문가들을 배출하고 함께 모여 일하는 센터',
+    icon: Users
+  },
+  {
+    title: 'Core Values',
+    subtitle: '핵심 가치',
+    description: '고객중심의 사고방식, 직책에 해당하는 역량 강화, &lsquo;함께&rsquo; 할때 즐거운 동료, 긍정적인 영향력',
+    icon: Heart
+  }
+]
+
+const workPrinciples = [
+  '의사결정의 기준은 &lsquo;고객만족&rsquo;이다.',
+  '우리가 만나는 모든 사람은 우리의 소중한 고객이다.',
+  '우리는 프로다. 프로는 결과물로 말한다.',
+  '본인 역량을 발전시키기 위한 시간을 명확히 정한다.',
+  '치열하게 논쟁하고, 결정된 사항은 옳은 선택이 되도록 최선을 다해 돕는다.',
+  '신뢰는 앞뒤가 다르지 않은 행동에서 나온다.',
+  '사려깊은 다른 의견을 존중하고, 함께 더 나은 대안을 모색한다.',
+  '업무시간에는 고객, 동료의 요구에 즉각적으로 대응한다.',
+  '변화에 대해서 두려워하지 않는다.'
+]
+
+const contactInfo = [
+  {
+    icon: Phone,
+    label: '전화문의',
+    value: '031-339-9905',
+    link: 'tel:031-339-9905'
+  },
+  {
+    icon: Mail,
+    label: '이메일',
+    value: 'stay_fitness@naver.com',
+    link: 'mailto:stay_fitness@naver.com'
+  },
+  {
+    icon: Globe,
+    label: '네이버 블로그',
+    value: '스테이피트니스 공식 블로그',
+    link: 'https://blog.naver.com/jh_training'
+  },
+  {
+    icon: Instagram,
+    label: '인스타그램',
+    value: '@stay_fitness_1',
+    link: 'https://www.instagram.com/stay_fitness_1/'
+  },
+  {
+    icon: MessageCircle,
+    label: '카카오톡 채널',
+    value: '스테이피트니스 상담',
+    link: 'https://pf.kakao.com/_INlxcxj'
+  }
 ]
 
 export default function AboutPage() {
@@ -203,6 +269,98 @@ export default function AboutPage() {
         </div>
       </section>
 
+      {/* MVC Section */}
+      <section className="py-20 bg-white">
+        <div className="max-w-7xl mx-auto px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <motion.h2 
+              className="text-3xl md:text-4xl font-bold text-stone-900 mb-4"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+              viewport={{ once: true }}
+            >
+              MVC - 우리는 무엇을 하고, 왜 하는가
+            </motion.h2>
+            <motion.p 
+              className="text-lg text-stone-600 max-w-3xl mx-auto"
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              transition={{ duration: 0.6, delay: 0.1 }}
+              viewport={{ once: true }}
+            >
+              스테이피트니스의 사명, 비전, 핵심가치를 소개합니다
+            </motion.p>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-8">
+            {mvc.map((item, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: index * 0.1 }}
+                viewport={{ once: true }}
+                className="bg-stone-50 rounded-2xl p-8 text-center hover:shadow-lg transition-all duration-300"
+              >
+                <div className="w-16 h-16 bg-stone-800 rounded-full flex items-center justify-center mx-auto mb-6">
+                  <item.icon className="w-8 h-8 text-white" />
+                </div>
+                <h3 className="text-2xl font-bold text-stone-900 mb-2">{item.title}</h3>
+                <h4 className="text-lg font-medium text-stone-600 mb-4">{item.subtitle}</h4>
+                <p className="text-stone-600 leading-relaxed">{item.description}</p>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Work Principles Section */}
+      <section className="py-20 bg-stone-50">
+        <div className="max-w-7xl mx-auto px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <motion.h2 
+              className="text-3xl md:text-4xl font-bold text-stone-900 mb-4"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+              viewport={{ once: true }}
+            >
+              일하는 원칙
+            </motion.h2>
+            <motion.p 
+              className="text-lg text-stone-600 max-w-3xl mx-auto"
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              transition={{ duration: 0.6, delay: 0.1 }}
+              viewport={{ once: true }}
+            >
+              스테이피트니스 구성원들이 지키는 9가지 원칙
+            </motion.p>
+          </div>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {workPrinciples.map((principle, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: index * 0.05 }}
+                viewport={{ once: true }}
+                className="bg-white rounded-xl p-6 shadow-sm hover:shadow-lg transition-all duration-300"
+              >
+                <div className="flex items-start space-x-4">
+                  <div className="w-8 h-8 bg-stone-800 rounded-full flex items-center justify-center flex-shrink-0">
+                    <span className="text-white font-bold text-sm">{index + 1}</span>
+                  </div>
+                  <p className="text-stone-700 leading-relaxed">{principle}</p>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* Timeline Section */}
       <section className="py-20 bg-white">
         <div className="max-w-4xl mx-auto px-6 lg:px-8">
@@ -321,6 +479,74 @@ export default function AboutPage() {
                 문의하기
               </Link>
             </Button>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Contact Information Section */}
+      <section className="py-20 bg-stone-50">
+        <div className="max-w-7xl mx-auto px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <motion.h2 
+              className="text-3xl md:text-4xl font-bold text-stone-900 mb-4"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+              viewport={{ once: true }}
+            >
+              연락처 및 소셜미디어
+            </motion.h2>
+            <motion.p 
+              className="text-lg text-stone-600 max-w-3xl mx-auto"
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              transition={{ duration: 0.6, delay: 0.1 }}
+              viewport={{ once: true }}
+            >
+              다양한 채널을 통해 스테이피트니스와 소통하세요
+            </motion.p>
+          </div>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto">
+            {contactInfo.map((contact, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: index * 0.1 }}
+                viewport={{ once: true }}
+              >
+                <Link 
+                  href={contact.link}
+                  target={contact.link.startsWith('http') ? '_blank' : '_self'}
+                  className="block bg-white rounded-2xl p-6 shadow-sm hover:shadow-lg transition-all duration-300 group"
+                >
+                  <div className="flex items-center space-x-4">
+                    <div className="w-12 h-12 bg-stone-100 rounded-full flex items-center justify-center group-hover:bg-stone-200 transition-colors">
+                      <contact.icon className="w-6 h-6 text-stone-700" />
+                    </div>
+                    <div className="flex-1">
+                      <h3 className="font-semibold text-stone-900 mb-1">{contact.label}</h3>
+                      <p className="text-stone-600 text-sm">{contact.value}</p>
+                    </div>
+                  </div>
+                </Link>
+              </motion.div>
+            ))}
+          </div>
+
+          {/* Brand Tagline */}
+          <motion.div 
+            className="text-center mt-16"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.3 }}
+            viewport={{ once: true }}
+          >
+            <div className="inline-block bg-gradient-to-r from-stone-800 to-stone-900 text-white px-8 py-4 rounded-full">
+              <h3 className="text-xl font-bold mb-2">&ldquo;당신의 건강이 머무르는 공간&rdquo;</h3>
+              <p className="text-stone-200 text-lg">STAY FITNESS</p>
+            </div>
           </motion.div>
         </div>
       </section>
