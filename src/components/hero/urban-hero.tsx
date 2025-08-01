@@ -35,19 +35,24 @@ export default function UrbanHero() {
         >
           {/* Trust indicators */}
           <motion.div 
-            className="flex justify-center items-center gap-8 mb-8"
+            className="flex justify-center items-center gap-6 mb-8"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.8, delay: 0.3 }}
           >
             <div className="flex items-center gap-2 text-stone-300">
               <Trophy className="w-4 h-4 text-amber-400" />
-              <span className="text-sm">1000+ 성공사례</span>
+              <span className="text-sm">1:1 전담 시스템</span>
             </div>
             <div className="w-1 h-1 bg-stone-400 rounded-full"></div>
             <div className="flex items-center gap-2 text-stone-300">
               <Target className="w-4 h-4 text-amber-400" />
-              <span className="text-sm">95% 목표달성</span>
+              <span className="text-sm">맞춤형 프로그램</span>
+            </div>
+            <div className="w-1 h-1 bg-stone-400 rounded-full"></div>
+            <div className="flex items-center gap-2 text-stone-300">
+              <Trophy className="w-4 h-4 text-amber-400" />
+              <span className="text-sm">확실한 결과</span>
             </div>
           </motion.div>
 
@@ -59,66 +64,62 @@ export default function UrbanHero() {
             transition={{ duration: 0.8, delay: 0.4 }}
           >
             <span className="block text-stone-300 text-lg md:text-xl font-medium mb-4">
-              단 3개월만에 몸이 바뀝니다
+              나만을 위한 완전 맞춤 솔루션
             </span>
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-stone-100 to-stone-300">
-              1:1 맞춤 PT
+              1:1 퍼스널 트레이닝
             </span>
             <br />
             <span className="text-white">
-              체계적 변화
+              확실한 변화, 지속가능한 결과
             </span>
           </motion.h1>
 
           {/* Value proposition */}
           <motion.div 
-            className="max-w-3xl mx-auto mb-8"
+            className="max-w-3xl mx-auto mb-12"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.8, delay: 0.5 }}
           >
-            <p className="text-xl md:text-2xl text-stone-200 mb-4 font-medium">
-              체성분 분석부터 식단 관리까지
+            <p className="text-xl md:text-2xl text-stone-200 mb-6 font-medium">
+              전담 트레이너 × 맞춤 프로그램 × 지속적 관리
             </p>
-            <p className="text-lg text-stone-300 leading-relaxed">
-              전문 트레이너가 당신만을 위한 완전 맞춤 프로그램으로<br />
-              확실한 변화를 만들어드립니다
-            </p>
+            <div className="grid md:grid-cols-3 gap-6 text-center">
+              <div className="p-4 bg-stone-800/30 rounded-xl backdrop-blur-sm">
+                <div className="text-amber-400 text-2xl mb-2">📊</div>
+                <h3 className="text-white font-semibold mb-2">과학적 분석</h3>
+                <p className="text-stone-400 text-sm">체성분 분석 기반<br />개인 맞춤 설계</p>
+              </div>
+              <div className="p-4 bg-stone-800/30 rounded-xl backdrop-blur-sm">
+                <div className="text-amber-400 text-2xl mb-2">🎯</div>
+                <h3 className="text-white font-semibold mb-2">1:1 전담 관리</h3>
+                <p className="text-stone-400 text-sm">전문 트레이너<br />완전 개인 집중</p>
+              </div>
+              <div className="p-4 bg-stone-800/30 rounded-xl backdrop-blur-sm">
+                <div className="text-amber-400 text-2xl mb-2">🔄</div>
+                <h3 className="text-white font-semibold mb-2">지속적 케어</h3>
+                <p className="text-stone-400 text-sm">운동+영양+라이프스타일<br />토탈 관리</p>
+              </div>
+            </div>
           </motion.div>
 
-          {/* Urgency & offer */}
-          <motion.div 
-            className="bg-stone-800/50 backdrop-blur-sm border border-stone-700 rounded-2xl p-6 mb-10 max-w-2xl mx-auto"
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.8, delay: 0.6 }}
-          >
-            <div className="text-amber-400 font-bold text-lg mb-2">
-              🔥 지금 시작하면 특별 혜택
-            </div>
-            <div className="text-white font-semibold text-xl mb-3">
-              첫 달 50% 할인 + 무료 체성분 분석
-            </div>
-            <div className="text-stone-300 text-sm">
-              ⏰ 이번 주 한정 • 선착순 20명
-            </div>
-          </motion.div>
 
           {/* Primary CTA */}
           <motion.div 
             className="flex flex-col items-center gap-4 mb-12"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.7 }}
+            transition={{ duration: 0.8, delay: 0.6 }}
           >
             <Button 
               size="lg" 
-              className="h-16 px-12 text-lg font-bold bg-stone-700 hover:bg-stone-600 text-white rounded-full transition-all duration-300 shadow-2xl shadow-stone-700/40 hover:shadow-stone-600/50 group"
+              className="h-16 px-12 text-lg font-bold bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 text-white rounded-full transition-all duration-300 shadow-2xl shadow-amber-500/40 hover:shadow-amber-600/50 group"
               asChild
             >
               <Link href="/consultation">
                 <Calendar className="w-6 h-6 mr-3" />
-                무료 체험 + 상담 예약하기
+                1:1 맞춤 상담 신청하기
                 <ArrowRight className="w-6 h-6 ml-3 group-hover:translate-x-1 transition-transform" />
               </Link>
             </Button>
@@ -130,27 +131,33 @@ export default function UrbanHero() {
 
           {/* Social proof stats */}
           <motion.div 
-            className="grid grid-cols-3 gap-8 max-w-4xl mx-auto"
+            className="grid grid-cols-2 md:grid-cols-4 gap-8 max-w-4xl mx-auto"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ duration: 0.8, delay: 0.8 }}
+            transition={{ duration: 0.8, delay: 0.7 }}
           >
             <div className="text-center">
-              <div className="text-3xl md:text-4xl font-bold text-white mb-2">1000+</div>
+              <div className="text-3xl md:text-4xl font-bold text-amber-400 mb-2">100%</div>
               <div className="text-sm text-stone-400 leading-tight">
-                성공적인<br />변화 사례
-              </div>
-            </div>
-            <div className="text-center border-x border-stone-700">
-              <div className="text-3xl md:text-4xl font-bold text-white mb-2">-15kg</div>
-              <div className="text-sm text-stone-400 leading-tight">
-                평균 체중<br />감량 효과
+                1:1 전담<br />트레이너
               </div>
             </div>
             <div className="text-center">
-              <div className="text-3xl md:text-4xl font-bold text-white mb-2">4.9/5</div>
+              <div className="text-3xl md:text-4xl font-bold text-amber-400 mb-2">24/7</div>
               <div className="text-sm text-stone-400 leading-tight">
-                고객 만족도<br />평점
+                언제든지<br />상담 가능
+              </div>
+            </div>
+            <div className="text-center">
+              <div className="text-3xl md:text-4xl font-bold text-amber-400 mb-2">맞춤형</div>
+              <div className="text-sm text-stone-400 leading-tight">
+                개인별<br />프로그램
+              </div>
+            </div>
+            <div className="text-center">
+              <div className="text-3xl md:text-4xl font-bold text-amber-400 mb-2">지속</div>
+              <div className="text-sm text-stone-400 leading-tight">
+                평생<br />건강 관리
               </div>
             </div>
           </motion.div>

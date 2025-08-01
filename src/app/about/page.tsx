@@ -9,23 +9,23 @@ import { motion } from 'framer-motion'
 const values = [
   {
     icon: Heart,
-    title: '건강한 라이프스타일',
-    description: '단순한 운동이 아닌, 평생 지속 가능한 건강한 생활 습관을 만들어갑니다.'
+    title: '편안하고 따뜻한 공간',
+    description: '기존 헬스장의 위압적인 분위기 대신, 따뜻하고 밝은 공간에서 부담 없이 운동할 수 있습니다.'
   },
   {
     icon: Target,
-    title: '개인 맞춤 접근',
-    description: '각자의 목표와 체력 수준에 맞는 완전히 개인화된 프로그램을 제공합니다.'
+    title: '초심자 친화적 환경',
+    description: '운동이 처음인 분들을 위한 환경. 회원 중 60%가 운동 초심자로, 누구나 쉽게 시작할 수 있습니다.'
   },
   {
     icon: Users,
-    title: '전문가 팀',
-    description: '검증된 자격증과 풍부한 경험을 가진 전문 트레이너들이 함께합니다.'
+    title: '다양한 트레이닝 옵션',
+    description: 'PT, 필라테스, 웨이트존 등 다양한 운동 방식을 제공하여 본인에게 맞는 스타일을 찾을 수 있습니다.'
   },
   {
     icon: Zap,
-    title: '지속적인 동기부여',
-    description: '꾸준한 관리와 격려를 통해 목표 달성까지 끝까지 함께 동행합니다.'
+    title: '유연한 운영시간',
+    description: '바쁜 현대인의 일정에 맞춰 유연한 운영시간을 제공하여 꾸준한 운동 습관을 만들 수 있습니다.'
   }
 ]
 
@@ -33,40 +33,40 @@ const milestones = [
   {
     year: '2019',
     title: '스테이피트니스 설립',
-    description: '건강한 삶을 추구하는 사람들을 위한 프리미엄 피트니스 센터로 시작'
+    description: '"당신의 건강이 머무르는 공간"을 만들기 위해 브랜드 탄생'
   },
   {
     year: '2020',
-    title: '홍대점 오픈',
-    description: '젊고 활기찬 홍대 지역에 두 번째 지점 개설'
+    title: '초심자 친화적 환경 구축',
+    description: '운동 초심자도 편안하게 시작할 수 있는 따뜻하고 밝은 공간 조성'
   },
   {
     year: '2021',
-    title: '디지털 헬스케어 도입',
-    description: '최신 기술을 활용한 체성분 분석 및 운동 트래킹 시스템 구축'
+    title: '다양한 트레이닝 프로그램 도입',
+    description: 'PT, 필라테스, 웨이트존 등 개인 스타일에 맞는 다양한 운동 옵션 제공'
   },
   {
     year: '2022',
-    title: '잠실점 확장',
-    description: '가족 단위 고객을 위한 프리미엄 시설로 서비스 영역 확대'
+    title: '직영 운영 시스템 확립',
+    description: '모든 지점을 직영으로 운영하여 한결같은 서비스와 환경 보장'
   },
   {
     year: '2023',
-    title: '1000명 회원 돌파',
-    description: '누적 1000명의 회원들과 함께 건강한 변화를 만들어가며 성장'
+    title: '초심자 회원 60% 달성',
+    description: '운동이 처음인 분들이 가장 많이 찾는 피트니스로 자리매김'
   },
   {
     year: '2024',
-    title: '종합 웰니스 서비스',
-    description: '운동, 영양, 라이프스타일 코칭을 통합한 토탈 웰니스 서비스 제공'
+    title: '운동 습관화 프로그램 완성',
+    description: '운동을 일상으로 만드는 지속 가능한 건강 관리 시스템 구축'
   }
 ]
 
 const stats = [
-  { number: '1000+', label: '총 회원 수' },
-  { number: '15+', label: '전문 트레이너' },
-  { number: '3', label: '지점 운영' },
-  { number: '95%', label: '고객 만족도' }
+  { number: '60%', label: '운동 초심자 회원' },
+  { number: '직영', label: '모든 지점 운영' },
+  { number: '3', label: '서울 내 지점' },
+  { number: '일상', label: '운동을 만드는 공간' }
 ]
 
 export default function AboutPage() {
@@ -82,13 +82,13 @@ export default function AboutPage() {
               transition={{ duration: 0.6 }}
             >
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6">
-                건강한 변화,<br />
-                <span className="text-stone-300">함께 만들어가요</span>
+                운동을 일상으로,<br />
+                <span className="text-stone-300">건강이 머무는 공간</span>
               </h1>
               <p className="text-xl text-stone-300 mb-8 leading-relaxed">
-                스테이피트니스는 단순한 운동 공간이 아닙니다. 
-                개인의 목표와 라이프스타일에 맞는 맞춤형 솔루션으로 
-                평생 건강한 삶을 만들어가는 파트너입니다.
+                운동을 '도전'이 아니라 '일상'으로 만드는 곳. 
+                누구나 편하게 찾아와 오래 머물 수 있는 피트니스, 
+                당신의 건강이 자연스럽게 습관이 되는 공간입니다.
               </p>
               <div className="flex flex-col sm:flex-row gap-4">
                 <Button 
@@ -169,7 +169,7 @@ export default function AboutPage() {
               transition={{ duration: 0.6 }}
               viewport={{ once: true }}
             >
-              우리의 가치
+              스테이피트니스만의 차별점
             </motion.h2>
             <motion.p 
               className="text-lg text-stone-600 max-w-3xl mx-auto"
@@ -178,7 +178,7 @@ export default function AboutPage() {
               transition={{ duration: 0.6, delay: 0.1 }}
               viewport={{ once: true }}
             >
-              스테이피트니스가 추구하는 핵심 가치와 철학을 소개합니다
+              운동을 도전이 아닌 일상으로 만드는 스테이피트니스의 특별함을 소개합니다
             </motion.p>
           </div>
 
@@ -281,8 +281,8 @@ export default function AboutPage() {
             transition={{ duration: 0.6, delay: 0.1 }}
             viewport={{ once: true }}
           >
-            &ldquo;모든 사람이 자신만의 속도로 건강한 변화를 경험하고, 
-            그 변화가 삶의 모든 영역에서 긍정적인 영향을 미칠 수 있도록 돕는 것&rdquo;
+            &ldquo;운동은 '잠깐 하는 것'이 아니라, 삶의 일부가 되어야 한다고 믿습니다. 
+            누구나 부담 없이 찾아오고, 자연스럽게 운동을 지속할 수 있는 공간을 만듭니다.&rdquo;
           </motion.p>
           <motion.p 
             className="text-lg text-stone-400 mb-12 max-w-3xl mx-auto"
@@ -291,7 +291,8 @@ export default function AboutPage() {
             transition={{ duration: 0.6, delay: 0.2 }}
             viewport={{ once: true }}
           >
-            이것이 바로 스테이피트니스가 존재하는 이유입니다.
+            운동이 하루하루의 루틴이 되고, 꾸준한 습관이 될 수 있도록. 
+            지금, 당신의 건강이 머무를 수 있는 공간에서 시작하세요.
           </motion.p>
           
           <motion.div 
