@@ -110,28 +110,18 @@ export function UrbanNav() {
           </div>
 
           {/* CTA Buttons */}
-          <div className="hidden lg:flex items-center space-x-4">
+          <div className="hidden lg:flex items-center">
             <Button 
-              variant="ghost" 
               className={cn(
                 "text-[15px] font-medium px-6 h-11 rounded-full transition-all duration-300",
                 isScrolled
-                  ? "text-stone-700 hover:text-stone-900 hover:bg-stone-100"
-                  : "text-white hover:bg-white/10"
+                  ? "bg-stone-800 hover:bg-stone-900 text-white"
+                  : "bg-stone-700 hover:bg-stone-600 text-white"
               )}
               asChild
             >
               <Link href="/consultation">상담예약</Link>
             </Button>
-            
-            <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-              <Button 
-                className="text-[15px] font-medium px-6 h-11 rounded-full bg-stone-800 hover:bg-stone-900 text-white shadow-lg shadow-stone-800/20 transition-all duration-300"
-                asChild
-              >
-                <Link href="/careers">트레이너 지원</Link>
-              </Button>
-            </motion.div>
           </div>
 
           {/* Mobile menu button */}
@@ -202,22 +192,13 @@ export function UrbanNav() {
                   </div>
 
                   {/* Mobile CTA */}
-                  <div className="px-6 py-6 border-t space-y-3">
-                    <Button 
-                      variant="outline"
-                      className="w-full h-12 rounded-full text-base font-medium"
-                      asChild
-                    >
-                      <Link href="/consultation" onClick={closeSheet}>
-                        상담 예약하기
-                      </Link>
-                    </Button>
+                  <div className="px-6 py-6 border-t">
                     <Button 
                       className="w-full h-12 rounded-full bg-stone-800 hover:bg-stone-900 text-white text-base font-medium"
                       asChild
                     >
-                      <Link href="/careers" onClick={closeSheet}>
-                        트레이너 지원하기
+                      <Link href="/consultation" onClick={closeSheet}>
+                        상담 예약하기
                       </Link>
                     </Button>
                   </div>

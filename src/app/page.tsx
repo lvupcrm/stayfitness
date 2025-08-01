@@ -4,7 +4,6 @@ import UrbanHero from "@/components/hero/urban-hero";
 import UrbanPrograms from "@/components/sections/urban-programs";
 import UrbanTestimonials from "@/components/sections/urban-testimonials";
 import WhyChooseUs from "@/components/landing/why-choose-us";
-import TrainerRecruitment from "@/components/landing/trainer-recruitment";
 import sample from "@/data/sample.json";
 import { useEffect } from "react";
 import { usePathname } from "next/navigation";
@@ -25,7 +24,6 @@ export default function Home() {
       <UrbanPrograms />
       <UrbanTestimonials />
       <WhyChooseUs />
-      <TrainerRecruitment />
       <LocationSection {...sample.location} />
       
       {/* 고객 중심 CTA 섹션 */}
