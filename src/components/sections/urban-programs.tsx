@@ -24,7 +24,7 @@ const programs = [
       '영양 및 라이프스타일 코칭',
       '주기적인 진도 체크 및 프로그램 조정'
     ],
-    color: 'from-green-500 to-green-600'
+    color: 'from-gray-700 to-gray-800'
   },
   {
     id: 'group',
@@ -42,7 +42,7 @@ const programs = [
       '소규모 정원으로 개인 케어',
       '커뮤니티 형성 및 동기부여'
     ],
-    color: 'from-blue-500 to-blue-600'
+    color: 'from-gray-600 to-gray-700'
   },
   {
     id: 'premium',
@@ -61,7 +61,7 @@ const programs = [
       '월간 건강 검진 및 리포트',
       'VIP 라운지 이용'
     ],
-    color: 'from-purple-500 to-purple-600'
+    color: 'from-gray-800 to-gray-900'
   }
 ]
 
@@ -144,7 +144,7 @@ export default function UrbanPrograms() {
               {/* Right: Content */}
               <div className="space-y-8">
                 <div>
-                  <p className="text-green-600 font-medium mb-2">{activeProgram.subtitle}</p>
+                  <p className="text-gray-600 font-medium mb-2">{activeProgram.subtitle}</p>
                   <h3 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
                     {activeProgram.title}
                   </h3>
@@ -181,7 +181,7 @@ export default function UrbanPrograms() {
                         animate={{ opacity: 1, x: 0 }}
                         transition={{ delay: index * 0.1 }}
                       >
-                        <span className="w-1.5 h-1.5 bg-green-600 rounded-full mt-2 flex-shrink-0" />
+                        <span className="w-1.5 h-1.5 bg-gray-600 rounded-full mt-2 flex-shrink-0" />
                         <span className="text-gray-700">{feature}</span>
                       </motion.li>
                     ))}
