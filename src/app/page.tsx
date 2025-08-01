@@ -83,15 +83,15 @@ export default function Home() {
               </div>
             </Link>
             
-            <Link href="/contact" className="group">
+            <Link href="/locations" className="group">
               <div className="p-6 bg-white rounded-xl shadow-sm hover:shadow-lg transition-all duration-200 border hover:border-stone-300">
                 <div className="w-12 h-12 bg-stone-100 rounded-lg flex items-center justify-center mb-4 group-hover:bg-stone-200 transition-colors">
                   <MapPin className="w-6 h-6 text-stone-700" />
                 </div>
-                <h3 className="text-xl font-semibold mb-2">센터 방문</h3>
-                <p className="text-muted-foreground mb-4">직접 방문해서 둘러보세요</p>
+                <h3 className="text-xl font-semibold mb-2">지점 안내</h3>
+                <p className="text-muted-foreground mb-4">가까운 지점을 확인해보세요</p>
                 <div className="flex items-center text-stone-700 group-hover:translate-x-1 transition-transform">
-                  <span className="font-medium">위치 보기</span>
+                  <span className="font-medium">지점 보기</span>
                   <ArrowRight className="w-4 h-4 ml-2" />
                 </div>
               </div>

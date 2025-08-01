@@ -3,7 +3,7 @@
 import Image from "next/image"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
-import { ArrowRight, ChevronDown, Calendar, Users, Trophy, Target } from "lucide-react"
+import { ArrowRight, ChevronDown, Calendar, Trophy, Target } from "lucide-react"
 import { motion } from "framer-motion"
 
 export default function UrbanHero() {
@@ -35,7 +35,7 @@ export default function UrbanHero() {
         >
           {/* Trust indicators */}
           <motion.div 
-            className="flex justify-center items-center gap-6 mb-8"
+            className="flex justify-center items-center gap-8 mb-8"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.8, delay: 0.3 }}
@@ -43,11 +43,6 @@ export default function UrbanHero() {
             <div className="flex items-center gap-2 text-stone-300">
               <Trophy className="w-4 h-4 text-amber-400" />
               <span className="text-sm">1000+ 성공사례</span>
-            </div>
-            <div className="w-1 h-1 bg-stone-400 rounded-full"></div>
-            <div className="flex items-center gap-2 text-stone-300">
-              <Users className="w-4 h-4 text-amber-400" />
-              <span className="text-sm">전문 트레이너 15명</span>
             </div>
             <div className="w-1 h-1 bg-stone-400 rounded-full"></div>
             <div className="flex items-center gap-2 text-stone-300">

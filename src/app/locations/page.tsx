@@ -340,7 +340,7 @@ export default function LocationsPage() {
                 </div>
 
                 {/* CTA */}
-                <div className="flex flex-col sm:flex-row gap-4">
+                <div className="flex justify-center">
                   <Button 
                     className="h-12 px-8 bg-stone-900 hover:bg-gray-800 text-white rounded-full"
                     asChild
@@ -348,16 +348,6 @@ export default function LocationsPage() {
                     <Link href="/consultation">
                       <Calendar className="w-4 h-4 mr-2" />
                       상담 예약하기
-                    </Link>
-                  </Button>
-                  <Button 
-                    variant="outline"
-                    className="h-12 px-8 border-stone-300 text-stone-700 hover:bg-stone-50 rounded-full"
-                    asChild
-                  >
-                    <Link href="/contact">
-                      <MapPin className="w-4 h-4 mr-2" />
-                      오시는 길
                     </Link>
                   </Button>
                 </div>
