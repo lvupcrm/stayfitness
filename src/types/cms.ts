@@ -106,12 +106,14 @@ export interface Page {
   meta_keywords?: string[]
   status: 'draft' | 'published' | 'archived'
   template?: 'default' | 'landing' | 'blog' | 'about'
+  featured_image?: string
   blocks: ContentBlock[]
   published_at?: string
   created_at: string
   updated_at: string
   created_by: string
-  updated_by: string
+  updated_by?: string
+  version_number: number
 }
 
 export interface MediaFile {

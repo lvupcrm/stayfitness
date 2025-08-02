@@ -40,7 +40,7 @@ export function PageEditor({ mode, slug }: PageEditorProps) {
     return () => {
       resetEditor()
     }
-  }, [mode, slug])
+  }, [mode, slug, createNewPage, loadPage, resetEditor])
 
   const loadPage = async (pageSlug: string) => {
     try {
