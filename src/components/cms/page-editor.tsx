@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useCallback } from 'react'
 import { useRouter } from 'next/navigation'
 import { toast } from 'react-toastify'
 import { DndProvider } from 'react-dnd'
@@ -42,7 +42,7 @@ export function PageEditor({ mode, slug }: PageEditorProps) {
     }
   }, [mode, slug, createNewPage, loadPage, resetEditor])
 
-  const loadPage = async (pageSlug: string) => {
+  const loadPage = useCallback(async (pageSlug: string) => {
     try {
       setIsLoading(true)
       const response = await fetch(`/api/cms/pages/${pageSlug}`)
@@ -68,9 +68,9 @@ export function PageEditor({ mode, slug }: PageEditorProps) {
     } finally {
       setIsLoading(false)
     }
-  }
+  }, [router, setCurrentPage, setPageTitle, setPageSlug])
 
-  const createNewPage = () => {
+  const createNewPage = useCallback(() => {
     const newPage: Page = {
       id: `temp_${Date.now()}`,
       slug: '',
@@ -82,13 +82,14 @@ export function PageEditor({ mode, slug }: PageEditorProps) {
       created_at: new Date().toISOString(),
       updated_at: new Date().toISOString(),
       created_by: '',
-      updated_by: ''
+      updated_by: '',
+      version_number: 1
     }
     
     setCurrentPage(newPage)
     setPageTitle(newPage.title)
     setPageSlug('')
-  }
+  }, [setCurrentPage, setPageTitle, setPageSlug])
 
   const handleSaveAndContinue = async () => {
     if (!currentPage) return

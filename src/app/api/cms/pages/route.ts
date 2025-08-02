@@ -124,7 +124,7 @@ export async function GET(request: NextRequest) {
           ?.sort((a: DatabaseBlock, b: DatabaseBlock) => a.block_order - b.block_order)
           ?.map((block: DatabaseBlock) => ({
             id: block.id,
-            type: block.type,
+            type: block.type as 'text' | 'image' | 'video' | 'button' | 'section' | 'hero' | 'card' | 'testimonial',
             order: block.block_order,
             data: block.data,
             styles: block.styles,
