@@ -8,6 +8,7 @@ import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet'
 import { Menu, X } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { motion } from 'framer-motion'
+import AdminAccess from './admin-access'
 
 const navigation = [
   { name: '소개', href: '/about' },
@@ -41,28 +42,31 @@ export function UrbanNav() {
     )}>
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         <div className="flex items-center justify-between h-20">
-          {/* Logo */}
-          <Link 
-            href="/" 
-            className="flex items-center space-x-2 group"
-          >
-            <motion.div
-              className="text-2xl stay-heading tracking-tight"
-              whileHover={{ scale: 1.05 }}
-              transition={{ type: "spring", stiffness: 400 }}
+          {/* Logo with Admin Access */}
+          <div className="relative">
+            <Link 
+              href="/" 
+              className="flex items-center space-x-2 group"
             >
-              <span className={cn(
-                "transition-colors duration-300",
-                isScrolled ? "stay-text-gradient" : "text-white"
-              )}>
-                STAY
-              </span>
-              <span className={cn(
-                "transition-colors duration-300",
-                isScrolled ? "text-slate-600" : "text-slate-300"
-              )}>FITNESS</span>
-            </motion.div>
-          </Link>
+              <motion.div
+                className="text-2xl stay-heading tracking-tight"
+                whileHover={{ scale: 1.05 }}
+                transition={{ type: "spring", stiffness: 400 }}
+              >
+                <span className={cn(
+                  "transition-colors duration-300",
+                  isScrolled ? "stay-text-gradient" : "text-white"
+                )}>
+                  STAY
+                </span>
+                <span className={cn(
+                  "transition-colors duration-300",
+                  isScrolled ? "text-slate-600" : "text-slate-300"
+                )}>FITNESS</span>
+              </motion.div>
+            </Link>
+            <AdminAccess />
+          </div>
 
           {/* Desktop Navigation */}
           <div className="hidden lg:flex items-center space-x-1">

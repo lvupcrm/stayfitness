@@ -9,6 +9,8 @@ import {
   OrganizationStructuredData 
 } from '@/components/seo/structured-data';
 import { UrbanNav } from '@/components/navigation/urban-nav';
+import Footer from '@/components/layout/footer';
+import AdminFloatingButton from '@/components/navigation/admin-floating-button';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -137,8 +139,12 @@ export default function RootLayout({ children }: { children: ReactNode }) {
           {children}
         </main>
         
+        {/* 푸터 */}
+        <Footer />
+        
         {/* 플로팅 요소들 */}
         <KakaoFloatingButton />
+        <AdminFloatingButton />
         
         {/* 토스트 알림 */}
         <ToastContainer
