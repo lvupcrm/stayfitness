@@ -4,7 +4,7 @@ import { createClient } from '@/lib/supabase/server'
 // Get all trainer applications for admin
 export async function GET(request: NextRequest) {
   try {
-    const supabase = createClient()
+    const supabase = await createClient()
     const { searchParams } = new URL(request.url)
     
     // Query parameters

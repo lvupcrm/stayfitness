@@ -8,7 +8,7 @@ export async function PATCH(
 ) {
   const params = await context.params
   try {
-    const supabase = createClient()
+    const supabase = await createClient()
     const body = await request.json()
     const { status, notes } = body
 
@@ -66,7 +66,7 @@ export async function DELETE(
 ) {
   const params = await context.params
   try {
-    const supabase = createClient()
+    const supabase = await createClient()
 
     const { error } = await supabase
       .from('consultations')
