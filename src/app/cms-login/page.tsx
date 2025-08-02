@@ -4,7 +4,7 @@ import { useEffect } from 'react'
 
 export default function CmsLoginRedirect() {
   useEffect(() => {
-    window.location.href = '/cms-auth'
+    window.location.href = '/static-login'
   }, [])
 
   return (

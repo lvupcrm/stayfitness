@@ -7,7 +7,7 @@ export default function AdminLoginRedirect() {
   const router = useRouter()
 
   useEffect(() => {
-    window.location.href = '/cms-auth'
+    window.location.href = '/static-login'
   }, [router])
 
   return (
