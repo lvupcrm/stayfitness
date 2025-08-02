@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { 
   Calendar, 
@@ -109,7 +109,7 @@ export default function ConsultationsPage() {
   const [sortOrder, setSortOrder] = useState('desc')
 
   // Fetch consultations
-  const fetchConsultations = async () => {
+  const fetchConsultations = useCallback(async () => {
     setLoading(true)
     try {
       const params = new URLSearchParams({
@@ -133,7 +133,7 @@ export default function ConsultationsPage() {
     } finally {
       setLoading(false)
     }
-  }
+  }, [currentPage, statusFilter, searchQuery, sortBy, sortOrder])
 
   useEffect(() => {
     fetchConsultations()

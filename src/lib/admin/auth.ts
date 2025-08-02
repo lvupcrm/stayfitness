@@ -9,7 +9,7 @@ const JWT_SECRET = new TextEncoder().encode(
 )
 
 const JWT_EXPIRES_IN = '15m' // 15 minutes for access token
-const _REFRESH_EXPIRES_IN = '7d' // 7 days for refresh token
+// const REFRESH_EXPIRES_IN = '7d' // 7 days for refresh token (future use)
 
 /**
  * Hash password for admin user

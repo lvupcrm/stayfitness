@@ -4,7 +4,7 @@ import { verifyAdminToken, getAdminUser } from '@/lib/admin/auth'
 
 export async function GET(_request: NextRequest) {
   try {
-    const cookieStore = cookies()
+    const cookieStore = await cookies()
     const token = cookieStore.get('admin_token')?.value
 
     if (!token) {

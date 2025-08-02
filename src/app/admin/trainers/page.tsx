@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { 
   UserCheck, 
@@ -119,7 +119,7 @@ export default function TrainersPage() {
   const [sortOrder, setSortOrder] = useState('desc')
 
   // Fetch trainer applications
-  const fetchApplications = async () => {
+  const fetchApplications = useCallback(async () => {
     setLoading(true)
     try {
       const params = new URLSearchParams({
@@ -143,7 +143,7 @@ export default function TrainersPage() {
     } finally {
       setLoading(false)
     }
-  }
+  }, [currentPage, statusFilter, searchQuery, sortBy, sortOrder])
 
   useEffect(() => {
     fetchApplications()
