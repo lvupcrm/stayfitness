@@ -23,8 +23,8 @@ const ADMIN_PUBLIC_ROUTES = [
 async function verifyAdminToken(token: string) {
   try {
     const { payload } = await jwtVerify(token, JWT_SECRET)
-    return payload as any
-  } catch (error) {
+    return payload as Record<string, unknown>
+  } catch (_error) {
     return null
   }
 }

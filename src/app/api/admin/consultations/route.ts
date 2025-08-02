@@ -50,7 +50,7 @@ export async function GET(request: NextRequest) {
     // Apply pagination
     query = query.range(offset, offset + limit - 1)
 
-    const { data: consultations, error, count } = await query
+    const { data: consultations, error, count: _count } = await query
 
     if (error) {
       console.error('Error fetching consultations:', error)

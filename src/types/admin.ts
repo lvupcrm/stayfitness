@@ -118,13 +118,13 @@ export interface DashboardStats {
 }
 
 // API Response types
-export interface AdminApiResponse<T = any> {
+export interface AdminApiResponse<T = unknown> {
   success: boolean
   data?: T
   error?: string
   message?: string
   pagination?: PaginationInfo
-  meta?: Record<string, any>
+  meta?: Record<string, unknown>
 }
 
 export interface PaginationInfo {

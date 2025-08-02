@@ -135,7 +135,7 @@ const recentActivities: RecentActivityItem[] = [
 
 export default function AdminDashboard() {
   const { user } = useAdminAuth()
-  const [stats, setStats] = useState<DashboardStats>(sampleStats)
+  const [stats] = useState<DashboardStats>(sampleStats)
 
   // TODO: Fetch real dashboard data
   useEffect(() => {

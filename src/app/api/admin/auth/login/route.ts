@@ -44,12 +44,12 @@ export async function POST(request: NextRequest) {
     await updateLastLogin(user.id)
 
     // Create session record
-    const ipAddress = request.ip || request.headers.get('x-forwarded-for') || 'unknown'
+    const ipAddress = request.headers.get('x-forwarded-for') || request.headers.get('x-real-ip') || 'unknown'
     const userAgent = request.headers.get('user-agent') || 'unknown'
     await createAdminSession(user.id, token, ipAddress, userAgent)
 
     // Set HTTP-only cookie
-    const cookieStore = cookies()
+    const cookieStore = await cookies()
     cookieStore.set('admin_token', token, {
       httpOnly: true,
       secure: process.env.NODE_ENV === 'production',

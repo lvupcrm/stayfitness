@@ -1,7 +1,7 @@
 import { createHash } from 'crypto'
 import { SignJWT, jwtVerify } from 'jose'
 import { supabase } from '@/lib/supabaseClient'
-import type { AdminUser, AdminLoginRequest, AdminSession } from '@/types/admin'
+import type { AdminUser, AdminLoginRequest } from '@/types/admin'
 import { ROLE_PERMISSIONS } from '@/types/admin'
 
 const JWT_SECRET = new TextEncoder().encode(
@@ -9,7 +9,7 @@ const JWT_SECRET = new TextEncoder().encode(
 )
 
 const JWT_EXPIRES_IN = '15m' // 15 minutes for access token
-const REFRESH_EXPIRES_IN = '7d' // 7 days for refresh token
+const _REFRESH_EXPIRES_IN = '7d' // 7 days for refresh token
 
 /**
  * Hash password for admin user

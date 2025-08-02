@@ -409,7 +409,7 @@ export default function TrainersPage() {
                             <span className="text-slate-500 stay-body">전문분야:</span>
                             <p className="text-slate-900 stay-body">
                               {application.specialization.slice(0, 2).map(s => 
-                                specializationTranslation[s] || s
+                                specializationTranslation[s as keyof typeof specializationTranslation] || s
                               ).join(', ')}
                               {application.specialization.length > 2 && ` 외 ${application.specialization.length - 2}개`}
                             </p>
@@ -445,7 +445,7 @@ export default function TrainersPage() {
                             {application.email}
                           </div>
                           <div className="text-sm text-slate-600 stay-body">
-                            {genderTranslation[application.gender]}, {application.age}세
+                            {genderTranslation[application.gender as keyof typeof genderTranslation]}, {application.age}세
                           </div>
                         </div>
                         
@@ -455,7 +455,7 @@ export default function TrainersPage() {
                           </div>
                           <div className="text-sm text-slate-600 stay-body">
                             {application.specialization.slice(0, 2).map(s => 
-                              specializationTranslation[s] || s
+                              specializationTranslation[s as keyof typeof specializationTranslation] || s
                             ).join(', ')}
                             {application.specialization.length > 2 && ` 외 ${application.specialization.length - 2}개`}
                           </div>
@@ -568,7 +568,7 @@ export default function TrainersPage() {
                       <div>
                         <label className="text-sm text-slate-600 stay-body">성별/나이</label>
                         <p className="font-medium text-slate-900 stay-body-medium">
-                          {genderTranslation[selectedApplication.gender]}, {selectedApplication.age}세
+                          {genderTranslation[selectedApplication.gender as keyof typeof genderTranslation]}, {selectedApplication.age}세
                         </p>
                       </div>
                       <div>
@@ -607,7 +607,7 @@ export default function TrainersPage() {
                         <div className="flex flex-wrap gap-2 mt-1">
                           {selectedApplication.specialization.map((spec, index) => (
                             <Badge key={index} variant="secondary" className="stay-body">
-                              {specializationTranslation[spec] || spec}
+                              {specializationTranslation[spec as keyof typeof specializationTranslation] || spec}
                             </Badge>
                           ))}
                         </div>

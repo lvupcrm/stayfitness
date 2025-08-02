@@ -391,7 +391,7 @@ export default function ConsultationsPage() {
                           </div>
                           <div>
                             <span className="text-slate-500 stay-body">목표:</span>
-                            <p className="text-slate-900 stay-body">{goalTranslation[consultation.goal] || consultation.goal}</p>
+                            <p className="text-slate-900 stay-body">{goalTranslation[consultation.goal as keyof typeof goalTranslation] || consultation.goal}</p>
                           </div>
                         </div>
 
@@ -430,7 +430,7 @@ export default function ConsultationsPage() {
                         </div>
                         
                         <div className="col-span-2 stay-body">
-                          {goalTranslation[consultation.goal] || consultation.goal}
+                          {goalTranslation[consultation.goal as keyof typeof goalTranslation] || consultation.goal}
                         </div>
                         
                         <div className="col-span-2">
@@ -560,13 +560,13 @@ export default function ConsultationsPage() {
                       <div>
                         <label className="text-sm text-slate-600 stay-body">목표</label>
                         <p className="font-medium text-slate-900 stay-body-medium">
-                          {goalTranslation[selectedConsultation.goal] || selectedConsultation.goal}
+                          {goalTranslation[selectedConsultation.goal as keyof typeof goalTranslation] || selectedConsultation.goal}
                         </p>
                       </div>
                       <div>
                         <label className="text-sm text-slate-600 stay-body">운동 수준</label>
                         <p className="font-medium text-slate-900 stay-body-medium">
-                          {fitnessLevelTranslation[selectedConsultation.fitness_level] || selectedConsultation.fitness_level}
+                          {fitnessLevelTranslation[selectedConsultation.fitness_level as keyof typeof fitnessLevelTranslation] || selectedConsultation.fitness_level}
                         </p>
                       </div>
                       <div className="md:col-span-2">

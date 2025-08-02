@@ -4,8 +4,9 @@ import { createClient } from '@/lib/supabase/server'
 // Update trainer application status
 export async function PATCH(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  context: { params: Promise<{ id: string }> }
 ) {
+  const params = await context.params
   try {
     const supabase = createClient()
     const body = await request.json()
@@ -59,8 +60,9 @@ export async function PATCH(
 // Delete trainer application
 export async function DELETE(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  context: { params: Promise<{ id: string }> }
 ) {
+  const params = await context.params
   try {
     const supabase = createClient()
 

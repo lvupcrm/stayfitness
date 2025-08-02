@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useCallback } from 'react'
 import { useRouter } from 'next/navigation'
-import type { AdminUser, AdminLoginRequest } from '@/types/admin'
+import type { AdminUser, AdminLoginRequest, AdminPermission } from '@/types/admin'
 
 interface UseAdminAuthReturn {
   user: AdminUser | null
@@ -21,7 +21,7 @@ export function useAdminAuth(): UseAdminAuthReturn {
 
   const hasPermission = useCallback((permission: string): boolean => {
     if (!user) return false
-    return user.role === 'super_admin' || user.permissions.includes(permission as any)
+    return user.role === 'super_admin' || user.permissions.includes(permission as AdminPermission)
   }, [user])
 
   const refreshAuth = useCallback(async () => {
