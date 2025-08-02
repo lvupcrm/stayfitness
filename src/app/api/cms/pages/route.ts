@@ -81,7 +81,21 @@ export async function GET(request: NextRequest) {
 
     // Transform data to match Page interface
     const transformedPages: Page[] = pages?.map(page => ({
-      ...page,
+      id: page.id,
+      slug: page.slug,
+      title: page.title,
+      description: page.description,
+      meta_title: page.meta_title,
+      meta_description: page.meta_description,
+      meta_keywords: page.meta_keywords,
+      status: page.status,
+      template: page.template,
+      featured_image: page.featured_image,
+      created_at: page.created_at,
+      updated_at: page.updated_at,
+      created_by: page.created_by,
+      updated_by: page.updated_by,
+      version_number: page.version_number,
       blocks: page.content_blocks
         ?.filter((block: DatabaseBlock) => block.is_active)
         ?.sort((a: DatabaseBlock, b: DatabaseBlock) => a.block_order - b.block_order)

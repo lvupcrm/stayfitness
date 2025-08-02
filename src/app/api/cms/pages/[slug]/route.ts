@@ -20,6 +20,25 @@ interface ContentBlockInput {
   styles?: unknown
 }
 
+interface DatabasePage {
+  id: string
+  slug: string
+  title: string
+  description?: string
+  meta_title?: string
+  meta_description?: string
+  meta_keywords?: string
+  status: string
+  template?: string
+  featured_image?: string
+  content_blocks?: DatabaseBlock[]
+  created_at: string
+  updated_at: string
+  created_by: string
+  updated_by?: string
+  version_number: number
+}
+
 // GET /api/cms/pages/[slug] - 특정 페이지 조회
 export async function GET(
   request: NextRequest,
@@ -56,8 +75,8 @@ export async function GET(
 
     const { data: page, error } = await query.single()
 
-    if (error) {
-      if (error.code === 'PGRST116') {
+    if (error || !page) {
+      if (error?.code === 'PGRST116') {
         return NextResponse.json(
           { error: 'Page not found' },
           { status: 404 }
@@ -72,7 +91,21 @@ export async function GET(
 
     // Transform data to match Page interface
     const transformedPage = {
-      ...page,
+      id: page.id,
+      slug: page.slug,
+      title: page.title,
+      description: page.description,
+      meta_title: page.meta_title,
+      meta_description: page.meta_description,
+      meta_keywords: page.meta_keywords,
+      status: page.status,
+      template: page.template,
+      featured_image: page.featured_image,
+      created_at: page.created_at,
+      updated_at: page.updated_at,
+      created_by: page.created_by,
+      updated_by: page.updated_by,
+      version_number: page.version_number,
       blocks: includeBlocks ? (page.content_blocks
         ?.filter((block: DatabaseBlock) => block.is_active)
         ?.sort((a: DatabaseBlock, b: DatabaseBlock) => a.block_order - b.block_order)
