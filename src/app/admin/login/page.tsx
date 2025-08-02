@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { motion } from 'framer-motion'
 import { Button } from '@/components/ui/button'
@@ -8,8 +8,6 @@ import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { AlertCircle, Eye, EyeOff, Lock } from 'lucide-react'
-import { useAdminAuth } from '@/hooks/useAdminAuth'
-import { toast } from 'react-toastify'
 
 export default function AdminLoginPage() {
   const [password, setPassword] = useState('')
@@ -17,15 +15,7 @@ export default function AdminLoginPage() {
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [error, setError] = useState('')
 
-  const { login, isAuthenticated, isLoading } = useAdminAuth()
   const router = useRouter()
-
-  // Redirect if already authenticated
-  useEffect(() => {
-    if (!isLoading && isAuthenticated) {
-      router.replace('/admin')
-    }
-  }, [isAuthenticated, isLoading, router])
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -39,13 +29,25 @@ export default function AdminLoginPage() {
     setIsSubmitting(true)
 
     try {
-      const success = await login({ email: 'admin@stayfitness.com', password })
+      const response = await fetch('/api/admin/auth/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          email: 'admin@stayfitness.com',
+          password: password
+        })
+      })
+
+      const data = await response.json()
       
-      if (success) {
-        toast.success('로그인 성공!')
+      if (data.success) {
+        // Login successful
+        alert('로그인 성공!')
         router.push('/admin')
       } else {
-        setError('패스워드가 올바르지 않습니다.')
+        setError(data.error || '패스워드가 올바르지 않습니다.')
       }
     } catch (error) {
       console.error('Login error:', error)
@@ -53,21 +55,6 @@ export default function AdminLoginPage() {
     } finally {
       setIsSubmitting(false)
     }
-  }
-
-  if (isLoading) {
-    return (
-      <div className="min-h-screen bg-gradient-to-br from-slate-900 to-slate-800 flex items-center justify-center">
-        <div className="text-white text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-white mx-auto mb-4"></div>
-          <p>로딩 중...</p>
-        </div>
-      </div>
-    )
-  }
-
-  if (isAuthenticated) {
-    return null // Will redirect
   }
 
   return (
