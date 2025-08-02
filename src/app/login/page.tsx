@@ -50,7 +50,28 @@ export default function AdminLoginPage() {
       if (data.success) {
         // Login successful
         alert('로그인 성공!')
-        router.push('/admin')
+        
+        // Wait a bit for cookie to be set, then verify auth
+        setTimeout(async () => {
+          try {
+            const verifyResponse = await fetch('/api/admin/auth/verify', {
+              method: 'GET',
+              credentials: 'include',
+            })
+            
+            if (verifyResponse.ok) {
+              // Auth verified, redirect to admin
+              window.location.href = '/admin'
+            } else {
+              // Fallback: force reload
+              window.location.href = '/admin'
+            }
+          } catch (error) {
+            console.error('Auth verification failed:', error)
+            // Fallback: force reload
+            window.location.href = '/admin'
+          }
+        }, 100)
       } else {
         setError(data.error || '패스워드가 올바르지 않습니다.')
       }
