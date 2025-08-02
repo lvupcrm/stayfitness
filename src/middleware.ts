@@ -72,7 +72,7 @@ export async function middleware(request: NextRequest) {
   }
 
   // Check if token is expired
-  if (adminUser.exp && Date.now() >= adminUser.exp * 1000) {
+  if (adminUser.exp && typeof adminUser.exp === 'number' && Date.now() >= adminUser.exp * 1000) {
     // Clear expired token and redirect to login
     const response = NextResponse.redirect(new URL('/admin/login', request.url))
     response.cookies.delete('admin-token')

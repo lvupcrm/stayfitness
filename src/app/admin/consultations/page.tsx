@@ -137,7 +137,7 @@ export default function ConsultationsPage() {
 
   useEffect(() => {
     fetchConsultations()
-  }, [currentPage, statusFilter, searchQuery, sortBy, sortOrder])
+  }, [fetchConsultations])
 
   // Update consultation status
   const updateConsultationStatus = async (id: string, status: string, notes?: string) => {

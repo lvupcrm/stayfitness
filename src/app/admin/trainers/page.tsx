@@ -147,7 +147,7 @@ export default function TrainersPage() {
 
   useEffect(() => {
     fetchApplications()
-  }, [currentPage, statusFilter, searchQuery, sortBy, sortOrder])
+  }, [fetchApplications])
 
   // Update application status
   const updateApplicationStatus = async (id: string, status: string, notes?: string, interviewDate?: string) => {
