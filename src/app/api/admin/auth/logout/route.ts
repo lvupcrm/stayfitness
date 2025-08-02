@@ -1,8 +1,8 @@
-import { NextRequest, NextResponse } from 'next/server'
+import { NextResponse } from 'next/server'
 import { cookies } from 'next/headers'
 import { invalidateAdminSession } from '@/lib/admin/auth'
 
-export async function POST(_request: NextRequest) {
+export async function POST() {
   try {
     const cookieStore = await cookies()
     const token = cookieStore.get('admin_token')?.value

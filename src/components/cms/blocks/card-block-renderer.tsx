@@ -2,8 +2,6 @@
 
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
-import { Button } from '@/components/ui/button'
-import { Image as ImageIcon } from 'lucide-react'
 import type { ContentBlock } from '@/types/cms'
 
 interface CardBlockRendererProps {

@@ -1,6 +1,6 @@
 'use client'
 
-import { Video, Play } from 'lucide-react'
+import { Video } from 'lucide-react'
 import { Input } from '@/components/ui/input'
 import type { ContentBlock } from '@/types/cms'
 
@@ -48,13 +48,7 @@ export function VideoBlockRenderer({ block, isEditing, onUpdate }: VideoBlockRen
     return url
   }
 
-  const getThumbnailUrl = (url: string) => {
-    const videoId = getVideoId(url)
-    if (videoId) {
-      return `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`
-    }
-    return videoData.thumbnail || ''
-  }
+  // Removed unused getThumbnailUrl function
 
   if (isEditing) {
     return (

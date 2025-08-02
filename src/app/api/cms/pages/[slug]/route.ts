@@ -89,8 +89,8 @@ export async function GET(
       )
     }
 
-    // Type assertion for Supabase result
-    const pageData = page as DatabasePage
+    // Type assertion for Supabase result - use unknown first for safety
+    const pageData = page as unknown as DatabasePage
 
     // Transform data to match Page interface
     const transformedPage = {

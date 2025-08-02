@@ -1,6 +1,5 @@
 'use client'
 
-import { useState } from 'react'
 import { RichTextEditor } from '../rich-text-editor'
 import type { ContentBlock } from '@/types/cms'
 
@@ -11,7 +10,6 @@ interface TextBlockRendererProps {
 }
 
 export function TextBlockRenderer({ block, isEditing, onUpdate }: TextBlockRendererProps) {
-  const [isEditorFocused, setIsEditorFocused] = useState(false)
   const textData = block.data.text || {}
 
   const handleContentChange = (content: string) => {

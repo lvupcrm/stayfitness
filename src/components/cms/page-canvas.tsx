@@ -11,7 +11,6 @@ export function PageCanvas() {
     currentPage, 
     isPreview, 
     addBlock,
-    moveBlock,
     hoveredBlockId,
     setHoveredBlockId 
   } = useCMSStore()

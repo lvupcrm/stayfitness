@@ -1,7 +1,6 @@
 'use client'
 
 import Link from 'next/link'
-import { motion } from 'framer-motion'
 import { MapPin, Phone, Mail, Clock, Shield } from 'lucide-react'
 
 export default function Footer() {

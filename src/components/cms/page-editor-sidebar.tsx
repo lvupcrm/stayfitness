@@ -3,20 +3,11 @@
 import { useState } from 'react'
 import { 
   Plus, 
-  Type, 
-  Image, 
-  Video, 
-  MousePointer, 
-  Layout,
-  Star,
-  MessageSquare,
-  Grid,
   Search,
   Layers,
   Palette,
   Settings
 } from 'lucide-react'
-import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { BlockLibrary } from './block-library'

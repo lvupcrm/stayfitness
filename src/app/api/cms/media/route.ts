@@ -138,7 +138,7 @@ export async function POST(request: NextRequest) {
     const filePath = `${folder}/${filename}`
 
     // Upload to Supabase Storage
-    const { data: uploadData, error: uploadError } = await supabase.storage
+    const { error: uploadError } = await supabase.storage
       .from('media')
       .upload(filePath, file, {
         cacheControl: '3600',
@@ -164,10 +164,6 @@ export async function POST(request: NextRequest) {
 
     if (file.type.startsWith('image/')) {
       try {
-        // Create image element to get dimensions
-        const arrayBuffer = await file.arrayBuffer()
-        const buffer = Buffer.from(arrayBuffer)
-        
         // For now, we'll skip dimension detection and let the client handle it
         // In production, you might want to use a library like 'sharp' for server-side processing
       } catch (error) {

@@ -8,7 +8,7 @@ interface DropZoneProps {
   onDrop: (item: { type: string; [key: string]: unknown }) => void
 }
 
-export function DropZone({ index, onDrop }: DropZoneProps) {
+export function DropZone({ onDrop }: DropZoneProps) {
   const [{ isOver, canDrop }, drop] = useDrop(() => ({
     accept: 'block',
     drop: (item: { type: string; [key: string]: unknown }, monitor) => {

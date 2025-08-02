@@ -2,8 +2,6 @@
 
 import { useState } from 'react'
 import { 
-  Eye, 
-  EyeOff, 
   GripVertical, 
   ChevronDown, 
   ChevronRight,
@@ -12,7 +10,6 @@ import {
   Video,
   MousePointer,
   Layout,
-  Star,
   MessageSquare,
   Grid
 } from 'lucide-react'
@@ -36,10 +33,7 @@ export function PageLayers() {
   const {
     currentPage,
     selectedBlock,
-    setSelectedBlock,
-    updateBlock,
-    deleteBlock,
-    moveBlock
+    setSelectedBlock
   } = useCMSStore()
 
   const blocks = currentPage?.blocks || []

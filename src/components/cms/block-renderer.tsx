@@ -2,10 +2,8 @@
 
 import { useState } from 'react'
 import { 
-  Edit, 
   Copy, 
   Trash2, 
-  GripVertical, 
   Settings,
   ChevronUp,
   ChevronDown

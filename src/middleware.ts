@@ -24,7 +24,7 @@ async function verifyAdminToken(token: string) {
   try {
     const { payload } = await jwtVerify(token, JWT_SECRET)
     return payload as Record<string, unknown>
-  } catch (_error) {
+  } catch {
     return null
   }
 }

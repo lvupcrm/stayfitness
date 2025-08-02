@@ -100,8 +100,8 @@ export async function GET(request: NextRequest) {
 
     // Transform data to match Page interface
     const transformedPages: Page[] = pages?.map(pageRow => {
-      // Type assertion for Supabase result
-      const pageData = pageRow as DatabasePage
+      // Type assertion for Supabase result - use unknown first for safety
+      const pageData = pageRow as unknown as DatabasePage
       
       return {
         id: pageData.id,
