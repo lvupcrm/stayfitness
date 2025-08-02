@@ -137,9 +137,9 @@ export function PageEditor({ mode, slug }: PageEditorProps) {
         await useCMSStore.getState().savePage()
         toast.success('페이지가 저장되었습니다')
       }
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error('Error saving page:', error)
-      toast.error(error.message || '저장에 실패했습니다')
+      toast.error((error as Error)?.message || '저장에 실패했습니다')
     }
   }
 

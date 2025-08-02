@@ -5,13 +5,13 @@ import { Plus } from 'lucide-react'
 
 interface DropZoneProps {
   index: number
-  onDrop: (item: any) => void
+  onDrop: (item: { type: string; [key: string]: unknown }) => void
 }
 
 export function DropZone({ index, onDrop }: DropZoneProps) {
   const [{ isOver, canDrop }, drop] = useDrop(() => ({
     accept: 'block',
-    drop: (item: any, monitor) => {
+    drop: (item: { type: string; [key: string]: unknown }, monitor) => {
       if (!monitor.didDrop()) {
         onDrop(item)
       }

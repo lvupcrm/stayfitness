@@ -2,6 +2,25 @@ import { NextRequest, NextResponse } from 'next/server'
 import { createClient } from '@/lib/supabase/server'
 import type { Page } from '@/types/cms'
 
+interface DatabaseBlock {
+  id: string
+  type: string
+  block_order: number
+  data: unknown
+  styles: unknown
+  is_active: boolean
+  created_at: string
+  updated_at: string
+}
+
+interface ContentBlockInput {
+  id?: string
+  type: string
+  order: number
+  data: unknown
+  styles?: unknown
+}
+
 // GET /api/cms/pages - 페이지 목록 조회
 export async function GET(request: NextRequest) {
   try {
@@ -64,9 +83,9 @@ export async function GET(request: NextRequest) {
     const transformedPages: Page[] = pages?.map(page => ({
       ...page,
       blocks: page.content_blocks
-        ?.filter((block: any) => block.is_active)
-        ?.sort((a: any, b: any) => a.block_order - b.block_order)
-        ?.map((block: any) => ({
+        ?.filter((block: DatabaseBlock) => block.is_active)
+        ?.sort((a: DatabaseBlock, b: DatabaseBlock) => a.block_order - b.block_order)
+        ?.map((block: DatabaseBlock) => ({
           id: block.id,
           type: block.type,
           order: block.block_order,
@@ -175,7 +194,7 @@ export async function POST(request: NextRequest) {
 
     // Create content blocks if provided
     if (blocks.length > 0) {
-      const blocksToInsert = blocks.map((block: any, index: number) => ({
+      const blocksToInsert = blocks.map((block: ContentBlockInput, index: number) => ({
         page_id: newPage.id,
         type: block.type,
         block_order: block.order || index,

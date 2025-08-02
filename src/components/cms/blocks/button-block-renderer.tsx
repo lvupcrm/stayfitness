@@ -116,7 +116,7 @@ export function ButtonBlockRenderer({ block, isEditing, onUpdate }: ButtonBlockR
             ].map((variant) => (
               <button
                 key={variant.value}
-                onClick={() => handleVariantChange(variant.value as any)}
+                onClick={() => handleVariantChange(variant.value as 'primary' | 'secondary' | 'outline')}
                 className={`
                   px-3 py-1 text-sm rounded border
                   ${(buttonData.variant || 'primary') === variant.value
@@ -144,7 +144,7 @@ export function ButtonBlockRenderer({ block, isEditing, onUpdate }: ButtonBlockR
             ].map((size) => (
               <button
                 key={size.value}
-                onClick={() => handleSizeChange(size.value as any)}
+                onClick={() => handleSizeChange(size.value as 'sm' | 'md' | 'lg')}
                 className={`
                   px-3 py-1 text-sm rounded border
                   ${(buttonData.size || 'md') === size.value

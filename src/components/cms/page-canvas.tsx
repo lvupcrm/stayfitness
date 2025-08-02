@@ -18,7 +18,7 @@ export function PageCanvas() {
 
   const [{ isOver, canDrop }, drop] = useDrop(() => ({
     accept: 'block',
-    drop: (item: any, monitor) => {
+    drop: (item: { type: string; [key: string]: unknown }, monitor) => {
       if (!monitor.didDrop()) {
         // Add block at the end
         addBlock({

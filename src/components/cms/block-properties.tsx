@@ -1,14 +1,8 @@
 'use client'
 
-import { useState } from 'react'
 import { 
   Palette,
-  Type,
   Layout,
-  Spacing,
-  AlignLeft,
-  AlignCenter,
-  AlignRight,
   Settings
 } from 'lucide-react'
 import { Input } from '@/components/ui/input'
@@ -178,7 +172,7 @@ export function BlockProperties({ blockId }: BlockPropertiesProps) {
             </label>
             <select
               value={styles.fontSize || 'base'}
-              onChange={(e) => updateStyles({ fontSize: e.target.value as any })}
+              onChange={(e) => updateStyles({ fontSize: e.target.value as ContentBlockStyles['fontSize'] })}
               className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
             >
               <option value="xs">매우 작게 (12px)</option>
@@ -198,7 +192,7 @@ export function BlockProperties({ blockId }: BlockPropertiesProps) {
             </label>
             <select
               value={styles.fontWeight || 'normal'}
-              onChange={(e) => updateStyles({ fontWeight: e.target.value as any })}
+              onChange={(e) => updateStyles({ fontWeight: e.target.value as ContentBlockStyles['fontWeight'] })}
               className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
             >
               <option value="normal">보통</option>

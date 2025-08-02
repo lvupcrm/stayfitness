@@ -7,13 +7,11 @@ import {
   Video, 
   MousePointer, 
   Layout,
-  Star,
   MessageSquare,
   Grid,
   Heading,
   AlignLeft
 } from 'lucide-react'
-import { Button } from '@/components/ui/button'
 import { useCMSStore } from '@/hooks/useCMSStore'
 import type { ContentBlock } from '@/types/cms'
 
@@ -22,9 +20,9 @@ interface BlockType {
   type: ContentBlock['type']
   name: string
   description: string
-  icon: React.ComponentType<any>
+  icon: React.ComponentType<{ className?: string }>
   category: 'basic' | 'layout' | 'content' | 'media'
-  defaultData: any
+  defaultData: Record<string, unknown>
 }
 
 const blockTypes: BlockType[] = [

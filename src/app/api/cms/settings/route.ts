@@ -84,7 +84,7 @@ export async function PUT(request: NextRequest) {
       .single()
 
     // Update data
-    const updateData: any = {
+    const updateData: Record<string, unknown> = {
       updated_by: user.id
     }
 

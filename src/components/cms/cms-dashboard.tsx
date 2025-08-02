@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
+import type { Page } from '@/types/cms'
 import { 
   FileText, 
   Image, 
@@ -57,8 +58,8 @@ export function CMSDashboard() {
       
       if (pagesData.success && mediaData.success) {
         const pages = pagesData.data || []
-        const publishedPages = pages.filter((p: any) => p.status === 'published').length
-        const draftPages = pages.filter((p: any) => p.status === 'draft').length
+        const publishedPages = pages.filter((p: Page) => p.status === 'published').length
+        const draftPages = pages.filter((p: Page) => p.status === 'draft').length
         
         setStats({
           totalPages: pages.length,

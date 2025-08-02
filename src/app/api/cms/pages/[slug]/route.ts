@@ -1,6 +1,25 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { createClient } from '@/lib/supabase/server'
 
+interface DatabaseBlock {
+  id: string
+  type: string
+  block_order: number
+  data: unknown
+  styles: unknown
+  is_active: boolean
+  created_at: string
+  updated_at: string
+}
+
+interface ContentBlockInput {
+  id?: string
+  type: string
+  order: number
+  data: unknown
+  styles?: unknown
+}
+
 // GET /api/cms/pages/[slug] - 특정 페이지 조회
 export async function GET(
   request: NextRequest,
@@ -55,9 +74,9 @@ export async function GET(
     const transformedPage = {
       ...page,
       blocks: includeBlocks ? (page.content_blocks
-        ?.filter((block: any) => block.is_active)
-        ?.sort((a: any, b: any) => a.block_order - b.block_order)
-        ?.map((block: any) => ({
+        ?.filter((block: DatabaseBlock) => block.is_active)
+        ?.sort((a: DatabaseBlock, b: DatabaseBlock) => a.block_order - b.block_order)
+        ?.map((block: DatabaseBlock) => ({
           id: block.id,
           type: block.type,
           order: block.block_order,
@@ -126,7 +145,7 @@ export async function PUT(
     }
 
     // Update page
-    const updateData: any = {
+    const updateData: Record<string, unknown> = {
       updated_by: user.id
     }
 
@@ -167,7 +186,7 @@ export async function PUT(
         .eq('page_id', existingPage.id)
 
       // Insert/update new blocks
-      const blocksToUpsert = blocks.map((block: any, index: number) => ({
+      const blocksToUpsert = blocks.map((block: ContentBlockInput, index: number) => ({
         id: block.id || undefined,
         page_id: existingPage.id,
         type: block.type,

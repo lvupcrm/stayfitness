@@ -84,7 +84,7 @@ export async function PUT(
     }
 
     // Update media file info
-    const updateData: any = {}
+    const updateData: Record<string, unknown> = {}
 
     if (alt_text !== undefined) updateData.alt_text = alt_text
     if (caption !== undefined) updateData.caption = caption

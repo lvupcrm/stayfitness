@@ -147,7 +147,7 @@ export function TestimonialBlockRenderer({ block, isEditing, onUpdate }: Testimo
                     {renderStars(testimonialData.rating || 0)}
                   </div>
                   <p className="text-gray-800 mb-3">
-                    "{testimonialData.content || '고객 후기를 입력하세요'}"
+                    &ldquo;{testimonialData.content || '고객 후기를 입력하세요'}&rdquo;
                   </p>
                   <div className="text-sm">
                     <p className="font-medium text-gray-900">
@@ -193,7 +193,7 @@ export function TestimonialBlockRenderer({ block, isEditing, onUpdate }: Testimo
             </div>
             
             <blockquote className="text-lg text-gray-800 mb-6 italic">
-              "{testimonialData.content || '훌륭한 서비스였습니다! 추천합니다.'}"
+              &ldquo;{testimonialData.content || '훌륭한 서비스였습니다! 추천합니다.'}&rdquo;
             </blockquote>
             
             <div>

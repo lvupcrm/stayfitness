@@ -96,7 +96,7 @@ export async function PUT(
     }
 
     // Update block
-    const updateData: any = {}
+    const updateData: Record<string, unknown> = {}
 
     if (type !== undefined) updateData.type = type
     if (order !== undefined) updateData.block_order = order
