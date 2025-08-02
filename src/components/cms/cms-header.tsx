@@ -24,7 +24,7 @@ export function CMSHeader() {
   const router = useRouter()
   
   const { 
-    isPreviewMode, 
+    isPreview, 
     isDirty, 
     togglePreview, 
     savePage,
@@ -90,12 +90,12 @@ export function CMSHeader() {
         {/* Preview Toggle */}
         <Button
           onClick={togglePreview}
-          variant={isPreviewMode ? "default" : "outline"}
+          variant={isPreview ? "default" : "outline"}
           size="sm"
           className="flex items-center space-x-2"
         >
           <Eye className="w-4 h-4" />
-          <span>{isPreviewMode ? '편집' : '미리보기'}</span>
+          <span>{isPreview ? '편집' : '미리보기'}</span>
         </Button>
       </div>
 
