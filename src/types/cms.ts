@@ -10,7 +10,7 @@ export interface ContentBlock {
   updated_at: string
 }
 
-export interface ContentBlockData {
+export interface ContentBlockData extends Record<string, unknown> {
   // Text Block
   text?: {
     content: string
@@ -76,7 +76,7 @@ export interface ContentBlockData {
   }
 }
 
-export interface ContentBlockStyles {
+export interface ContentBlockStyles extends Record<string, unknown> {
   backgroundColor?: string
   textColor?: string
   padding?: {

@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { createClient } from '@/lib/supabase/server'
-import type { Page } from '@/types/cms'
+import type { Page, ContentBlockData, ContentBlockStyles } from '@/types/cms'
 
 interface DatabaseBlock {
   id: string
@@ -126,8 +126,8 @@ export async function GET(request: NextRequest) {
             id: block.id,
             type: block.type as 'text' | 'image' | 'video' | 'button' | 'section' | 'hero' | 'card' | 'testimonial',
             order: block.block_order,
-            data: block.data,
-            styles: block.styles,
+            data: block.data as ContentBlockData,
+            styles: block.styles as ContentBlockStyles | undefined,
             created_at: pageData.created_at,
             updated_at: pageData.updated_at
           })) || []
