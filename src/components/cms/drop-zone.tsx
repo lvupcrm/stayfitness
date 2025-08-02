@@ -26,7 +26,7 @@ export function DropZone({ onDrop }: DropZoneProps) {
 
   return (
     <div
-      ref={drop}
+      ref={drop as unknown as React.Ref<HTMLDivElement>}
       className={`
         relative h-3 -my-1.5 group transition-all duration-200
         ${isActive ? 'h-16' : 'hover:h-8'}

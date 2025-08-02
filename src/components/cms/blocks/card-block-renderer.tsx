@@ -11,14 +11,24 @@ interface CardBlockRendererProps {
 }
 
 export function CardBlockRenderer({ block, isEditing, onUpdate }: CardBlockRendererProps) {
-  const cardData = block.data.card || {}
+  const cardData = block.data.card || {
+    title: '카드 제목',
+    description: '카드 설명을 입력하세요',
+    image: '',
+    link: '',
+    icon: ''
+  }
 
   const handleFieldChange = (field: string, value: string) => {
     onUpdate({
       data: {
         ...block.data,
         card: {
-          ...cardData,
+          title: cardData.title || '카드 제목',
+          description: cardData.description || '카드 설명을 입력하세요',
+          image: cardData.image || '',
+          link: cardData.link || '',
+          icon: cardData.icon || '',
           [field]: value
         }
       }

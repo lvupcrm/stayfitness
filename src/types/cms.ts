@@ -209,12 +209,12 @@ export interface PaginatedResponse<T> {
 
 // CMS 편집기 상태
 export interface EditorState {
-  selectedBlock?: string
-  selectedPage?: string
+  selectedBlock?: string | null
+  selectedPage?: string | null
   isEditing: boolean
   isPreview: boolean
   isDirty: boolean
-  clipboard?: ContentBlock
+  clipboard?: ContentBlock | null
 }
 
 export interface BlockDragItem {

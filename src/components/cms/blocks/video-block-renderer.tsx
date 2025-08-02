@@ -11,14 +11,22 @@ interface VideoBlockRendererProps {
 }
 
 export function VideoBlockRenderer({ block, isEditing, onUpdate }: VideoBlockRendererProps) {
-  const videoData = block.data.video || {}
+  const videoData = block.data.video || {
+    url: '',
+    thumbnail: '',
+    autoplay: false,
+    controls: true
+  }
 
   const handleFieldChange = (field: string, value: string | boolean) => {
     onUpdate({
       data: {
         ...block.data,
         video: {
-          ...videoData,
+          url: videoData.url || '',
+          thumbnail: videoData.thumbnail || '',
+          autoplay: videoData.autoplay || false,
+          controls: videoData.controls !== undefined ? videoData.controls : true,
           [field]: value
         }
       }

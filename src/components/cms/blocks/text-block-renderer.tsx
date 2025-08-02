@@ -10,15 +10,22 @@ interface TextBlockRendererProps {
 }
 
 export function TextBlockRenderer({ block, isEditing, onUpdate }: TextBlockRendererProps) {
-  const textData = block.data.text || {}
+  const textData = block.data.text || {
+    content: '여기에 텍스트를 입력하세요.',
+    heading: '',
+    subheading: '',
+    alignment: 'left' as const
+  }
 
   const handleContentChange = (content: string) => {
     onUpdate({
       data: {
         ...block.data,
         text: {
-          ...textData,
-          content
+          content,
+          heading: textData.heading || '',
+          subheading: textData.subheading || '',
+          alignment: textData.alignment || 'left'
         }
       }
     })
@@ -29,8 +36,10 @@ export function TextBlockRenderer({ block, isEditing, onUpdate }: TextBlockRende
       data: {
         ...block.data,
         text: {
-          ...textData,
-          heading
+          content: textData.content || '여기에 텍스트를 입력하세요.',
+          heading,
+          subheading: textData.subheading || '',
+          alignment: textData.alignment || 'left'
         }
       }
     })

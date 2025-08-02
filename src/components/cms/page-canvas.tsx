@@ -5,6 +5,7 @@ import { Plus } from 'lucide-react'
 import { useCMSStore } from '@/hooks/useCMSStore'
 import { BlockRenderer } from './block-renderer'
 import { DropZone } from './drop-zone'
+import type { ContentBlockData } from '@/types/cms'
 
 export function PageCanvas() {
   const { 
@@ -21,9 +22,9 @@ export function PageCanvas() {
       if (!monitor.didDrop()) {
         // Add block at the end
         addBlock({
-          type: item.type,
+          type: item.type as 'text' | 'image' | 'video' | 'button' | 'section' | 'hero' | 'card' | 'testimonial',
           order: currentPage?.blocks.length || 0,
-          data: item.data
+          data: item.data as ContentBlockData
         })
       }
     },
@@ -50,7 +51,7 @@ export function PageCanvas() {
     <div className="h-full bg-gray-100">
       <div className="max-w-4xl mx-auto bg-white min-h-full shadow-sm">
         <div
-          ref={drop}
+          ref={drop as unknown as React.Ref<HTMLDivElement>}
           className={`
             relative min-h-full p-6
             ${isOver && canDrop ? 'bg-blue-50 border-2 border-dashed border-blue-300' : ''}
@@ -87,9 +88,9 @@ export function PageCanvas() {
                       index={index}
                       onDrop={(item) => {
                         addBlock({
-                          type: item.type,
+                          type: item.type as 'text' | 'image' | 'video' | 'button' | 'section' | 'hero' | 'card' | 'testimonial',
                           order: index,
-                          data: item.data
+                          data: item.data as ContentBlockData
                         })
                       }}
                     />
@@ -117,9 +118,9 @@ export function PageCanvas() {
                       index={index + 1}
                       onDrop={(item) => {
                         addBlock({
-                          type: item.type,
+                          type: item.type as 'text' | 'image' | 'video' | 'button' | 'section' | 'hero' | 'card' | 'testimonial',
                           order: index + 1,
-                          data: item.data
+                          data: item.data as ContentBlockData
                         })
                       }}
                     />

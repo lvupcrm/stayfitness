@@ -33,7 +33,8 @@ export function PageLayers() {
   const {
     currentPage,
     selectedBlock,
-    setSelectedBlock
+    setSelectedBlock,
+    moveBlock
   } = useCMSStore()
 
   const blocks = currentPage?.blocks || []

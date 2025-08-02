@@ -14,7 +14,13 @@ interface ImageBlockRendererProps {
 
 export function ImageBlockRenderer({ block, isEditing, onUpdate }: ImageBlockRendererProps) {
   const [isUploading, setIsUploading] = useState(false)
-  const imageData = block.data.image || {}
+  const imageData = block.data.image || {
+    url: '',
+    alt: '',
+    caption: '',
+    width: 0,
+    height: 0
+  }
 
   const handleImageUpload = async (file: File) => {
     setIsUploading(true)

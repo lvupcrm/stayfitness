@@ -30,18 +30,6 @@ export function PageEditor({ mode, slug }: PageEditorProps) {
     resetEditor
   } = useCMSStore()
 
-  useEffect(() => {
-    if (mode === 'edit' && slug) {
-      loadPage(slug)
-    } else if (mode === 'create') {
-      createNewPage()
-    }
-
-    return () => {
-      resetEditor()
-    }
-  }, [mode, slug, createNewPage, loadPage, resetEditor])
-
   const loadPage = useCallback(async (pageSlug: string) => {
     try {
       setIsLoading(true)
@@ -90,6 +78,18 @@ export function PageEditor({ mode, slug }: PageEditorProps) {
     setPageTitle(newPage.title)
     setPageSlug('')
   }, [setCurrentPage, setPageTitle, setPageSlug])
+
+  useEffect(() => {
+    if (mode === 'edit' && slug) {
+      loadPage(slug)
+    } else if (mode === 'create') {
+      createNewPage()
+    }
+
+    return () => {
+      resetEditor()
+    }
+  }, [mode, slug, createNewPage, loadPage, resetEditor])
 
   const handleSaveAndContinue = async () => {
     if (!currentPage) return

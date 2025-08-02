@@ -12,15 +12,24 @@ interface ButtonBlockRendererProps {
 }
 
 export function ButtonBlockRenderer({ block, isEditing, onUpdate }: ButtonBlockRendererProps) {
-  const buttonData = block.data.button || {}
+  const buttonData = block.data.button || {
+    text: '버튼 텍스트',
+    url: '#',
+    variant: 'primary' as const,
+    size: 'md' as const,
+    external: false
+  }
 
   const handleTextChange = (text: string) => {
     onUpdate({
       data: {
         ...block.data,
         button: {
-          ...buttonData,
-          text
+          text,
+          url: buttonData.url || '#',
+          variant: buttonData.variant || 'primary',
+          size: buttonData.size || 'md',
+          external: buttonData.external || false
         }
       }
     })
@@ -31,8 +40,11 @@ export function ButtonBlockRenderer({ block, isEditing, onUpdate }: ButtonBlockR
       data: {
         ...block.data,
         button: {
-          ...buttonData,
-          url
+          text: buttonData.text || '버튼 텍스트',
+          url,
+          variant: buttonData.variant || 'primary',
+          size: buttonData.size || 'md',
+          external: buttonData.external || false
         }
       }
     })
@@ -43,8 +55,11 @@ export function ButtonBlockRenderer({ block, isEditing, onUpdate }: ButtonBlockR
       data: {
         ...block.data,
         button: {
-          ...buttonData,
-          variant
+          text: buttonData.text || '버튼 텍스트',
+          url: buttonData.url || '#',
+          variant,
+          size: buttonData.size || 'md',
+          external: buttonData.external || false
         }
       }
     })
@@ -55,8 +70,11 @@ export function ButtonBlockRenderer({ block, isEditing, onUpdate }: ButtonBlockR
       data: {
         ...block.data,
         button: {
-          ...buttonData,
-          size
+          text: buttonData.text || '버튼 텍스트',
+          url: buttonData.url || '#',
+          variant: buttonData.variant || 'primary',
+          size,
+          external: buttonData.external || false
         }
       }
     })
@@ -67,7 +85,10 @@ export function ButtonBlockRenderer({ block, isEditing, onUpdate }: ButtonBlockR
       data: {
         ...block.data,
         button: {
-          ...buttonData,
+          text: buttonData.text || '버튼 텍스트',
+          url: buttonData.url || '#',
+          variant: buttonData.variant || 'primary',
+          size: buttonData.size || 'md',
           external
         }
       }
@@ -181,7 +202,7 @@ export function ButtonBlockRenderer({ block, isEditing, onUpdate }: ButtonBlockR
           <div className="p-4 bg-gray-50 rounded-lg">
             <Button
               variant={buttonData.variant || 'default'}
-              size={buttonData.size || 'default'}
+              size={buttonData.size === 'md' ? 'default' : buttonData.size || 'default'}
               className="pointer-events-none"
             >
               {buttonData.text || '버튼 텍스트'}
@@ -198,7 +219,7 @@ export function ButtonBlockRenderer({ block, isEditing, onUpdate }: ButtonBlockR
       {buttonData.text && buttonData.url ? (
         <Button
           variant={buttonData.variant || 'default'}
-          size={buttonData.size || 'default'}
+          size={buttonData.size === 'md' ? 'default' : buttonData.size || 'default'}
           asChild
         >
           <a

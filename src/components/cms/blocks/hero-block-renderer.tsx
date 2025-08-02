@@ -14,15 +14,27 @@ interface HeroBlockRendererProps {
 
 export function HeroBlockRenderer({ block, isEditing, onUpdate }: HeroBlockRendererProps) {
   const [isUploading, setIsUploading] = useState(false)
-  const heroData = block.data.hero || {}
+  const heroData = block.data.hero || {
+    title: '메인 제목',
+    subtitle: '부제목을 입력하세요',
+    backgroundImage: '',
+    backgroundVideo: '',
+    ctaButton: {
+      text: '지금 시작하기',
+      url: '#'
+    }
+  }
 
   const handleTitleChange = (title: string) => {
     onUpdate({
       data: {
         ...block.data,
         hero: {
-          ...heroData,
-          title
+          title,
+          subtitle: heroData.subtitle || '부제목을 입력하세요',
+          backgroundImage: heroData.backgroundImage || '',
+          backgroundVideo: heroData.backgroundVideo || '',
+          ctaButton: heroData.ctaButton || { text: '지금 시작하기', url: '#' }
         }
       }
     })
@@ -33,8 +45,11 @@ export function HeroBlockRenderer({ block, isEditing, onUpdate }: HeroBlockRende
       data: {
         ...block.data,
         hero: {
-          ...heroData,
-          subtitle
+          title: heroData.title || '메인 제목',
+          subtitle,
+          backgroundImage: heroData.backgroundImage || '',
+          backgroundVideo: heroData.backgroundVideo || '',
+          ctaButton: heroData.ctaButton || { text: '지금 시작하기', url: '#' }
         }
       }
     })
@@ -45,8 +60,11 @@ export function HeroBlockRenderer({ block, isEditing, onUpdate }: HeroBlockRende
       data: {
         ...block.data,
         hero: {
-          ...heroData,
-          backgroundImage
+          title: heroData.title || '메인 제목',
+          subtitle: heroData.subtitle || '부제목을 입력하세요',
+          backgroundImage,
+          backgroundVideo: heroData.backgroundVideo || '',
+          ctaButton: heroData.ctaButton || { text: '지금 시작하기', url: '#' }
         }
       }
     })
@@ -57,9 +75,13 @@ export function HeroBlockRenderer({ block, isEditing, onUpdate }: HeroBlockRende
       data: {
         ...block.data,
         hero: {
-          ...heroData,
+          title: heroData.title || '메인 제목',
+          subtitle: heroData.subtitle || '부제목을 입력하세요',
+          backgroundImage: heroData.backgroundImage || '',
+          backgroundVideo: heroData.backgroundVideo || '',
           ctaButton: {
-            ...heroData.ctaButton,
+            text: heroData.ctaButton?.text || '지금 시작하기',
+            url: heroData.ctaButton?.url || '#',
             [field]: value
           }
         }

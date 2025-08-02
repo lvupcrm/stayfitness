@@ -11,14 +11,24 @@ interface TestimonialBlockRendererProps {
 }
 
 export function TestimonialBlockRenderer({ block, isEditing, onUpdate }: TestimonialBlockRendererProps) {
-  const testimonialData = block.data.testimonial || {}
+  const testimonialData = block.data.testimonial || {
+    content: '훌륭한 서비스였습니다!',
+    author: '고객 이름',
+    position: '직책',
+    avatar: '',
+    rating: 5
+  }
 
   const handleFieldChange = (field: string, value: string | number) => {
     onUpdate({
       data: {
         ...block.data,
         testimonial: {
-          ...testimonialData,
+          content: testimonialData.content || '훌륭한 서비스였습니다!',
+          author: testimonialData.author || '고객 이름',
+          position: testimonialData.position || '직책',
+          avatar: testimonialData.avatar || '',
+          rating: testimonialData.rating || 5,
           [field]: value
         }
       }

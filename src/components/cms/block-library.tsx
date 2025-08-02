@@ -204,7 +204,7 @@ function DraggableBlock({ blockType }: DraggableBlockProps) {
 
   return (
     <div
-      ref={drag}
+      ref={drag as unknown as React.Ref<HTMLDivElement>}
       className={`
         block-item p-3 border-2 border-dashed border-gray-300 rounded-lg cursor-move
         hover:border-blue-400 hover:bg-blue-50 transition-colors
