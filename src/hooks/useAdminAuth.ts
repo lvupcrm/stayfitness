@@ -90,7 +90,7 @@ export function useAdminAuth(): UseAdminAuthReturn {
       console.error('Logout request failed:', error)
     } finally {
       setUser(null)
-      router.push('/login')
+      router.push('/cms-login')
     }
   }, [router])
 

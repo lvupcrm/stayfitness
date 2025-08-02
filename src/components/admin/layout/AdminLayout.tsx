@@ -39,7 +39,7 @@ export default function AdminLayout({ children, className }: AdminLayoutProps) {
   // Redirect if not authenticated
   useEffect(() => {
     if (!isLoading && !isAuthenticated) {
-      router.push('/login')
+      router.push('/cms-login')
     }
   }, [isAuthenticated, isLoading, router])
 

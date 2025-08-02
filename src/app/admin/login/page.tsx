@@ -7,7 +7,7 @@ export default function AdminLoginRedirect() {
   const router = useRouter()
 
   useEffect(() => {
-    router.replace('/login')
+    router.replace('/cms-login')
   }, [router])
 
   return (
