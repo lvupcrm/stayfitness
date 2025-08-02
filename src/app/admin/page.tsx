@@ -61,13 +61,13 @@ function StatCard({ title, value, change, icon: Icon, color, delay = 0 }: StatCa
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5, delay }}
     >
-      <Card className=\"hover:shadow-lg transition-all duration-300 hover:-translate-y-1\">
-        <CardContent className=\"p-6\">
-          <div className=\"flex items-center justify-between\">
-            <div className=\"flex-1\">
-              <p className=\"text-sm font-medium text-slate-600 stay-body-medium\">{title}</p>
-              <div className=\"flex items-baseline space-x-2 mt-2\">
-                <h3 className=\"text-2xl font-bold text-slate-900 stay-heading\">{value}</h3>
+      <Card className="hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
+        <CardContent className="p-6">
+          <div className="flex items-center justify-between">
+            <div className="flex-1">
+              <p className="text-sm font-medium text-slate-600 stay-body-medium">{title}</p>
+              <div className="flex items-baseline space-x-2 mt-2">
+                <h3 className="text-2xl font-bold text-slate-900 stay-heading">{value}</h3>
                 {change && (
                   <span className={`text-sm font-medium ${
                     change.startsWith('+') ? 'text-emerald-600' : 'text-red-600'
@@ -78,7 +78,7 @@ function StatCard({ title, value, change, icon: Icon, color, delay = 0 }: StatCa
               </div>
             </div>
             <div className={`p-3 rounded-xl bg-gradient-to-br ${colorClasses[color]} shadow-lg`}>
-              <Icon className=\"w-6 h-6 text-white\" />
+              <Icon className="w-6 h-6 text-white" />
             </div>
           </div>
         </CardContent>
@@ -169,75 +169,75 @@ export default function AdminDashboard() {
   }
 
   return (
-    <div className=\"space-y-6\">
+    <div className="space-y-6">
       {/* Welcome Header */}
       <motion.div
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
-        className=\"bg-gradient-to-r from-blue-600 to-blue-700 rounded-2xl p-6 text-white\"
+        className="bg-gradient-to-r from-blue-600 to-blue-700 rounded-2xl p-6 text-white"
       >
-        <h1 className=\"text-2xl font-bold stay-heading mb-2\">
+        <h1 className="text-2xl font-bold stay-heading mb-2">
           안녕하세요, {user?.name || 'Admin'}님! 👋
         </h1>
-        <p className=\"text-blue-100 stay-body\">
+        <p className="text-blue-100 stay-body">
           오늘도 Stay Fitness를 관리해주셔서 감사합니다. 최신 현황을 확인해보세요.
         </p>
       </motion.div>
 
       {/* Stats Grid */}
-      <div className=\"grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6\">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
         <StatCard
-          title=\"전체 상담 예약\"
+          title="전체 상담 예약"
           value={stats.consultations.total}
-          change=\"+12%\"
+          change="+12%"
           icon={Calendar}
-          color=\"blue\"
+          color="blue"
           delay={0.1}
         />
         <StatCard
-          title=\"대기 중인 상담\"
+          title="대기 중인 상담"
           value={stats.consultations.pending}
           icon={Clock}
-          color=\"yellow\"
+          color="yellow"
           delay={0.2}
         />
         <StatCard
-          title=\"트레이너 지원\"
+          title="트레이너 지원"
           value={stats.trainers.applications}
-          change=\"+5\"
+          change="+5"
           icon={UserCheck}
-          color=\"green\"
+          color="green"
           delay={0.3}
         />
         <StatCard
-          title=\"총 회원 수\"
+          title="총 회원 수"
           value={`${(stats.users.totalMembers / 1000).toFixed(1)}K`}
-          change=\"+89\"
+          change="+89"
           icon={Users}
-          color=\"red\"
+          color="red"
           delay={0.4}
         />
       </div>
 
       {/* Content Grid */}
-      <div className=\"grid grid-cols-1 lg:grid-cols-3 gap-6\">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         {/* Recent Activity */}
         <motion.div
           initial={{ opacity: 0, x: -20 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.6, delay: 0.5 }}
-          className=\"lg:col-span-2\"
+          className="lg:col-span-2"
         >
           <Card>
             <CardHeader>
-              <CardTitle className=\"flex items-center space-x-2 stay-heading\">
-                <MessageSquare className=\"w-5 h-5\" />
+              <CardTitle className="flex items-center space-x-2 stay-heading">
+                <MessageSquare className="w-5 h-5" />
                 <span>최근 활동</span>
               </CardTitle>
             </CardHeader>
             <CardContent>
-              <div className=\"space-y-4\">
+              <div className="space-y-4">
                 {recentActivities.map((activity, index) => {
                   const Icon = getActivityIcon(activity.type)
                   return (
@@ -246,21 +246,21 @@ export default function AdminDashboard() {
                       initial={{ opacity: 0, x: -10 }}
                       animate={{ opacity: 1, x: 0 }}
                       transition={{ duration: 0.3, delay: 0.6 + index * 0.1 }}
-                      className=\"flex items-start space-x-3 p-3 rounded-lg hover:bg-slate-50 transition-colors\"
+                      className="flex items-start space-x-3 p-3 rounded-lg hover:bg-slate-50 transition-colors"
                     >
                       <div className={`p-2 rounded-lg ${getStatusColor(activity.status)} bg-opacity-10`}>
                         <Icon className={`w-4 h-4 ${getStatusColor(activity.status)}`} />
                       </div>
-                      <div className=\"flex-1 min-w-0\">
-                        <p className=\"text-sm text-slate-900 stay-body\">{activity.message}</p>
-                        <p className=\"text-xs text-slate-500 stay-body mt-1\">{activity.time}</p>
+                      <div className="flex-1 min-w-0">
+                        <p className="text-sm text-slate-900 stay-body">{activity.message}</p>
+                        <p className="text-xs text-slate-500 stay-body mt-1">{activity.time}</p>
                       </div>
                     </motion.div>
                   )
                 })}
               </div>
-              <div className=\"mt-4 pt-4 border-t border-slate-100\">
-                <Button variant=\"ghost\" className=\"w-full stay-body-medium\">
+              <div className="mt-4 pt-4 border-t border-slate-100">
+                <Button variant="ghost" className="w-full stay-body-medium">
                   모든 활동 보기
                 </Button>
               </div>
@@ -273,36 +273,36 @@ export default function AdminDashboard() {
           initial={{ opacity: 0, x: 20 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.6, delay: 0.6 }}
-          className=\"space-y-6\"
+          className="space-y-6"
         >
           {/* Quick Actions Card */}
           <Card>
             <CardHeader>
-              <CardTitle className=\"stay-heading\">빠른 작업</CardTitle>
+              <CardTitle className="stay-heading">빠른 작업</CardTitle>
             </CardHeader>
-            <CardContent className=\"space-y-3\">
+            <CardContent className="space-y-3">
               <Button 
-                variant=\"outline\" 
-                className=\"w-full justify-start stay-body-medium\"
+                variant="outline" 
+                className="w-full justify-start stay-body-medium"
                 onClick={() => window.location.href = '/admin/consultations'}
               >
-                <Calendar className=\"w-4 h-4 mr-2\" />
+                <Calendar className="w-4 h-4 mr-2" />
                 상담 예약 관리
               </Button>
               <Button 
-                variant=\"outline\" 
-                className=\"w-full justify-start stay-body-medium\"
+                variant="outline" 
+                className="w-full justify-start stay-body-medium"
                 onClick={() => window.location.href = '/admin/trainers'}
               >
-                <UserCheck className=\"w-4 h-4 mr-2\" />
+                <UserCheck className="w-4 h-4 mr-2" />
                 트레이너 지원서
               </Button>
               <Button 
-                variant=\"outline\" 
-                className=\"w-full justify-start stay-body-medium\"
+                variant="outline" 
+                className="w-full justify-start stay-body-medium"
                 onClick={() => window.location.href = '/admin/analytics'}
               >
-                <TrendingUp className=\"w-4 h-4 mr-2\" />
+                <TrendingUp className="w-4 h-4 mr-2" />
                 분석 보기
               </Button>
             </CardContent>
@@ -311,28 +311,28 @@ export default function AdminDashboard() {
           {/* System Status */}
           <Card>
             <CardHeader>
-              <CardTitle className=\"stay-heading\">시스템 상태</CardTitle>
+              <CardTitle className="stay-heading">시스템 상태</CardTitle>
             </CardHeader>
-            <CardContent className=\"space-y-3\">
-              <div className=\"flex items-center justify-between\">
-                <span className=\"text-sm text-slate-600 stay-body\">데이터베이스</span>
-                <div className=\"flex items-center space-x-1\">
-                  <CheckCircle className=\"w-4 h-4 text-emerald-500\" />
-                  <span className=\"text-xs text-emerald-600 stay-body\">정상</span>
+            <CardContent className="space-y-3">
+              <div className="flex items-center justify-between">
+                <span className="text-sm text-slate-600 stay-body">데이터베이스</span>
+                <div className="flex items-center space-x-1">
+                  <CheckCircle className="w-4 h-4 text-emerald-500" />
+                  <span className="text-xs text-emerald-600 stay-body">정상</span>
                 </div>
               </div>
-              <div className=\"flex items-center justify-between\">
-                <span className=\"text-sm text-slate-600 stay-body\">API 서버</span>
-                <div className=\"flex items-center space-x-1\">
-                  <CheckCircle className=\"w-4 h-4 text-emerald-500\" />
-                  <span className=\"text-xs text-emerald-600 stay-body\">정상</span>
+              <div className="flex items-center justify-between">
+                <span className="text-sm text-slate-600 stay-body">API 서버</span>
+                <div className="flex items-center space-x-1">
+                  <CheckCircle className="w-4 h-4 text-emerald-500" />
+                  <span className="text-xs text-emerald-600 stay-body">정상</span>
                 </div>
               </div>
-              <div className=\"flex items-center justify-between\">
-                <span className=\"text-sm text-slate-600 stay-body\">백업</span>
-                <div className=\"flex items-center space-x-1\">
-                  <AlertCircle className=\"w-4 h-4 text-amber-500\" />
-                  <span className=\"text-xs text-amber-600 stay-body\">2시간 전</span>
+              <div className="flex items-center justify-between">
+                <span className="text-sm text-slate-600 stay-body">백업</span>
+                <div className="flex items-center space-x-1">
+                  <AlertCircle className="w-4 h-4 text-amber-500" />
+                  <span className="text-xs text-amber-600 stay-body">2시간 전</span>
                 </div>
               </div>
             </CardContent>

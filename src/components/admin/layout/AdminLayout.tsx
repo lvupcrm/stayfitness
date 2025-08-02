@@ -46,10 +46,10 @@ export default function AdminLayout({ children, className }: AdminLayoutProps) {
   // Show loading state
   if (isLoading) {
     return (
-      <div className=\"min-h-screen bg-slate-50 flex items-center justify-center\">
-        <div className=\"text-center\">
-          <div className=\"animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto mb-4\"></div>
-          <p className=\"text-slate-600 stay-body\">로딩 중...</p>
+      <div className="min-h-screen bg-slate-50 flex items-center justify-center">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto mb-4"></div>
+          <p className="text-slate-600 stay-body">로딩 중...</p>
         </div>
       </div>
     )
@@ -61,9 +61,9 @@ export default function AdminLayout({ children, className }: AdminLayoutProps) {
   }
 
   return (
-    <div className=\"min-h-screen bg-slate-50\">
+    <div className="min-h-screen bg-slate-50">
       {/* Desktop Sidebar */}
-      <div className=\"hidden lg:block\">
+      <div className="hidden lg:block">
         <AdminSidebar 
           collapsed={sidebarCollapsed} 
           onCollapsedChange={setSidebarCollapsed} 
@@ -74,7 +74,7 @@ export default function AdminLayout({ children, className }: AdminLayoutProps) {
       {isMobile && showMobileSidebar && (
         <>
           <div 
-            className=\"fixed inset-0 bg-black bg-opacity-50 z-40 lg:hidden\"
+            className="fixed inset-0 bg-black bg-opacity-50 z-40 lg:hidden"
             onClick={() => setShowMobileSidebar(false)}
           />
           <motion.div
@@ -82,7 +82,7 @@ export default function AdminLayout({ children, className }: AdminLayoutProps) {
             animate={{ x: 0 }}
             exit={{ x: -280 }}
             transition={{ duration: 0.3, ease: 'easeInOut' }}
-            className=\"fixed left-0 top-0 h-full z-50 lg:hidden\"
+            className="fixed left-0 top-0 h-full z-50 lg:hidden"
           >
             <AdminSidebar 
               collapsed={false} 
@@ -104,7 +104,7 @@ export default function AdminLayout({ children, className }: AdminLayoutProps) {
         sidebarCollapsed || isMobile ? 'lg:pl-20' : 'lg:pl-80',
         className
       )}>
-        <div className=\"p-6\">
+        <div className="p-6">
           {children}
         </div>
       </main>

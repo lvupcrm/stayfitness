@@ -96,18 +96,18 @@ export default function AdminSidebar({
       )}
     >
       {/* Header */}
-      <div className=\"flex items-center justify-between p-6 border-b border-slate-200\">
-        <AnimatePresence mode=\"wait\">
+      <div className="flex items-center justify-between p-6 border-b border-slate-200">
+        <AnimatePresence mode="wait">
           {!collapsed && (
             <motion.div
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, x: -20 }}
               transition={{ duration: 0.2 }}
-              className=\"text-2xl stay-heading tracking-tight\"
+              className="text-2xl stay-heading tracking-tight"
             >
-              <span className=\"stay-text-gradient\">STAY</span>
-              <span className=\"text-slate-600\">FITNESS</span>
+              <span className="stay-text-gradient">STAY</span>
+              <span className="text-slate-600">FITNESS</span>
             </motion.div>
           )}
         </AnimatePresence>
@@ -120,16 +120,16 @@ export default function AdminSidebar({
           )}
         >
           {collapsed ? (
-            <ChevronRight className=\"w-5 h-5 text-slate-600\" />
+            <ChevronRight className="w-5 h-5 text-slate-600" />
           ) : (
-            <ChevronLeft className=\"w-5 h-5 text-slate-600\" />
+            <ChevronLeft className="w-5 h-5 text-slate-600" />
           )}
         </button>
       </div>
 
       {/* Navigation */}
-      <div className=\"flex-1 py-6 px-3 overflow-y-auto\">
-        <nav className=\"space-y-2\">
+      <div className="flex-1 py-6 px-3 overflow-y-auto">
+        <nav className="space-y-2">
           {visibleItems.map((item) => {
             const Icon = item.icon
             const isActive = pathname === item.href || 
@@ -150,8 +150,8 @@ export default function AdminSidebar({
                 {/* Active indicator */}
                 {isActive && (
                   <motion.div
-                    layoutId=\"sidebar-active\"
-                    className=\"absolute left-0 top-0 bottom-0 w-1 bg-gradient-to-b from-blue-500 to-blue-600 rounded-r-full\"
+                    layoutId="sidebar-active"
+                    className="absolute left-0 top-0 bottom-0 w-1 bg-gradient-to-b from-blue-500 to-blue-600 rounded-r-full"
                     transition={{ type: 'spring', bounce: 0.3, duration: 0.6 }}
                   />
                 )}
@@ -161,7 +161,7 @@ export default function AdminSidebar({
                   isActive ? 'text-slate-900' : 'text-slate-500 group-hover:text-slate-700'
                 )} />
 
-                <AnimatePresence mode=\"wait\">
+                <AnimatePresence mode="wait">
                   {!collapsed && (
                     <motion.span
                       initial={{ opacity: 0, x: -10 }}
@@ -183,7 +183,7 @@ export default function AdminSidebar({
                   <motion.div
                     initial={{ scale: 0 }}
                     animate={{ scale: 1 }}
-                    className=\"ml-auto bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center stay-body\"
+                    className="ml-auto bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center stay-body"
                   >
                     {item.badge > 99 ? '99+' : item.badge}
                   </motion.div>
@@ -191,9 +191,9 @@ export default function AdminSidebar({
 
                 {/* Tooltip for collapsed state */}
                 {collapsed && (
-                  <div className=\"absolute left-full ml-2 px-2 py-1 bg-slate-900 text-white text-xs rounded opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 whitespace-nowrap z-50\">
+                  <div className="absolute left-full ml-2 px-2 py-1 bg-slate-900 text-white text-xs rounded opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 whitespace-nowrap z-50">
                     {item.name}
-                    <div className=\"absolute left-0 top-1/2 transform -translate-x-1 -translate-y-1/2 w-2 h-2 bg-slate-900 rotate-45\"></div>
+                    <div className="absolute left-0 top-1/2 transform -translate-x-1 -translate-y-1/2 w-2 h-2 bg-slate-900 rotate-45"></div>
                   </div>
                 )}
               </Link>
@@ -203,7 +203,7 @@ export default function AdminSidebar({
       </div>
 
       {/* Footer */}
-      <div className=\"p-3 border-t border-slate-200\">
+      <div className="p-3 border-t border-slate-200">
         <div className={cn(
           'text-xs text-slate-500 stay-body text-center',
           collapsed && 'hidden'

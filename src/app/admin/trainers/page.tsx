@@ -152,7 +152,7 @@ export default function TrainersPage() {
   // Update application status
   const updateApplicationStatus = async (id: string, status: string, notes?: string, interviewDate?: string) => {
     try {
-      const body: any = { status }
+      const body: Record<string, string> = { status }
       if (notes !== undefined) body.notes = notes
       if (interviewDate) body.interview_date = interviewDate
 
