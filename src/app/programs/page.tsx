@@ -1,5 +1,4 @@
 import { Metadata } from 'next'
-import sample from "@/data/sample.json";
 import Link from "next/link";
 import Image from "next/image";
 import { PageHeader } from "@/components/ui/page-header";
@@ -7,6 +6,27 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Clock, Users, Target, ArrowRight } from "lucide-react";
+
+const programs = [
+  {
+    name: "PT 1:1 맞춤 트레이닝",
+    description: "개인별 목표에 맞춘 1:1 트레이닝 프로그램",
+    image: { src: "/images/pt-training.jpg", alt: "PT 이미지" },
+    price: "월 30만원~"
+  },
+  {
+    name: "그룹 요가/필라테스",
+    description: "소규모 그룹으로 진행되는 요가 및 필라테스 수업",
+    image: { src: "/images/yoga-pilates.jpg", alt: "요가 이미지" },
+    price: "월 15만원~"
+  },
+  {
+    name: "다이어트·체형교정",
+    description: "전문가와 함께하는 체형 분석 및 다이어트 프로그램",
+    image: { src: "/images/diet-correction.jpg", alt: "다이어트 이미지" },
+    price: "월 20만원~"
+  }
+];
 
 export const metadata: Metadata = {
   title: '프로그램 안내',
@@ -27,7 +47,7 @@ export default function ProgramsPage() {
       <section className="py-16">
         <div className="container mx-auto px-4">
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {sample.programs.programs.map((program) => (
+            {programs.map((program) => (
               <Card key={program.name} className="group hover:shadow-lg transition-all duration-300 overflow-hidden">
                 <div className="relative h-48 overflow-hidden">
                   <Image 
