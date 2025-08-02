@@ -21,6 +21,25 @@ interface ContentBlockInput {
   styles?: unknown
 }
 
+interface DatabasePage {
+  id: string
+  slug: string
+  title: string
+  description?: string
+  meta_title?: string
+  meta_description?: string
+  meta_keywords?: string
+  status: string
+  template?: string
+  featured_image?: string
+  content_blocks?: DatabaseBlock[]
+  created_at: string
+  updated_at: string
+  created_by: string
+  updated_by?: string
+  version_number: number
+}
+
 // GET /api/cms/pages - 페이지 목록 조회
 export async function GET(request: NextRequest) {
   try {
@@ -80,35 +99,40 @@ export async function GET(request: NextRequest) {
       .select('*', { count: 'exact', head: true })
 
     // Transform data to match Page interface
-    const transformedPages: Page[] = pages?.map(page => ({
-      id: page.id,
-      slug: page.slug,
-      title: page.title,
-      description: page.description,
-      meta_title: page.meta_title,
-      meta_description: page.meta_description,
-      meta_keywords: page.meta_keywords,
-      status: page.status,
-      template: page.template,
-      featured_image: page.featured_image,
-      created_at: page.created_at,
-      updated_at: page.updated_at,
-      created_by: page.created_by,
-      updated_by: page.updated_by,
-      version_number: page.version_number,
-      blocks: page.content_blocks
-        ?.filter((block: DatabaseBlock) => block.is_active)
-        ?.sort((a: DatabaseBlock, b: DatabaseBlock) => a.block_order - b.block_order)
-        ?.map((block: DatabaseBlock) => ({
-          id: block.id,
-          type: block.type,
-          order: block.block_order,
-          data: block.data,
-          styles: block.styles,
-          created_at: page.created_at,
-          updated_at: page.updated_at
-        })) || []
-    })) || []
+    const transformedPages: Page[] = pages?.map(pageRow => {
+      // Type assertion for Supabase result
+      const pageData = pageRow as DatabasePage
+      
+      return {
+        id: pageData.id,
+        slug: pageData.slug,
+        title: pageData.title,
+        description: pageData.description,
+        meta_title: pageData.meta_title,
+        meta_description: pageData.meta_description,
+        meta_keywords: pageData.meta_keywords,
+        status: pageData.status,
+        template: pageData.template,
+        featured_image: pageData.featured_image,
+        created_at: pageData.created_at,
+        updated_at: pageData.updated_at,
+        created_by: pageData.created_by,
+        updated_by: pageData.updated_by,
+        version_number: pageData.version_number,
+        blocks: pageData.content_blocks
+          ?.filter((block: DatabaseBlock) => block.is_active)
+          ?.sort((a: DatabaseBlock, b: DatabaseBlock) => a.block_order - b.block_order)
+          ?.map((block: DatabaseBlock) => ({
+            id: block.id,
+            type: block.type,
+            order: block.block_order,
+            data: block.data,
+            styles: block.styles,
+            created_at: pageData.created_at,
+            updated_at: pageData.updated_at
+          })) || []
+      }
+    }) || []
 
     return NextResponse.json({
       success: true,

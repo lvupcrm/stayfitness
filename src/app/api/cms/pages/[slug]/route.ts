@@ -89,24 +89,27 @@ export async function GET(
       )
     }
 
+    // Type assertion for Supabase result
+    const pageData = page as DatabasePage
+
     // Transform data to match Page interface
     const transformedPage = {
-      id: page.id,
-      slug: page.slug,
-      title: page.title,
-      description: page.description,
-      meta_title: page.meta_title,
-      meta_description: page.meta_description,
-      meta_keywords: page.meta_keywords,
-      status: page.status,
-      template: page.template,
-      featured_image: page.featured_image,
-      created_at: page.created_at,
-      updated_at: page.updated_at,
-      created_by: page.created_by,
-      updated_by: page.updated_by,
-      version_number: page.version_number,
-      blocks: includeBlocks ? (page.content_blocks
+      id: pageData.id,
+      slug: pageData.slug,
+      title: pageData.title,
+      description: pageData.description,
+      meta_title: pageData.meta_title,
+      meta_description: pageData.meta_description,
+      meta_keywords: pageData.meta_keywords,
+      status: pageData.status,
+      template: pageData.template,
+      featured_image: pageData.featured_image,
+      created_at: pageData.created_at,
+      updated_at: pageData.updated_at,
+      created_by: pageData.created_by,
+      updated_by: pageData.updated_by,
+      version_number: pageData.version_number,
+      blocks: includeBlocks ? (pageData.content_blocks
         ?.filter((block: DatabaseBlock) => block.is_active)
         ?.sort((a: DatabaseBlock, b: DatabaseBlock) => a.block_order - b.block_order)
         ?.map((block: DatabaseBlock) => ({
