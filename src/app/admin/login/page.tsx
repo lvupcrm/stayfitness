@@ -1,8 +1,7 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
-import { motion } from 'framer-motion'
 import { Button } from '@/components/ui/button'
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
@@ -14,8 +13,14 @@ export default function AdminLoginPage() {
   const [showPassword, setShowPassword] = useState(false)
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [error, setError] = useState('')
+  const [mounted, setMounted] = useState(false)
 
   const router = useRouter()
+
+  // Prevent hydration mismatch by ensuring component is mounted
+  useEffect(() => {
+    setMounted(true)
+  }, [])
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -57,25 +62,24 @@ export default function AdminLoginPage() {
     }
   }
 
+  // Prevent hydration mismatch
+  if (!mounted) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-slate-900 to-slate-800 flex items-center justify-center">
+        <div className="text-white">로딩 중...</div>
+      </div>
+    )
+  }
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-900 to-slate-800 flex items-center justify-center p-6">
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6 }}
-        className="w-full max-w-md"
-      >
+      <div className="w-full max-w-md">
         {/* Logo */}
         <div className="text-center mb-8">
-          <motion.div
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="text-3xl stay-heading tracking-tight mb-2"
-          >
+          <div className="text-3xl stay-heading tracking-tight mb-2">
             <span className="stay-text-gradient">STAY</span>
             <span className="text-slate-300">FITNESS</span>
-          </motion.div>
+          </div>
           <p className="text-slate-400 stay-body text-sm">관리자 로그인</p>
         </div>
 
@@ -122,14 +126,10 @@ export default function AdminLoginPage() {
 
               {/* Error Message */}
               {error && (
-                <motion.div
-                  initial={{ opacity: 0, y: -10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  className="flex items-center space-x-2 text-red-600 bg-red-50 p-3 rounded-lg"
-                >
+                <div className="flex items-center space-x-2 text-red-600 bg-red-50 p-3 rounded-lg">
                   <AlertCircle className="w-4 h-4" />
                   <span className="text-sm stay-body">{error}</span>
-                </motion.div>
+                </div>
               )}
 
               {/* Submit Button */}
@@ -172,7 +172,7 @@ export default function AdminLoginPage() {
             © 2024 Stay Fitness. All rights reserved.
           </p>
         </div>
-      </motion.div>
+      </div>
     </div>
   )
 }
