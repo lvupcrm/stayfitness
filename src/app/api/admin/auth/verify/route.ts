@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server'
 import { cookies } from 'next/headers'
-import { verifyAdminToken, getAdminUser } from '@/lib/admin/auth'
+import { verifyAdminToken } from '@/lib/admin/auth'
+import type { AdminPermission } from '@/types/admin'
 
 export async function GET() {
   try {
@@ -30,17 +31,18 @@ export async function GET() {
       )
     }
 
-    // Get fresh user data from database
-    const user = await getAdminUser(tokenUser.id)
-    
-    if (!user || !user.isActive) {
-      return NextResponse.json(
-        { 
-          success: false, 
-          error: '사용자를 찾을 수 없거나 비활성화된 계정입니다.' 
-        },
-        { status: 401 }
-      )
+    // Return mock user data for simple auth (same as login)
+    const user = {
+      id: 'cms-user',
+      email: 'admin@stayfitness.com',
+      name: 'CMS 사용자',
+      role: 'admin' as const,
+      permissions: ['read_consultations', 'manage_consultations', 'read_trainers', 'manage_trainers', 'hire_trainers', 'read_users', 'read_analytics', 'export_data'] as AdminPermission[],
+      profileImageUrl: undefined,
+      lastLogin: new Date().toISOString(),
+      isActive: true,
+      createdAt: new Date().toISOString(),
+      updatedAt: new Date().toISOString()
     }
 
     return NextResponse.json({
@@ -53,7 +55,9 @@ export async function GET() {
         permissions: user.permissions,
         profileImageUrl: user.profileImageUrl,
         lastLogin: user.lastLogin,
-        isActive: user.isActive
+        isActive: user.isActive,
+        createdAt: user.createdAt,
+        updatedAt: user.updatedAt
       }
     })
 
