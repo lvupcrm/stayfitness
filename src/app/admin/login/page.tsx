@@ -1,8 +1,14 @@
 'use client'
 
 import { useState } from 'react'
+import { useEffect } from 'react'
 
 export default function AdminLoginPage() {
+  const [mounted, setMounted] = useState(false)
+
+  useEffect(() => {
+    setMounted(true)
+  }, [])
   const [error, setError] = useState<string | null>(null)
   const [isLoading, setIsLoading] = useState(false)
 
@@ -49,6 +55,10 @@ export default function AdminLoginPage() {
     } finally {
       setIsLoading(false)
     }
+  }
+
+  if (!mounted) {
+    return null
   }
 
   return (
