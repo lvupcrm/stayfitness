@@ -146,7 +146,7 @@ export async function GET(
         ?.sort((a: DatabaseBlock, b: DatabaseBlock) => a.block_order - b.block_order)
         ?.map((block: DatabaseBlock) => ({
           id: block.id,
-          type: block.type as 'text' | 'image' | 'video' | 'button' | 'section' | 'hero' | 'card' | 'testimonial' | 'problem_awareness' | 'solution' | 'social_proof' | 'urgency' | 'faq',
+          type: block.type as 'text' | 'image' | 'video' | 'button' | 'section' | 'hero' | 'card' | 'testimonial' | 'problem_awareness' | 'solution' | 'social_proof' | 'urgency' | 'faq' | 'stats' | 'values' | 'mvc' | 'principles' | 'timeline' | 'locations' | 'programs' | 'reviews' | 'contact_info',
           order: block.block_order,
           data: block.data as ContentBlockData,
           styles: block.styles as ContentBlockStyles | undefined,

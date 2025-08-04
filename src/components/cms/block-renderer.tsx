@@ -25,6 +25,15 @@ import { SolutionBlockRenderer } from './blocks/solution-block-renderer'
 import { SocialProofBlockRenderer } from './blocks/social-proof-block-renderer'
 import { UrgencyBlockRenderer } from './blocks/urgency-block-renderer'
 import { FAQBlockRenderer } from './blocks/faq-block-renderer'
+import { StatsBlockRenderer } from './blocks/stats-block-renderer'
+import { ValuesBlockRenderer } from './blocks/values-block-renderer'
+import { MVCBlockRenderer } from './blocks/mvc-block-renderer'
+import { PrinciplesBlockRenderer } from './blocks/principles-block-renderer'
+import { TimelineBlockRenderer } from './blocks/timeline-block-renderer'
+import { LocationsBlockRenderer } from './blocks/locations-block-renderer'
+import { ProgramsBlockRenderer } from './blocks/programs-block-renderer'
+import { ReviewsBlockRenderer } from './blocks/reviews-block-renderer'
+import { ContactInfoBlockRenderer } from './blocks/contact-info-block-renderer'
 
 interface BlockRendererProps {
   block: ContentBlock
@@ -193,6 +202,69 @@ export function BlockRenderer({ block, isEditing, isHovered }: BlockRendererProp
       case 'faq':
         return (
           <FAQBlockRenderer
+            block={block}
+            isEditing={isEditing}
+          />
+        )
+      case 'stats':
+        return (
+          <StatsBlockRenderer
+            block={block}
+            isEditing={isEditing}
+          />
+        )
+      case 'values':
+        return (
+          <ValuesBlockRenderer
+            block={block}
+            isEditing={isEditing}
+          />
+        )
+      case 'mvc':
+        return (
+          <MVCBlockRenderer
+            block={block}
+            isEditing={isEditing}
+          />
+        )
+      case 'principles':
+        return (
+          <PrinciplesBlockRenderer
+            block={block}
+            isEditing={isEditing}
+          />
+        )
+      case 'timeline':
+        return (
+          <TimelineBlockRenderer
+            block={block}
+            isEditing={isEditing}
+          />
+        )
+      case 'locations':
+        return (
+          <LocationsBlockRenderer
+            block={block}
+            isEditing={isEditing}
+          />
+        )
+      case 'programs':
+        return (
+          <ProgramsBlockRenderer
+            block={block}
+            isEditing={isEditing}
+          />
+        )
+      case 'reviews':
+        return (
+          <ReviewsBlockRenderer
+            block={block}
+            isEditing={isEditing}
+          />
+        )
+      case 'contact_info':
+        return (
+          <ContactInfoBlockRenderer
             block={block}
             isEditing={isEditing}
           />

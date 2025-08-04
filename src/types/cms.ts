@@ -2,7 +2,7 @@
 
 export interface ContentBlock {
   id: string
-  type: 'text' | 'image' | 'video' | 'button' | 'section' | 'hero' | 'card' | 'testimonial' | 'problem_awareness' | 'solution' | 'social_proof' | 'urgency' | 'faq'
+  type: 'text' | 'image' | 'video' | 'button' | 'section' | 'hero' | 'card' | 'testimonial' | 'problem_awareness' | 'solution' | 'social_proof' | 'urgency' | 'faq' | 'stats' | 'values' | 'mvc' | 'principles' | 'timeline' | 'locations' | 'programs' | 'reviews' | 'contact_info'
   order: number
   data: ContentBlockData
   styles?: ContentBlockStyles
@@ -126,6 +126,145 @@ export interface ContentBlockData extends Record<string, unknown> {
       buttonText: string
       buttonUrl: string
       phoneNumber?: string
+    }
+  }
+
+  // New Block Types for About Page
+  stats?: {
+    title?: string
+    subtitle?: string
+    items: Array<{
+      number: string
+      label: string
+      description?: string
+    }>
+  }
+
+  values?: {
+    title: string
+    subtitle?: string
+    items: Array<{
+      icon: string
+      title: string
+      description: string
+    }>
+  }
+
+  mvc?: {
+    title: string
+    subtitle?: string
+    items: Array<{
+      title: string
+      subtitle: string
+      description: string
+      icon: string
+    }>
+  }
+
+  principles?: {
+    title: string
+    subtitle?: string
+    items: string[]
+  }
+
+  timeline?: {
+    title: string
+    subtitle?: string
+    milestones: Array<{
+      year: string
+      title: string
+      description: string
+    }>
+  }
+
+  // New Block Types for Locations Page
+  locations?: {
+    title: string
+    subtitle?: string
+    locations: Array<{
+      id: string
+      name: string
+      address: string
+      phone: string
+      hours: string
+      image: string
+      description: string
+      features: string[]
+      facilities: Array<{
+        icon: string
+        name: string
+        description: string
+      }>
+      trainers: Array<{
+        id: number
+        name: string
+        specialty: string
+        experience: string
+        rating: number
+        image: string
+        certifications: string[]
+        achievements: string
+      }>
+    }>
+  }
+
+  // New Block Types for Programs Page
+  programs?: {
+    title: string
+    subtitle?: string
+    programs: Array<{
+      name: string
+      description: string
+      image: {
+        src: string
+        alt: string
+      }
+      price: string
+      duration?: string
+      participants?: string
+      level?: string
+      features?: string[]
+      schedule?: string
+      benefits?: string[]
+    }>
+  }
+
+  // New Block Types for Reviews Page
+  reviews?: {
+    title: string
+    subtitle?: string
+    reviews: Array<{
+      name: string
+      content: string
+      rating?: number
+      program?: string
+      image?: string
+      date?: string
+      age?: number
+      location?: string
+      duration?: string
+      period?: string
+      results?: string[]
+      beforeAfter?: {
+        before: string
+        after: string
+      }
+    }>
+  }
+
+  // Contact Information Block
+  contact_info?: {
+    title: string
+    subtitle?: string
+    contacts: Array<{
+      icon: string
+      label: string
+      value: string
+      link: string
+    }>
+    tagline?: {
+      title: string
+      subtitle: string
     }
   }
 }

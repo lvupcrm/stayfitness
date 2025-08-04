@@ -1,134 +1,114 @@
-import { Metadata } from 'next'
-import Link from "next/link";
-import Image from "next/image";
-import { PageHeader } from "@/components/ui/page-header";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-import { Clock, Users, Target, ArrowRight } from "lucide-react";
+'use client'
 
-const programs = [
-  {
-    name: "PT 1:1 맞춤 트레이닝",
-    description: "개인별 목표에 맞춘 1:1 트레이닝 프로그램",
-    image: { src: "/images/pt-training.jpg", alt: "PT 이미지" },
-    price: "월 30만원~"
-  },
-  {
-    name: "그룹 요가/필라테스",
-    description: "소규모 그룹으로 진행되는 요가 및 필라테스 수업",
-    image: { src: "/images/yoga-pilates.jpg", alt: "요가 이미지" },
-    price: "월 15만원~"
-  },
-  {
-    name: "다이어트·체형교정",
-    description: "전문가와 함께하는 체형 분석 및 다이어트 프로그램",
-    image: { src: "/images/diet-correction.jpg", alt: "다이어트 이미지" },
-    price: "월 20만원~"
-  }
-];
-
-export const metadata: Metadata = {
-  title: '프로그램 안내',
-  description: '스테이피트니스의 다양한 웰니스/트레이닝 프로그램을 만나보세요. 퍼스널 트레이닝부터 그룹 클래스까지.',
-  keywords: ['피트니스 프로그램', '퍼스널 트레이닝', 'PT', '그룹 클래스', '운동 프로그램'],
-}
+import { useEffect, useState } from 'react'
+import { BlockRenderer } from '@/components/cms/block-renderer'
+import { mockPagesList } from '@/lib/mock-cms-data'
+import type { Page } from '@/types/cms'
 
 export default function ProgramsPage() {
-  return (
-    <div className="min-h-screen bg-background">
-      <PageHeader 
-        title="프로그램 안내"
-        description="스테이피트니스의 다양한 웰니스/트레이닝 프로그램을 만나보세요."
-        imageSrc="/images/programs-hero.jpg"
-        imageAlt="프로그램 전체"
-      />
-      
-      <section className="py-16">
-        <div className="container mx-auto px-4">
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {programs.map((program) => (
-              <Card key={program.name} className="group hover:shadow-lg transition-all duration-300 overflow-hidden">
-                <div className="relative h-48 overflow-hidden">
-                  <Image 
-                    src={program.image.src} 
-                    alt={program.image.alt} 
-                    fill 
-                    className="object-cover group-hover:scale-105 transition-transform duration-300" 
-                  />
-                  <div className="absolute top-4 left-4">
-                    <Badge className="bg-fitness-primary text-white">
-                      추천 프로그램
-                    </Badge>
-                  </div>
-                </div>
-                
-                <CardHeader>
-                  <CardTitle className="text-xl text-foreground group-hover:text-fitness-primary transition-colors">
-                    {program.name}
-                  </CardTitle>
-                  <CardDescription className="text-base">
-                    {program.description}
-                  </CardDescription>
-                </CardHeader>
-                
-                <CardContent className="space-y-4">
-                  <div className="flex items-center justify-between text-sm text-muted-foreground">
-                    <div className="flex items-center gap-2">
-                      <Clock className="w-4 h-4" />
-                      <span>60분</span>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <Users className="w-4 h-4" />
-                      <span>1:1 개인</span>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <Target className="w-4 h-4" />
-                      <span>초급~고급</span>
-                    </div>
-                  </div>
-                  
-                  <div className="flex items-center justify-between">
-                    <div className="text-2xl font-bold text-fitness-primary">
-                      {program.price}
-                    </div>
-                    <Button asChild size="sm" className="group-hover:bg-fitness-primary group-hover:text-white transition-colors">
-                      <Link href={`/programs/${program.name}`}>
-                        자세히 보기
-                        <ArrowRight className="w-4 h-4 ml-2" />
-                      </Link>
-                    </Button>
-                  </div>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-          
-          {/* CTA 섹션 */}
-          <div className="mt-16 text-center">
-            <div className="max-w-2xl mx-auto">
-              <h3 className="text-2xl font-bold text-foreground mb-4">
-                어떤 프로그램이 맞는지 고민되시나요?
-              </h3>
-              <p className="text-lg text-muted-foreground mb-8">
-                전문 컨설턴트가 당신에게 맞는 최적의 프로그램을 추천해드립니다
-              </p>
-              <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Button asChild size="lg" className="fitness-gradient text-white">
-                  <Link href="/consultation">
-                    무료 상담 받기
-                  </Link>
-                </Button>
-                <Button asChild variant="outline" size="lg">
-                  <Link href="/contact">
-                    센터 둘러보기
-                  </Link>
-                </Button>
-              </div>
+  const [pageData, setPageData] = useState<Page | null>(null)
+  const [isLoading, setIsLoading] = useState(true)
+
+  useEffect(() => {
+    const fetchPageData = async () => {
+      try {
+        // Try to fetch from API first
+        const hasSupabase = process.env.NEXT_PUBLIC_SUPABASE_URL && 
+                           process.env.NEXT_PUBLIC_SUPABASE_URL !== 'your_supabase_url_here'
+        
+        if (!hasSupabase) {
+          // Use mock data when Supabase is not configured
+          console.log('🔧 Using mock CMS data for Programs page')
+          const programsPageData = mockPagesList.find(p => p.slug === 'programs')
+          setPageData(programsPageData || null)
+          setIsLoading(false)
+          return
+        }
+
+        const response = await fetch('/api/cms/pages/programs')
+        if (!response.ok) {
+          throw new Error('Failed to fetch page data')
+        }
+        
+        const result = await response.json()
+        if (result.success) {
+          setPageData(result.data)
+        } else {
+          throw new Error(result.error || 'Failed to load page')
+        }
+      } catch (error) {
+        console.error('Error fetching programs page:', error)
+        // Fallback to mock data
+        console.log('🔧 Falling back to mock CMS data for Programs page')
+        const programsPageData = mockPagesList.find(p => p.slug === 'programs')
+        setPageData(programsPageData || null)
+      } finally {
+        setIsLoading(false)
+      }
+    }
+
+    fetchPageData()
+  }, [])
+
+  if (isLoading) {
+    return (
+      <div className="min-h-screen bg-stone-50 pt-20">
+        <div className="max-w-7xl mx-auto px-6 lg:px-8 py-16">
+          <div className="animate-pulse">
+            <div className="h-8 bg-gray-200 rounded w-1/3 mb-4"></div>
+            <div className="h-4 bg-gray-200 rounded w-2/3 mb-8"></div>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {Array.from({ length: 6 }).map((_, i) => (
+                <div key={i} className="h-96 bg-gray-200 rounded-lg"></div>
+              ))}
             </div>
           </div>
         </div>
-      </section>
+      </div>
+    )
+  }
+
+  if (!pageData) {
+    return (
+      <div className="min-h-screen bg-stone-50 pt-20">
+        <div className="max-w-7xl mx-auto px-6 lg:px-8 py-16 text-center">
+          <h1 className="text-3xl font-bold text-gray-900 mb-4">페이지를 찾을 수 없습니다</h1>
+          <p className="text-gray-600">요청하신 페이지를 로드할 수 없습니다.</p>
+        </div>
+      </div>
+    )
+  }
+
+  return (
+    <div className="min-h-screen bg-stone-50">
+      {/* Page Meta */}
+      {pageData.meta_title && (
+        <title>{pageData.meta_title}</title>
+      )}
+      {pageData.meta_description && (
+        <meta name="description" content={pageData.meta_description} />
+      )}
+      
+      {/* Render CMS Blocks */}
+      <div className="cms-page">
+        {pageData.blocks && pageData.blocks.length > 0 ? (
+          pageData.blocks
+            .sort((a, b) => a.order - b.order)
+            .map((block) => (
+              <BlockRenderer
+                key={block.id}
+                block={block}
+                isEditing={false}
+                isHovered={false}
+              />
+            ))
+        ) : (
+          <div className="max-w-7xl mx-auto px-6 lg:px-8 py-16 text-center pt-20">
+            <h1 className="text-3xl font-bold text-gray-900 mb-4">콘텐츠가 없습니다</h1>
+            <p className="text-gray-600">이 페이지에 표시할 콘텐츠가 없습니다.</p>
+          </div>
+        )}
+      </div>
     </div>
-  );
-} 
+  )
+}

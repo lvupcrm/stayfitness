@@ -16,7 +16,13 @@ import {
   Target,
   Users,
   Zap,
-  HelpCircle
+  HelpCircle,
+  BarChart3,
+  Award,
+  Clock,
+  MapPin,
+  Star,
+  Phone
 } from 'lucide-react'
 import { useCMSStore } from '@/hooks/useCMSStore'
 import type { ContentBlock } from '@/types/cms'
@@ -34,7 +40,16 @@ const blockIcons = {
   solution: Target,
   social_proof: Users,
   urgency: Zap,
-  faq: HelpCircle
+  faq: HelpCircle,
+  stats: BarChart3,
+  values: Award,
+  mvc: Target,
+  principles: Users,
+  timeline: Clock,
+  locations: MapPin,
+  programs: Target,
+  reviews: Star,
+  contact_info: Phone
 }
 
 export function PageLayers() {
@@ -85,6 +100,24 @@ export function PageLayers() {
         return block.data.section?.title || '긴급성 섹션'
       case 'faq':
         return block.data.section?.title || 'FAQ 섹션'
+      case 'stats':
+        return block.data.stats?.title || '통계 섹션'
+      case 'values':
+        return block.data.values?.title || '핵심 가치 섹션'
+      case 'mvc':
+        return block.data.mvc?.title || 'MVC 섹션'
+      case 'principles':
+        return block.data.principles?.title || '운영 원칙 섹션'
+      case 'timeline':
+        return block.data.timeline?.title || '연혁 섹션'
+      case 'locations':
+        return block.data.locations?.title || '지점 안내 섹션'
+      case 'programs':
+        return block.data.programs?.title || '프로그램 섹션'
+      case 'reviews':
+        return block.data.reviews?.title || '후기 섹션'
+      case 'contact_info':
+        return block.data.contact_info?.title || '연락처 정보 섹션'
       default:
         return `${block.type} 블록`
     }

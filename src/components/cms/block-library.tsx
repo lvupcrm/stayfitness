@@ -15,7 +15,13 @@ import {
   Target,
   Users,
   Zap,
-  HelpCircle
+  HelpCircle,
+  BarChart3,
+  Award,
+  Clock,
+  MapPin,
+  Star,
+  Phone
 } from 'lucide-react'
 import { useCMSStore } from '@/hooks/useCMSStore'
 import type { ContentBlock } from '@/types/cms'
@@ -26,7 +32,7 @@ interface BlockType {
   name: string
   description: string
   icon: React.ComponentType<{ className?: string }>
-  category: 'basic' | 'layout' | 'content' | 'media' | 'homepage'
+  category: 'basic' | 'layout' | 'content' | 'media' | 'homepage' | 'about' | 'locations' | 'programs' | 'reviews'
   defaultData: Record<string, unknown>
 }
 
@@ -311,6 +317,237 @@ const blockTypes: BlockType[] = [
         ]
       }
     }
+  },
+
+  // About Page Blocks
+  {
+    id: 'stats',
+    type: 'stats',
+    name: '통계',
+    description: '숫자로 보여주는 성과 섹션',
+    icon: BarChart3,
+    category: 'about',
+    defaultData: {
+      stats: {
+        title: '우리의 성과',
+        subtitle: '숫자로 확인하는 신뢰도',
+        items: [
+          { number: '95%', label: '만족도', description: '고객 만족도' },
+          { number: '1000+', label: '고객 수', description: '누적 고객 수' }
+        ]
+      }
+    }
+  },
+  {
+    id: 'values',
+    type: 'values',
+    name: '핵심 가치',
+    description: '회사의 차별점과 가치 제시',
+    icon: Award,
+    category: 'about',
+    defaultData: {
+      values: {
+        title: '우리만의 차별점',
+        subtitle: '특별한 가치를 제공합니다',
+        items: [
+          {
+            icon: 'Heart',
+            title: '고객 중심',
+            description: '고객의 만족이 최우선입니다'
+          }
+        ]
+      }
+    }
+  },
+  {
+    id: 'mvc',
+    type: 'mvc',
+    name: 'Mission & Vision',
+    description: '사명, 비전, 핵심가치 섹션',
+    icon: Target,
+    category: 'about',
+    defaultData: {
+      mvc: {
+        title: 'MVC - 우리는 무엇을 하고, 왜 하는가',
+        subtitle: '우리의 사명, 비전, 핵심가치',
+        items: [
+          {
+            title: 'Mission',
+            subtitle: '우리의 사명',
+            description: '고객에게 최고의 가치를 제공합니다',
+            icon: 'Target'
+          }
+        ]
+      }
+    }
+  },
+  {
+    id: 'principles',
+    type: 'principles',
+    name: '운영 원칙',
+    description: '회사 운영 원칙과 규칙',
+    icon: Users,
+    category: 'about',
+    defaultData: {
+      principles: {
+        title: '일하는 원칙',
+        subtitle: '우리가 지키는 원칙들',
+        items: [
+          '고객 만족이 최우선입니다',
+          '정직하고 투명하게 운영합니다'
+        ]
+      }
+    }
+  },
+  {
+    id: 'timeline',
+    type: 'timeline',
+    name: '연혁',
+    description: '회사의 성장 과정과 역사',
+    icon: Clock,
+    category: 'about',
+    defaultData: {
+      timeline: {
+        title: '우리의 성장 스토리',
+        subtitle: '지금까지의 발걸음',
+        milestones: [
+          {
+            year: '2024',
+            title: '회사 설립',
+            description: '새로운 시작을 알리는 첫걸음'
+          }
+        ]
+      }
+    }
+  },
+  {
+    id: 'contact_info',
+    type: 'contact_info',
+    name: '연락처 정보',
+    description: '연락처 및 소셜미디어 정보',
+    icon: Phone,
+    category: 'about',
+    defaultData: {
+      contact_info: {
+        title: '연락처 및 소셜미디어',
+        subtitle: '다양한 채널로 소통하세요',
+        contacts: [
+          {
+            icon: 'Phone',
+            label: '전화문의',
+            value: '02-1234-5678',
+            link: 'tel:02-1234-5678'
+          }
+        ],
+        tagline: {
+          title: '우리와 함께하세요',
+          subtitle: 'COMPANY NAME'
+        }
+      }
+    }
+  },
+
+  // Locations Page Blocks
+  {
+    id: 'locations',
+    type: 'locations',
+    name: '지점 안내',
+    description: '여러 지점 정보와 시설 안내',
+    icon: MapPin,
+    category: 'locations',
+    defaultData: {
+      locations: {
+        title: '지점 안내',
+        subtitle: '가까운 지점을 찾아보세요',
+        locations: [
+          {
+            id: 'main',
+            name: '본점',
+            address: '서울특별시 강남구 테헤란로 123',
+            phone: '02-1234-5678',
+            hours: '09:00-18:00',
+            image: '/images/location-main.jpg',
+            description: '메인 지점입니다',
+            features: ['주차 가능', '최신 시설'],
+            facilities: [
+              {
+                icon: 'Dumbbell',
+                name: '운동 시설',
+                description: '최신 운동 기구 완비'
+              }
+            ],
+            trainers: [
+              {
+                id: 1,
+                name: '김트레이너',
+                specialty: '전문 트레이닝',
+                experience: '5년',
+                rating: 4.9,
+                image: '/images/trainer1.jpg',
+                certifications: ['자격증1', '자격증2'],
+                achievements: '다수의 성공 사례'
+              }
+            ]
+          }
+        ]
+      }
+    }
+  },
+
+  // Programs Page Blocks
+  {
+    id: 'programs',
+    type: 'programs',
+    name: '프로그램',
+    description: '다양한 프로그램 소개',
+    icon: Target,
+    category: 'programs',
+    defaultData: {
+      programs: {
+        title: '프로그램 안내',
+        subtitle: '다양한 프로그램을 만나보세요',
+        programs: [
+          {
+            name: '기본 프로그램',
+            description: '기초부터 시작하는 프로그램',
+            image: {
+              src: '/images/program1.jpg',
+              alt: '기본 프로그램'
+            },
+            price: '월 10만원',
+            duration: '60분',
+            participants: '1:1 개인',
+            level: '초급~중급'
+          }
+        ]
+      }
+    }
+  },
+
+  // Reviews Page Blocks
+  {
+    id: 'reviews',
+    type: 'reviews',
+    name: '후기',
+    description: '고객 후기 모음',
+    icon: Star,
+    category: 'reviews',
+    defaultData: {
+      reviews: {
+        title: '고객 후기',
+        subtitle: '실제 고객들의 생생한 후기',
+        reviews: [
+          {
+            name: '김고객',
+            content: '정말 만족스러운 서비스였습니다!',
+            rating: 5,
+            program: '기본 프로그램',
+            image: '/images/customer1.jpg',
+            date: '2024-01-15'
+          }
+        ]
+      }
+    }
   }
 ]
 
@@ -384,7 +621,11 @@ export function BlockLibrary({ searchTerm }: BlockLibraryProps) {
     { id: 'layout', name: '레이아웃', icon: Layout },
     { id: 'content', name: '콘텐츠', icon: AlignLeft },
     { id: 'media', name: '미디어', icon: Image },
-    { id: 'homepage', name: '홈페이지 섹션', icon: Target }
+    { id: 'homepage', name: '홈페이지 섹션', icon: Target },
+    { id: 'about', name: '소개 페이지', icon: Award },
+    { id: 'locations', name: '지점 안내', icon: MapPin },
+    { id: 'programs', name: '프로그램', icon: Target },
+    { id: 'reviews', name: '후기', icon: Star }
   ]
 
   return (
