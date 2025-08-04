@@ -2,7 +2,7 @@
 
 export interface ContentBlock {
   id: string
-  type: 'text' | 'image' | 'video' | 'button' | 'section' | 'hero' | 'card' | 'testimonial'
+  type: 'text' | 'image' | 'video' | 'button' | 'section' | 'hero' | 'card' | 'testimonial' | 'problem_awareness' | 'solution' | 'social_proof' | 'urgency' | 'faq'
   order: number
   data: ContentBlockData
   styles?: ContentBlockStyles
@@ -73,6 +73,60 @@ export interface ContentBlockData extends Record<string, unknown> {
     position?: string
     avatar?: string
     rating?: number
+  }
+
+  // Homepage Section Blocks
+  section?: {
+    title: string
+    subtitle?: string
+    problems?: Array<{
+      icon: string
+      title: string
+      description: string
+    }>
+    solutions?: Array<{
+      icon: string
+      title: string
+      description: string
+    }>
+    testimonials?: Array<{
+      name: string
+      content: string
+      rating: number
+      program: string
+      beforeAfter: {
+        before: string
+        after: string
+      }
+    }>
+    achievements?: {
+      title: string
+      stats: Array<{
+        number: string
+        label: string
+      }>
+    }
+    offers?: Array<{
+      title: string
+      description: string
+      originalPrice: string
+      discountPrice: string
+      validUntil: string
+      limitation: string
+    }>
+    urgencyMessages?: string[]
+    faqs?: Array<{
+      question: string
+      answer: string
+    }>
+    callToAction?: {
+      title: string
+      subtitle?: string
+      description?: string
+      buttonText: string
+      buttonUrl: string
+      phoneNumber?: string
+    }
   }
 }
 

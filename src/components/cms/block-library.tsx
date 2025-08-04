@@ -10,7 +10,12 @@ import {
   MessageSquare,
   Grid,
   Heading,
-  AlignLeft
+  AlignLeft,
+  AlertTriangle,
+  Target,
+  Users,
+  Zap,
+  HelpCircle
 } from 'lucide-react'
 import { useCMSStore } from '@/hooks/useCMSStore'
 import type { ContentBlock } from '@/types/cms'
@@ -21,7 +26,7 @@ interface BlockType {
   name: string
   description: string
   icon: React.ComponentType<{ className?: string }>
-  category: 'basic' | 'layout' | 'content' | 'media'
+  category: 'basic' | 'layout' | 'content' | 'media' | 'homepage'
   defaultData: Record<string, unknown>
 }
 
@@ -169,6 +174,143 @@ const blockTypes: BlockType[] = [
         rating: 5
       }
     }
+  },
+
+  // Homepage Sections
+  {
+    id: 'problem_awareness',
+    type: 'problem_awareness',
+    name: '문제점 인식',
+    description: '고객의 문제점을 제시하는 섹션',
+    icon: AlertTriangle,
+    category: 'homepage',
+    defaultData: {
+      section: {
+        title: '혹시 이런 고민이 있으신가요?',
+        subtitle: '많은 분들이 겪는 공통 고민들입니다',
+        problems: [
+          {
+            icon: '😫',
+            title: '문제점 1',
+            description: '문제점에 대한 설명을 입력하세요'
+          }
+        ],
+        callToAction: {
+          title: '이 모든 문제, 해결할 수 있습니다!',
+          description: '전문적인 솔루션으로 문제를 해결하세요',
+          buttonText: '해결책 알아보기',
+          buttonUrl: '/consultation'
+        }
+      }
+    }
+  },
+  {
+    id: 'solution',
+    type: 'solution',
+    name: '솔루션 제시',
+    description: '문제 해결 방법을 제시하는 섹션',
+    icon: Target,
+    category: 'homepage',
+    defaultData: {
+      section: {
+        title: '차별화된 솔루션',
+        subtitle: '전문적인 시스템으로 문제를 해결합니다',
+        solutions: [
+          {
+            icon: '🔬',
+            title: '솔루션 1',
+            description: '솔루션에 대한 설명을 입력하세요'
+          }
+        ]
+      }
+    }
+  },
+  {
+    id: 'social_proof',
+    type: 'social_proof',
+    name: '사회적 증명',
+    description: '실제 성과와 후기를 보여주는 섹션',
+    icon: Users,
+    category: 'homepage',
+    defaultData: {
+      section: {
+        title: '이미 많은 분들이 변화를 경험했습니다',
+        subtitle: '실제 고객들의 생생한 후기',
+        testimonials: [
+          {
+            name: '김○○님',
+            content: '정말 만족스러운 결과였습니다!',
+            rating: 5,
+            program: '기본 프로그램',
+            beforeAfter: {
+              before: '이전 상태',
+              after: '개선된 상태'
+            }
+          }
+        ],
+        achievements: {
+          title: '우리의 성과',
+          stats: [
+            { number: '95%', label: '만족도' }
+          ]
+        }
+      }
+    }
+  },
+  {
+    id: 'urgency',
+    type: 'urgency',
+    name: '긴급성/한정성',
+    description: '특별 혜택과 긴급성을 강조하는 섹션',
+    icon: Zap,
+    category: 'homepage',
+    defaultData: {
+      section: {
+        title: '지금 시작하세요!',
+        subtitle: '한정된 기회를 놓치지 마세요',
+        offers: [
+          {
+            title: '특별 혜택',
+            description: '지금만 받을 수 있는 특별한 혜택',
+            originalPrice: '100,000원',
+            discountPrice: '무료',
+            validUntil: '이달 말까지',
+            limitation: '선착순 10명'
+          }
+        ],
+        urgencyMessages: [
+          '⏰ 한정된 시간',
+          '🎯 특별한 기회'
+        ],
+        callToAction: {
+          title: '지금 신청하기',
+          subtitle: '간단한 신청으로 시작하세요',
+          buttonText: '지금 신청하기',
+          buttonUrl: '/consultation',
+          phoneNumber: '1588-0000'
+        }
+      }
+    }
+  },
+  {
+    id: 'faq',
+    type: 'faq',
+    name: 'FAQ',
+    description: '자주 묻는 질문과 답변 섹션',
+    icon: HelpCircle,
+    category: 'homepage',
+    defaultData: {
+      section: {
+        title: '자주 묻는 질문',
+        subtitle: '궁금한 점들을 확인해보세요',
+        faqs: [
+          {
+            question: '자주 묻는 질문 1',
+            answer: '답변을 입력하세요'
+          }
+        ]
+      }
+    }
   }
 ]
 
@@ -241,7 +383,8 @@ export function BlockLibrary({ searchTerm }: BlockLibraryProps) {
     { id: 'basic', name: '기본 블록', icon: Type },
     { id: 'layout', name: '레이아웃', icon: Layout },
     { id: 'content', name: '콘텐츠', icon: AlignLeft },
-    { id: 'media', name: '미디어', icon: Image }
+    { id: 'media', name: '미디어', icon: Image },
+    { id: 'homepage', name: '홈페이지 섹션', icon: Target }
   ]
 
   return (

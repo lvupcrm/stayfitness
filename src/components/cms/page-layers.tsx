@@ -11,7 +11,12 @@ import {
   MousePointer,
   Layout,
   MessageSquare,
-  Grid
+  Grid,
+  AlertTriangle,
+  Target,
+  Users,
+  Zap,
+  HelpCircle
 } from 'lucide-react'
 import { useCMSStore } from '@/hooks/useCMSStore'
 import type { ContentBlock } from '@/types/cms'
@@ -24,7 +29,12 @@ const blockIcons = {
   hero: Layout,
   section: Grid,
   card: Layout,
-  testimonial: MessageSquare
+  testimonial: MessageSquare,
+  problem_awareness: AlertTriangle,
+  solution: Target,
+  social_proof: Users,
+  urgency: Zap,
+  faq: HelpCircle
 }
 
 export function PageLayers() {
@@ -65,6 +75,16 @@ export function PageLayers() {
         return block.data.card?.title || '카드'
       case 'testimonial':
         return `${block.data.testimonial?.author || '고객'} 후기`
+      case 'problem_awareness':
+        return block.data.section?.title || '문제점 인식 섹션'
+      case 'solution':
+        return block.data.section?.title || '솔루션 섹션'
+      case 'social_proof':
+        return block.data.section?.title || '사회적 증명 섹션'
+      case 'urgency':
+        return block.data.section?.title || '긴급성 섹션'
+      case 'faq':
+        return block.data.section?.title || 'FAQ 섹션'
       default:
         return `${block.type} 블록`
     }

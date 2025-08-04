@@ -20,6 +20,11 @@ import { ButtonBlockRenderer } from './blocks/button-block-renderer'
 import { HeroBlockRenderer } from './blocks/hero-block-renderer'
 import { CardBlockRenderer } from './blocks/card-block-renderer'
 import { TestimonialBlockRenderer } from './blocks/testimonial-block-renderer'
+import { ProblemAwarenessBlockRenderer } from './blocks/problem-awareness-block-renderer'
+import { SolutionBlockRenderer } from './blocks/solution-block-renderer'
+import { SocialProofBlockRenderer } from './blocks/social-proof-block-renderer'
+import { UrgencyBlockRenderer } from './blocks/urgency-block-renderer'
+import { FAQBlockRenderer } from './blocks/faq-block-renderer'
 
 interface BlockRendererProps {
   block: ContentBlock
@@ -155,6 +160,41 @@ export function BlockRenderer({ block, isEditing, isHovered }: BlockRendererProp
             block={block}
             isEditing={isEditing}
             onUpdate={handleUpdate}
+          />
+        )
+      case 'problem_awareness':
+        return (
+          <ProblemAwarenessBlockRenderer
+            block={block}
+            isEditing={isEditing}
+          />
+        )
+      case 'solution':
+        return (
+          <SolutionBlockRenderer
+            block={block}
+            isEditing={isEditing}
+          />
+        )
+      case 'social_proof':
+        return (
+          <SocialProofBlockRenderer
+            block={block}
+            isEditing={isEditing}
+          />
+        )
+      case 'urgency':
+        return (
+          <UrgencyBlockRenderer
+            block={block}
+            isEditing={isEditing}
+          />
+        )
+      case 'faq':
+        return (
+          <FAQBlockRenderer
+            block={block}
+            isEditing={isEditing}
           />
         )
       default:
