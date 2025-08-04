@@ -5,6 +5,7 @@ import { Image as ImageIcon } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import type { ContentBlock } from '@/types/cms'
+import { OptimizedCmsImage } from './optimized-cms-image'
 
 interface HeroBlockRendererProps {
   block: ContentBlock
@@ -163,10 +164,11 @@ export function HeroBlockRenderer({ block, isEditing, onUpdate }: HeroBlockRende
           {heroData.backgroundImage ? (
             <div className="space-y-3">
               <div className="relative">
-                <img
+                <OptimizedCmsImage
                   src={heroData.backgroundImage}
                   alt="히어로 배경"
-                  className="w-full h-32 object-cover rounded-lg border"
+                  aspectRatio="wide"
+                  className="rounded-lg border"
                 />
                 <Button
                   variant="outline"

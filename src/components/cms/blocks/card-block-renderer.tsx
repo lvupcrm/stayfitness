@@ -3,6 +3,7 @@
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
 import type { ContentBlock } from '@/types/cms'
+import { OptimizedCmsImage } from './optimized-cms-image'
 
 interface CardBlockRendererProps {
   block: ContentBlock
@@ -113,10 +114,10 @@ export function CardBlockRenderer({ block, isEditing, onUpdate }: CardBlockRende
             <Card className="max-w-sm">
               {cardData.image && (
                 <div className="aspect-video overflow-hidden rounded-t-lg">
-                  <img
+                  <OptimizedCmsImage
                     src={cardData.image}
                     alt={cardData.title || ''}
-                    className="w-full h-full object-cover"
+                    priority={true}
                   />
                 </div>
               )}
@@ -154,10 +155,10 @@ export function CardBlockRenderer({ block, isEditing, onUpdate }: CardBlockRende
         <Card className="h-full">
           {cardData.image && (
             <div className="aspect-video overflow-hidden rounded-t-lg">
-              <img
+              <OptimizedCmsImage
                 src={cardData.image}
                 alt={cardData.title || ''}
-                className="w-full h-full object-cover"
+                priority={true}
               />
             </div>
           )}

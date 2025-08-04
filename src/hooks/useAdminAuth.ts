@@ -92,7 +92,7 @@ export function useAdminAuth(): UseAdminAuthReturn {
       setUser(null)
       window.location.href = '/static-login'
     }
-  }, [router])
+  }, [])
 
   // Initialize auth state on mount
   useEffect(() => {
