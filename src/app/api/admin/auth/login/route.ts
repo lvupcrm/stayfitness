@@ -62,8 +62,8 @@ export async function POST(request: NextRequest) {
     // Set authentication cookie
     const cookieHeader = `admin_token=${token}; Path=/; HttpOnly; SameSite=Lax; Max-Age=${24 * 60 * 60}`
     
-    // Create response with cookie
-    const response = NextResponse.json({
+    // Create response with cookie and set it in header
+    const response = new Response(JSON.stringify({
       success: true,
       message: '로그인 성공',
       data: {
@@ -72,19 +72,15 @@ export async function POST(request: NextRequest) {
           email: user.email,
           name: user.name,
           role: user.role,
-          permissions: user.permissions,
-          profileImageUrl: user.profileImageUrl,
-          lastLogin: user.lastLogin,
-          isActive: user.isActive,
-          createdAt: user.createdAt,
-          updatedAt: user.updatedAt
-        },
-        expiresAt: expiresAt.toISOString()
+          permissions: user.permissions
+        }
+      }
+    }), {
+      headers: {
+        'Content-Type': 'application/json',
+        'Set-Cookie': cookieHeader
       }
     })
-
-    // Append cookie to response headers
-    response.headers.set('Set-Cookie', cookieHeader)
 
     return response
 

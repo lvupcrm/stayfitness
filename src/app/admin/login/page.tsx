@@ -48,7 +48,8 @@ export default function AdminLoginPage() {
       console.log('Response status:', response.status)
       console.log('Cookies:', document.cookie)
 
-      if (data.success) {
+      if (response.ok && data.success) {
+        console.log('Login successful, redirecting to /admin')
         const urlParams = new URLSearchParams(window.location.search)
         const redirectUrl = urlParams.get('redirect')
         window.location.href = redirectUrl || '/admin'
