@@ -17,7 +17,7 @@ import {
   CheckCircle,
   Star
 } from 'lucide-react'
-import { useForm, Resolver } from 'react-hook-form'
+import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import * as yup from 'yup'
 import { toast } from 'react-toastify'
@@ -82,7 +82,7 @@ export function TrainerApplication() {
     setValue,
     watch
   } = useForm<TrainerApplicationData>({
-    resolver: yupResolver(trainerApplicationSchema) as Resolver<TrainerApplicationData>
+    resolver: yupResolver(trainerApplicationSchema)
   })
 
   const onSubmit = async (data: TrainerApplicationData) => {

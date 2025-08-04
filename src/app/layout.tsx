@@ -9,6 +9,7 @@ import {
   OrganizationStructuredData 
 } from '@/components/seo/structured-data';
 import { UrbanNav } from '@/components/navigation/urban-nav';
+import { SkipLink } from '@/components/navigation/skip-link';
 import Footer from '@/components/layout/footer';
 import AdminFloatingButton from '@/components/navigation/admin-floating-button';
 import { ToastContainer } from 'react-toastify';
@@ -131,16 +132,23 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         <WebsiteStructuredData />
         <OrganizationStructuredData />
         
+        {/* 접근성 스킵 링크 */}
+        <SkipLink />
+
         {/* 메인 네비게이션 */}
-        <UrbanNav />
+        <header>
+          <UrbanNav />
+        </header>
         
         {/* 메인 콘텐츠 */}
-        <main>
+        <main id="main-content" role="main">
           {children}
         </main>
         
         {/* 푸터 */}
-        <Footer />
+        <footer role="contentinfo">
+          <Footer />
+        </footer>
         
         {/* 플로팅 요소들 */}
         <KakaoFloatingButton />

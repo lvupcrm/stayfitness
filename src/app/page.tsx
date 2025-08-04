@@ -1,15 +1,44 @@
-"use client";
-import UrbanHero from "@/components/hero/urban-hero";
-import { 
-  ProblemAwarenessSection,
-  SolutionSection,
-  SocialProofSection,
-  UrgencySection,
-  FAQSection
-} from "@/components/sections/conversion-sections";
-import { useEffect } from "react";
-import { usePathname } from "next/navigation";
-import { trackPageView } from "@/lib/analytics";
+import { type Metadata } from 'next'
+import { generateMetadata as baseGenerateMetadata } from '@/lib/metadata'
+import UrbanHero from '@/components/hero/urban-hero';
+import dynamic from 'next/dynamic'
+import { SectionLoading } from '@/components/loading/section-loading'
+
+// Dynamic imports for conversion sections
+const ProblemAwarenessSection = dynamic(
+  () => import('@/components/sections/conversion-sections').then(mod => mod.ProblemAwarenessSection),
+  { loading: () => <SectionLoading /> }
+)
+
+const SolutionSection = dynamic(
+  () => import('@/components/sections/conversion-sections').then(mod => mod.SolutionSection),
+  { loading: () => <SectionLoading /> }
+)
+
+const SocialProofSection = dynamic(
+  () => import('@/components/sections/conversion-sections').then(mod => mod.SocialProofSection),
+  { loading: () => <SectionLoading /> }
+)
+
+const UrgencySection = dynamic(
+  () => import('@/components/sections/conversion-sections').then(mod => mod.UrgencySection),
+  { loading: () => <SectionLoading /> }
+)
+
+const FAQSection = dynamic(
+  () => import('@/components/sections/conversion-sections').then(mod => mod.FAQSection),
+  { loading: () => <SectionLoading /> }
+)
+// Dynamic imports for client-side features
+'use client';
+import { useEffect } from 'react';
+import { usePathname } from 'next/navigation';
+import { trackPageView } from '@/lib/analytics';
+
+export const metadata: Metadata = baseGenerateMetadata({
+  description: '스테이피트니스는 체형교정과 통증개선에 특화된 프리미엄 피트니스입니다. 강남, 홍대, 잠실 지점에서 전문 트레이너의 1:1 맞춤 관리로 당신의 건강한 변화를 시작하세요.',
+  path: '/'
+});
 
 export default function Home() {
   const pathname = usePathname();

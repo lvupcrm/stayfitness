@@ -1,4 +1,4 @@
-import LeadForm from "@/components/lead-form";
+import LeadForm from "@/components/lead-form/LeadForm";
 import { PageHeader } from "@/components/ui/page-header";
 
 export default function ContactPage() {

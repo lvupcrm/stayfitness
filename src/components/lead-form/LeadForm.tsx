@@ -1,6 +1,5 @@
 "use client";
 
-import React from 'react';
 import { useForm, SubmitHandler, Resolver } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
@@ -22,7 +21,7 @@ const LeadForm: React.FC = () => {
     formState: { errors, isSubmitting },
     reset,
   } = useForm<LeadFormData>({
-    resolver: yupResolver(schema) as Resolver<LeadFormData>,
+    resolver: yupResolver(schema),
   });
 
   const onSubmit: SubmitHandler<LeadFormData> = async (data) => {

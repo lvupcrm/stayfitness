@@ -6,7 +6,7 @@ import { Input } from '@/components/ui/input'
 import { Textarea } from '@/components/ui/textarea'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Calendar, Clock, MessageCircle, Phone, Video } from 'lucide-react'
-import { useForm, Resolver } from 'react-hook-form'
+import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import * as yup from 'yup'
 import { toast } from 'react-toastify'
@@ -47,7 +47,7 @@ export function ConsultationBooking() {
     setValue,
     watch
   } = useForm<ConsultationFormData>({
-    resolver: yupResolver(consultationSchema) as Resolver<ConsultationFormData>
+    resolver: yupResolver(consultationSchema)
   })
 
 

@@ -1,6 +1,5 @@
 'use client';
 
-import React from "react";
 import { trackKakaoClick } from "@/lib/analytics";
 
 const kakaoUrl = process.env.NEXT_PUBLIC_KAKAO_URL || "https://pf.kakao.com/_default";

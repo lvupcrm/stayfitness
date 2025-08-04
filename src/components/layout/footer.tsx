@@ -3,6 +3,16 @@
 import Link from 'next/link'
 import { MapPin, Phone, Mail, Clock, Shield } from 'lucide-react'
 
+type FooterLink = {
+  href: string
+  label: string
+}
+
+const legalLinks: FooterLink[] = [
+  { href: '/privacy', label: '개인정보처리방침' },
+  { href: '/terms', label: '이용약관' }
+]
+
 export default function Footer() {
   const currentYear = new Date().getFullYear()
 
@@ -94,6 +104,17 @@ export default function Footer() {
             {/* Copyright */}
             <div className="text-slate-400 text-sm stay-body">
               © {currentYear} STAY FITNESS. All rights reserved.
+          <div className="flex gap-4 mt-2">
+            {legalLinks.map((link) => (
+              <Link
+                key={link.href}
+                href={link.href}
+                className="text-slate-400 hover:text-white text-sm transition-colors"
+              >
+                {link.label}
+              </Link>
+            ))}
+          </div>
             </div>
 
             {/* Admin Access - Subtle */}
