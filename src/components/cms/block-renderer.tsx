@@ -50,7 +50,9 @@ export function BlockRenderer({ block, isEditing, isHovered }: BlockRendererProp
     updateBlock,
     deleteBlock,
     duplicateBlock,
-    currentPage
+    currentPage,
+    isPreview,
+    togglePreview
   } = useCMSStore()
 
   const isSelected = selectedBlock === block.id
@@ -73,6 +75,13 @@ export function BlockRenderer({ block, isEditing, isHovered }: BlockRendererProp
 
   const handleDuplicate = () => {
     duplicateBlock(block.id)
+  }
+
+  const handleEditFromPreview = () => {
+    if (isPreview) {
+      togglePreview() // Switch to edit mode
+      setSelectedBlock(block.id) // Select this block
+    }
   }
 
   const handleMoveUp = () => {
@@ -295,82 +304,104 @@ export function BlockRenderer({ block, isEditing, isHovered }: BlockRendererProp
         {renderBlockContent()}
       </div>
 
-      {/* Editing Toolbar */}
-      {isEditing && (isHovered || isSelected || showToolbar) && (
-        <div className="absolute top-2 right-2 flex items-center space-x-1 bg-white shadow-lg rounded-lg border p-1 z-10">
-          {/* Move Up */}
-          <Button
-            variant="ghost"
-            size="sm"
-            onClick={(e) => {
-              e.stopPropagation()
-              handleMoveUp()
-            }}
-            disabled={blockIndex === 0}
-            className="p-1 h-auto"
-            title="위로 이동"
-          >
-            <ChevronUp className="w-4 h-4" />
-          </Button>
+      {/* Editing Toolbar - Always show when hovered, but different style for preview */}
+      {(isHovered || isSelected || showToolbar) && (
+        <div className={`absolute top-2 right-2 flex items-center space-x-1 shadow-lg rounded-lg border p-1 z-10 ${
+          isEditing ? 'bg-white' : 'bg-blue-600 text-white'
+        }`}>
+          {isEditing ? (
+            // Full editing toolbar
+            <>
+              {/* Move Up */}
+              <Button
+                variant="ghost"
+                size="sm"
+                onClick={(e) => {
+                  e.stopPropagation()
+                  handleMoveUp()
+                }}
+                disabled={blockIndex === 0}
+                className="p-1 h-auto"
+                title="위로 이동"
+              >
+                <ChevronUp className="w-4 h-4" />
+              </Button>
 
-          {/* Move Down */}
-          <Button
-            variant="ghost"
-            size="sm"
-            onClick={(e) => {
-              e.stopPropagation()
-              handleMoveDown()
-            }}
-            disabled={blockIndex === totalBlocks - 1}
-            className="p-1 h-auto"
-            title="아래로 이동"
-          >
-            <ChevronDown className="w-4 h-4" />
-          </Button>
+              {/* Move Down */}
+              <Button
+                variant="ghost"
+                size="sm"
+                onClick={(e) => {
+                  e.stopPropagation()
+                  handleMoveDown()
+                }}
+                disabled={blockIndex === totalBlocks - 1}
+                className="p-1 h-auto"
+                title="아래로 이동"
+              >
+                <ChevronDown className="w-4 h-4" />
+              </Button>
 
-          <div className="w-px h-4 bg-gray-300" />
+              <div className="w-px h-4 bg-gray-300" />
 
-          {/* Duplicate */}
-          <Button
-            variant="ghost"
-            size="sm"
-            onClick={(e) => {
-              e.stopPropagation()
-              handleDuplicate()
-            }}
-            className="p-1 h-auto"
-            title="복제"
-          >
-            <Copy className="w-4 h-4" />
-          </Button>
+              {/* Duplicate */}
+              <Button
+                variant="ghost"
+                size="sm"
+                onClick={(e) => {
+                  e.stopPropagation()
+                  handleDuplicate()
+                }}
+                className="p-1 h-auto"
+                title="복제"
+              >
+                <Copy className="w-4 h-4" />
+              </Button>
 
-          {/* Properties */}
-          <Button
-            variant="ghost"
-            size="sm"
-            onClick={(e) => {
-              e.stopPropagation()
-              setSelectedBlock(block.id)
-            }}
-            className="p-1 h-auto"
-            title="속성 편집"
-          >
-            <Settings className="w-4 h-4" />
-          </Button>
+              {/* Properties */}
+              <Button
+                variant="ghost"
+                size="sm"
+                onClick={(e) => {
+                  e.stopPropagation()
+                  setSelectedBlock(block.id)
+                }}
+                className="p-1 h-auto"
+                title="속성 편집"
+              >
+                <Settings className="w-4 h-4" />
+              </Button>
 
-          {/* Delete */}
-          <Button
-            variant="ghost"
-            size="sm"
-            onClick={(e) => {
-              e.stopPropagation()
-              handleDelete()
-            }}
-            className="p-1 h-auto text-red-600 hover:text-red-700 hover:bg-red-50"
-            title="삭제"
-          >
-            <Trash2 className="w-4 h-4" />
-          </Button>
+              {/* Delete */}
+              <Button
+                variant="ghost"
+                size="sm"
+                onClick={(e) => {
+                  e.stopPropagation()
+                  handleDelete()
+                }}
+                className="p-1 h-auto text-red-600 hover:text-red-700 hover:bg-red-50"
+                title="삭제"
+              >
+                <Trash2 className="w-4 h-4" />
+              </Button>
+            </>
+          ) : (
+            // Preview mode - show edit button only
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={(e) => {
+                e.stopPropagation()
+                handleEditFromPreview()
+              }}
+              className="p-1 h-auto text-white hover:bg-blue-700"
+              title="이 섹션 편집하기"
+            >
+              <Settings className="w-4 h-4 mr-1" />
+              <span className="text-xs">편집</span>
+            </Button>
+          )}
         </div>
       )}
 

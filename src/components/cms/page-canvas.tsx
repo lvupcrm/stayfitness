@@ -55,7 +55,6 @@ export function PageCanvas() {
           className={`
             relative min-h-full p-6
             ${isOver && canDrop ? 'bg-blue-50 border-2 border-dashed border-blue-300' : ''}
-            ${isPreview ? 'pointer-events-none' : ''}
           `}
         >
           {blocks.length === 0 ? (
@@ -102,8 +101,8 @@ export function PageCanvas() {
                       relative group
                       ${!isPreview ? 'hover:ring-2 hover:ring-blue-400 hover:ring-opacity-50' : ''}
                     `}
-                    onMouseEnter={() => !isPreview && setHoveredBlockId(block.id)}
-                    onMouseLeave={() => !isPreview && setHoveredBlockId(null)}
+                    onMouseEnter={() => setHoveredBlockId(block.id)}
+                    onMouseLeave={() => setHoveredBlockId(null)}
                   >
                     <BlockRenderer
                       block={block}
