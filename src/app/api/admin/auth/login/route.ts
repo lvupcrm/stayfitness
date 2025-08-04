@@ -8,7 +8,7 @@ import type { AdminLoginRequest, AdminPermission } from '@/types/admin'
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json()
-    console.log('Login request body:', body)
+    console.log('Login request received')
     
     // Validate input
     if (!body.password) {
@@ -62,8 +62,7 @@ export async function POST(request: NextRequest) {
     // Set authentication cookie
     const cookieHeader = `admin_token=${token}; Path=/; HttpOnly; SameSite=Lax; Max-Age=${24 * 60 * 60}`
     
-    // Create response with cookie and set it in header
-    const response = new Response(JSON.stringify({
+    const response = NextResponse.json({
       success: true,
       message: '로그인 성공',
       data: {
@@ -75,13 +74,17 @@ export async function POST(request: NextRequest) {
           permissions: user.permissions
         }
       }
-    }), {
-      headers: {
-        'Content-Type': 'application/json',
-        'Set-Cookie': cookieHeader
-      }
     })
 
+    response.cookies.set('admin_token', token, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === 'production',
+      sameSite: 'lax',
+      path: '/',
+      maxAge: 60 * 60 * 24 // 24 hours
+    })
+
+    console.log('Login successful, cookie set')
     return response
 
   } catch (error) {

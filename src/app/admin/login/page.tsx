@@ -28,7 +28,9 @@ export default function AdminLoginPage() {
     setError(null)
 
     try {
-      console.log('Attempting login with password:', password)
+      setError(null)
+      console.log('Attempting login...')
+      
       const response = await fetch('/api/admin/auth/login', {
         method: 'POST',
         headers: {
@@ -36,16 +38,38 @@ export default function AdminLoginPage() {
         },
         body: JSON.stringify({
           password: password
-        })
+        }),
+        credentials: 'include'
       })
 
       const data = await response.json()
-      console.log('Login response:', data)
-      console.log('Response status:', response.status)
-      console.log('Cookies:', document.cookie)
+      console.log('Login response:', {
+        ok: response.ok,
+        status: response.status,
+        data: data
+      })
 
-      if (response.ok && data.success) {
-        console.log('Login successful, redirecting to /admin')
+      if (!response.ok) {
+        throw new Error(data.error || '서버 오류가 발생했습니다.')
+      }
+
+      if (!data.success) {
+        throw new Error(data.error || '로그인에 실패했습니다.')
+      }
+
+      // Verify authentication before redirect
+      const verifyResponse = await fetch('/api/admin/auth/verify', {
+        credentials: 'include'
+      })
+      
+      const verifyData = await verifyResponse.json()
+      console.log('Verify response:', verifyData)
+      
+      if (!verifyData.success) {
+        throw new Error('인증에 실패했습니다.')
+      }
+
+      console.log('Login successful, redirecting to /admin')
         const urlParams = new URLSearchParams(window.location.search)
         const redirectUrl = urlParams.get('redirect')
         window.location.href = redirectUrl || '/admin'
