@@ -71,10 +71,9 @@ export default function AdminLoginPage() {
         console.log('Login successful, redirecting to /admin')
         const urlParams = new URLSearchParams(window.location.search)
         const redirectUrl = urlParams.get('redirect')
-        // Ensure the token is properly set before redirect
-        await new Promise(resolve => setTimeout(resolve, 100))
         const nextUrl = redirectUrl || '/admin'
-        window.location.replace(nextUrl)
+        // Force a hard reload to ensure cookie is available
+        window.location.href = nextUrl
       } catch (verifyError) {
         console.error('Verification error:', verifyError)
         throw new Error('인증 확인 중 오류가 발생했습니다.')

@@ -56,12 +56,6 @@ export async function POST(request: NextRequest) {
     // await updateLastLogin(user.id)
     // await createAdminSession(user.id, token, ipAddress, userAgent)
 
-    // Set HTTP-only cookie with extended session
-    const cookieStore = cookies()
-    
-    // Set authentication cookie
-    const cookieHeader = `admin_token=${token}; Path=/; HttpOnly; SameSite=Lax; Max-Age=${24 * 60 * 60}`
-    
     const response = NextResponse.json({
       success: true,
       message: '로그인 성공',
@@ -78,11 +72,21 @@ export async function POST(request: NextRequest) {
 
     response.cookies.set('admin_token', token, {
       httpOnly: true,
-      secure: process.env.NODE_ENV === 'production',
+      secure: true,
       sameSite: 'lax',
       path: '/',
       maxAge: 60 * 60 * 24 // 24 hours
     })
+
+    // Double check cookie is set
+    const setCookie = response.headers.get('Set-Cookie')
+    if (!setCookie?.includes('admin_token')) {
+      console.error('Cookie not set properly')
+      return NextResponse.json(
+        { success: false, error: '인증 설정에 실패했습니다.' },
+        { status: 500 }
+      )
+    }
 
     console.log('Login successful, cookie set')
     return response
