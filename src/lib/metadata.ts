@@ -40,7 +40,7 @@ const defaultMetadata = {
     google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION,
     naver: process.env.NEXT_PUBLIC_NAVER_SITE_VERIFICATION
   }
-} as const
+}
 
 export function generateMetadata({
   title,
