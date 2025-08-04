@@ -10,8 +10,8 @@ import type { LeadFormData } from '@/types';
 const schema = yup.object({
   name: yup.string().required('이름을 입력하세요.'),
   phone: yup.string().required('전화번호를 입력하세요.'),
-  program: yup.string().notRequired(),
-});
+  program: yup.string().default(''),
+}).required();
 
 
 const LeadForm: React.FC = () => {
