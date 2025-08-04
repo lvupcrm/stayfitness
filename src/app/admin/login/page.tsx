@@ -34,7 +34,9 @@ export default function AdminLoginPage() {
       const data = await response.json()
 
       if (data.success) {
-        window.location.href = '/admin'
+        const urlParams = new URLSearchParams(window.location.search)
+        const redirectUrl = urlParams.get('redirect')
+        window.location.href = redirectUrl || '/admin'
       } else {
         setError(data.error || '패스워드가 올바르지 않습니다.')
       }
