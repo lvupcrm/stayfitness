@@ -63,10 +63,10 @@ const timeSlots = [
 ]
 
 const workStyles = [
-  { value: 'full-time', label: '정규직', description: '안정적인 풀타임 근무' },
-  { value: 'part-time', label: '파트타임', description: '유연한 시간 근무' },
-  { value: 'freelance', label: '프리랜서', description: '자유로운 계약 근무' },
-  { value: 'consulting', label: '컨설팅', description: '전문성 기반 자문 역할' }
+  { value: 'full-time', label: '정규직', description: '안정적인 풀타임 근무', id: 'full-time' },
+  { value: 'part-time', label: '파트타임', description: '유연한 시간 근무', id: 'part-time' },
+  { value: 'freelance', label: '프리랜서', description: '자유로운 계약 근무', id: 'freelance' },
+  { value: 'consulting', label: '컨설팅', description: '전문성 기반 자문 역할', id: 'consulting' }
 ]
 
 export function TrainerApplication() {
@@ -323,12 +323,18 @@ export function TrainerApplication() {
               <label className="block text-sm font-medium mb-4">선호하는 근무 방식</label>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 {workStyles.map((style) => (
-                  <label key={style.value} className="cursor-pointer">
+                  <label 
+                    key={style.value} 
+                    className="cursor-pointer"
+                    htmlFor={style.id}
+                  >
                     <input
                       type="radio"
+                      id={style.id}
                       {...register('workStyle')}
                       value={style.value}
                       className="sr-only"
+                      aria-describedby={`${style.id}-description`}
                     />
                     <div className={`p-4 rounded-lg border transition-all ${
                       watch('workStyle') === style.value
@@ -336,7 +342,7 @@ export function TrainerApplication() {
                         : 'border-border hover:border-fitness-primary/50'
                     }`}>
                       <div className="font-medium">{style.label}</div>
-                      <div className="text-sm text-muted-foreground mt-1">{style.description}</div>
+                      <div id={`${style.id}-description`} className="text-sm text-muted-foreground mt-1">{style.description}</div>
                     </div>
                   </label>
                 ))}

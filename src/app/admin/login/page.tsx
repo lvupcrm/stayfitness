@@ -94,7 +94,7 @@ export default function AdminLoginPage() {
   }
 
   return (
-    <main role="main" className="min-h-screen bg-gradient-to-br from-slate-900 to-slate-800 p-6 flex items-center justify-center">
+    <main className="min-h-screen bg-gradient-to-br from-slate-900 to-slate-800 p-6 flex items-center justify-center">
       <div className="w-full max-w-md">
         <div className="text-center mb-8">
           <h1 className="text-4xl font-bold mb-2" id="login-title">
@@ -104,7 +104,7 @@ export default function AdminLoginPage() {
           <p className="text-slate-400 text-sm">관리자 로그인</p>
         </div>
 
-        <div className="bg-white/95 rounded-xl p-8 shadow-2xl" role="dialog" aria-labelledby="login-title">
+        <div className="bg-white/95 rounded-xl p-8 shadow-2xl" role="dialog" aria-labelledby="login-title" aria-modal="true">
           <div className="text-center mb-6">
             <h2 className="text-2xl font-bold text-slate-800 mb-2">CMS 접속</h2>
             <p className="text-slate-500 text-sm" id="login-description">홈페이지 콘텐츠를 쉽게 편집하세요</p>
