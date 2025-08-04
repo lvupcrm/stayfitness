@@ -5,15 +5,11 @@ import { useEffect } from 'react'
 
 export default function AdminLoginPage() {
   const [mounted, setMounted] = useState(false)
-  const [initialized, setInitialized] = useState(false)
 
   useEffect(() => {
     setMounted(true)
-    
-    // Reset form state when component mounts
     setError(null)
     setIsLoading(false)
-    setInitialized(true)
   }, [])
   const [error, setError] = useState<string | null>(null)
   const [isLoading, setIsLoading] = useState(false)
@@ -64,7 +60,7 @@ export default function AdminLoginPage() {
     }
   }
 
-  if (!mounted || !initialized) {
+  if (!mounted) {
     return (
       <div className="min-h-screen bg-gradient-to-br from-slate-900 to-slate-800 p-6 flex items-center justify-center">
         <div className="text-center">
@@ -99,6 +95,16 @@ export default function AdminLoginPage() {
           )}
 
           <form onSubmit={handleSubmit}>
+            <div className="sr-only">
+              <label htmlFor="username">아이디</label>
+              <input
+                type="text"
+                id="username"
+                name="username"
+                autoComplete="username"
+                defaultValue="admin@stayfitness.com"
+              />
+            </div>
             <div className="mb-4">
               <label htmlFor="password" className="block text-sm font-medium text-gray-700 mb-2">
                 접속 패스워드
