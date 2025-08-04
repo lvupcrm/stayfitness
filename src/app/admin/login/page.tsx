@@ -55,29 +55,12 @@ export default function AdminLoginPage() {
         throw new Error(errorMessage)
       }
 
-      // Verify authentication before redirect
-      try {
-        const verifyResponse = await fetch('/api/admin/auth/verify', {
-          credentials: 'include'
-        })
-        
-        const verifyData = await verifyResponse.json()
-        console.log('Verify response:', verifyData)
-        
-        if (!verifyData.success) {
-          throw new Error('인증에 실패했습니다.')
-        }
-
-        console.log('Login successful, redirecting to /admin')
-        const urlParams = new URLSearchParams(window.location.search)
-        const redirectUrl = urlParams.get('redirect')
-        const nextUrl = redirectUrl || '/admin'
-        // Force a hard reload to ensure cookie is available
-        window.location.href = nextUrl
-      } catch (verifyError) {
-        console.error('Verification error:', verifyError)
-        throw new Error('인증 확인 중 오류가 발생했습니다.')
-      }
+      // Redirect after successful login
+      console.log('Login successful, redirecting to /admin')
+      const urlParams = new URLSearchParams(window.location.search)
+      const redirectUrl = urlParams.get('redirect')
+      const nextUrl = redirectUrl || '/admin'
+      window.location.href = nextUrl
     } catch (error) {
       console.error('Login error:', error)
       setError('로그인 처리 중 오류가 발생했습니다.')

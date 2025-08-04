@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from 'next/server'
 import { jwtVerify } from 'jose'
 
 const JWT_SECRET = new TextEncoder().encode(
-  process.env.JWT_SECRET || 'stay-fitness-admin-secret-key-2024'
+  process.env.ADMIN_JWT_SECRET || 'stay-fitness-admin-secret-key-change-in-production'
 )
 
 // Admin routes that require authentication
@@ -52,7 +52,7 @@ export async function middleware(request: NextRequest) {
   }
 
   // Get the admin token from cookies
-  const adminToken = request.cookies.get('admin-token')?.value
+  const adminToken = request.cookies.get('admin_token')?.value
 
   if (!adminToken) {
     // Redirect to admin login if no token
@@ -67,7 +67,7 @@ export async function middleware(request: NextRequest) {
   if (!adminUser) {
     // Clear invalid token and redirect to login
     const response = NextResponse.redirect(new URL('/admin/login', request.url))
-    response.cookies.delete('admin-token')
+    response.cookies.delete('admin_token')
     return response
   }
 
@@ -75,7 +75,7 @@ export async function middleware(request: NextRequest) {
   if (adminUser.exp && typeof adminUser.exp === 'number' && Date.now() >= adminUser.exp * 1000) {
     // Clear expired token and redirect to login
     const response = NextResponse.redirect(new URL('/admin/login', request.url))
-    response.cookies.delete('admin-token')
+    response.cookies.delete('admin_token')
     return response
   }
 
