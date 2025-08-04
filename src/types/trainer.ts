@@ -4,10 +4,10 @@ export interface TrainerApplicationData {
   email: string
   experience: string
   specialization: string[]
-  certification?: string
+  certification: string
   introduction: string
   motivation: string
   availableTime: string[]
-  portfolio?: string | null
+  portfolio: string | null
   workStyle: string
 }

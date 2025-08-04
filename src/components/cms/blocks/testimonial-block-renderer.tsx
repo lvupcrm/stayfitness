@@ -3,6 +3,8 @@
 import { Star, MessageSquare } from 'lucide-react'
 import { Input } from '@/components/ui/input'
 import type { ContentBlock } from '@/types/cms'
+import Image from 'next/image'
+import { AspectRatio } from '@/components/ui/aspect-ratio'
 
 interface TestimonialBlockRendererProps {
   block: ContentBlock
@@ -141,11 +143,15 @@ export function TestimonialBlockRenderer({ block, isEditing, onUpdate }: Testimo
               <div className="flex items-start space-x-4">
                 <div className="flex-shrink-0">
                   {testimonialData.avatar ? (
-                    <img
-                      src={testimonialData.avatar}
-                      alt={testimonialData.author || ''}
-                      className="w-12 h-12 rounded-full object-cover"
-                    />
+                    <AspectRatio ratio={1} className="w-12 h-12">
+                      <Image
+                        src={testimonialData.avatar}
+                        alt={testimonialData.author || ''}
+                        fill
+                        className="rounded-full object-cover"
+                        sizes="48px"
+                      />
+                    </AspectRatio>
                   ) : (
                     <div className="w-12 h-12 bg-gray-200 rounded-full flex items-center justify-center">
                       <MessageSquare className="w-6 h-6 text-gray-400" />
@@ -185,11 +191,15 @@ export function TestimonialBlockRenderer({ block, isEditing, onUpdate }: Testimo
         <div className="flex items-start space-x-6">
           <div className="flex-shrink-0">
             {testimonialData.avatar ? (
-              <img
-                src={testimonialData.avatar}
-                alt={testimonialData.author || ''}
-                className="w-16 h-16 rounded-full object-cover"
-              />
+              <AspectRatio ratio={1} className="w-16 h-16">
+                <Image
+                  src={testimonialData.avatar}
+                  alt={testimonialData.author || ''}
+                  fill
+                  className="rounded-full object-cover"
+                  sizes="64px"
+                />
+              </AspectRatio>
             ) : (
               <div className="w-16 h-16 bg-gray-200 rounded-full flex items-center justify-center">
                 <MessageSquare className="w-8 h-8 text-gray-400" />

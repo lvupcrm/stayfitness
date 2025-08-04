@@ -30,14 +30,14 @@ const trainerApplicationSchema = yup.object({
   phone: yup.string().required('연락처를 입력해주세요'),
   email: yup.string().email('올바른 이메일을 입력해주세요').required('이메일을 입력해주세요'),
   experience: yup.string().required('경력을 선택해주세요'),
-  specialization: yup.array().min(1, '전문분야를 최소 1개 선택해주세요'),
-  certification: yup.string(),
+  specialization: yup.array().of(yup.string().required()).min(1, '전문분야를 최소 1개 선택해주세요').required(),
+  certification: yup.string().default(''),
   introduction: yup.string().required('자기소개를 작성해주세요').min(50, '자기소개는 50자 이상 작성해주세요'),
   motivation: yup.string().required('지원동기를 작성해주세요').min(30, '지원동기는 30자 이상 작성해주세요'),
-  availableTime: yup.array().min(1, '가능한 시간대를 최소 1개 선택해주세요'),
-  portfolio: yup.string().url('올바른 URL을 입력해주세요').nullable(),
+  availableTime: yup.array().of(yup.string().required()).min(1, '가능한 시간대를 최소 1개 선택해주세요').required(),
+  portfolio: yup.string().url('올바른 URL을 입력해주세요').nullable().default(null),
   workStyle: yup.string().required('선호하는 근무 방식을 선택해주세요')
-})
+}).required()
 
 const experienceLevels = [
   { value: 'beginner', label: '신입 (1년 미만)', icon: GraduationCap },
