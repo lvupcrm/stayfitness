@@ -51,22 +51,24 @@ export async function GET() {
       'Pragma': 'no-cache'
     })
 
-    return NextResponse.json({
-      success: true,
-      data: {
-        id: user.id,
-        email: user.email,
-        name: user.name,
-        role: user.role,
-        permissions: user.permissions,
-        profileImageUrl: user.profileImageUrl,
-        lastLogin: user.lastLogin,
-        isActive: user.isActive,
-        createdAt: user.createdAt,
-        updatedAt: user.updatedAt
+    return NextResponse.json(
+      {
+        success: true,
+        data: {
+          id: user.id,
+          email: user.email,
+          name: user.name,
+          role: user.role,
+          permissions: user.permissions,
+          profileImageUrl: user.profileImageUrl,
+          lastLogin: user.lastLogin,
+          isActive: user.isActive,
+          createdAt: user.createdAt,
+          updatedAt: user.updatedAt
+        }
       },
       { headers }
-    })
+    )
 
   } catch (error) {
     console.error('Admin token verification error:', error)
