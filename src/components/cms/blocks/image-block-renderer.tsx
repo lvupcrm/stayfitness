@@ -5,6 +5,7 @@ import { Image as ImageIcon } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import type { ContentBlock } from '@/types/cms'
+import { OptimizedCmsImage } from './optimized-cms-image'
 
 interface ImageBlockRendererProps {
   block: ContentBlock
@@ -52,8 +53,9 @@ export function ImageBlockRenderer({ block, isEditing, onUpdate }: ImageBlockRen
           }
         })
       }
-    } catch (error) {
-      console.error('Image upload error:', error)
+    } catch (error: unknown) {
+      const errorMessage = error instanceof Error ? error.message : String(error)
+      console.error('Image upload error:', errorMessage)
       alert('이미지 업로드에 실패했습니다')
     } finally {
       setIsUploading(false)
@@ -115,10 +117,11 @@ export function ImageBlockRenderer({ block, isEditing, onUpdate }: ImageBlockRen
           {imageData.url ? (
             <div className="space-y-3">
               <div className="relative">
-                <img
+                <OptimizedCmsImage
                   src={imageData.url}
                   alt={imageData.alt || ''}
-                  className="w-full max-w-md h-auto rounded-lg border"
+                  className="rounded-lg border"
+                  aspectRatio="wide"
                 />
                 <Button
                   variant="outline"
@@ -136,8 +139,8 @@ export function ImageBlockRenderer({ block, isEditing, onUpdate }: ImageBlockRen
               <div className="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center">
                 <ImageIcon className="w-12 h-12 text-gray-400 mx-auto mb-4" />
                 <div className="space-y-2">
-                  <label className="cursor-pointer">
-                    <span className="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition-colors">
+                  <label className="cursor-pointer" role="button" aria-label="이미지 파일 업로드">
+                    <span className="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition-colors" aria-hidden={isUploading}>
                       {isUploading ? '업로드 중...' : '파일 선택'}
                     </span>
                     <input
@@ -199,14 +202,11 @@ export function ImageBlockRenderer({ block, isEditing, onUpdate }: ImageBlockRen
     <div className="p-6">
       {imageData.url ? (
         <figure className="space-y-2">
-          <img
+          <OptimizedCmsImage
             src={imageData.url}
             alt={imageData.alt || ''}
-            className="w-full h-auto rounded-lg shadow-sm"
-            style={{
-              maxWidth: imageData.width || 'none',
-              maxHeight: imageData.height || 'none'
-            }}
+            className="rounded-lg shadow-sm"
+            aspectRatio="wide"
           />
           {imageData.caption && (
             <figcaption className="text-sm text-gray-600 text-center italic">

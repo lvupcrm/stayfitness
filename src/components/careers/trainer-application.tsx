@@ -1,6 +1,9 @@
 'use client'
 
 import { useState } from 'react'
+import type { TrainerApplicationData } from '@/types/trainer'
+// @ts-expect-error - Define custom colors in tailwind.config.js
+import type {} from 'tailwindcss/types'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Textarea } from '@/components/ui/textarea'
@@ -35,8 +38,6 @@ const trainerApplicationSchema = yup.object({
   portfolio: yup.string().url('올바른 URL을 입력해주세요').nullable(),
   workStyle: yup.string().required('선호하는 근무 방식을 선택해주세요')
 })
-
-type TrainerApplicationData = yup.InferType<typeof trainerApplicationSchema>
 
 const experienceLevels = [
   { value: 'beginner', label: '신입 (1년 미만)', icon: GraduationCap },
@@ -249,7 +250,7 @@ export function TrainerApplication() {
                 {experienceLevels.map((level) => {
                   const Icon = level.icon
                   return (
-                    <label key={level.value} className="cursor-pointer">
+                    <label key={level.value} className="cursor-pointer" role="radio" aria-checked={watch('experience') === level.value}>
                       <input
                         type="radio"
                         {...register('experience')}
@@ -287,6 +288,8 @@ export function TrainerApplication() {
                         : 'hover:bg-fitness-primary/10'
                     }`}
                     onClick={() => handleSpecializationToggle(spec.id)}
+                    role="checkbox"
+                    aria-checked={selectedSpecializations.includes(spec.id)}
                   >
                     {spec.label}
                   </Badge>
@@ -357,6 +360,8 @@ export function TrainerApplication() {
                         : 'hover:bg-fitness-secondary/10'
                     }`}
                     onClick={() => handleTimeToggle(time)}
+                    role="checkbox"
+                    aria-checked={selectedTimes.includes(time)}
                   >
                     <Clock className="w-4 h-4 mr-2" />
                     {time}
