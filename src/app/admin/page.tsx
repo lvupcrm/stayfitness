@@ -7,13 +7,8 @@ import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { ScrollArea } from '@/components/ui/scroll-area'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
-import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs'
 import {
-  ChevronDown,
-  PencilLine,
   Image as ImageIcon,
-  Type,
-  Square,
   Grid2X2,
   Monitor,
   Save,
@@ -21,7 +16,6 @@ import {
 } from 'lucide-react'
 
 export default function AdminDashboard() {
-  const [activeSection, setActiveSection] = useState('hero')
   const [previewMode, setPreviewMode] = useState(false)
 
   return (

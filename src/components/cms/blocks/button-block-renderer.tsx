@@ -15,7 +15,7 @@ export function ButtonBlockRenderer({ block, isEditing, onUpdate }: ButtonBlockR
   const buttonData = block.data.button || {
     text: '버튼 텍스트',
     url: '#',
-    variant: 'primary' as const,
+    variant: 'default' as const,
     size: 'md' as const,
     external: false
   }
@@ -27,7 +27,7 @@ export function ButtonBlockRenderer({ block, isEditing, onUpdate }: ButtonBlockR
         button: {
           text,
           url: buttonData.url || '#',
-          variant: buttonData.variant || 'primary',
+          variant: buttonData.variant || 'default',
           size: buttonData.size || 'md',
           external: buttonData.external || false
         }
@@ -42,7 +42,7 @@ export function ButtonBlockRenderer({ block, isEditing, onUpdate }: ButtonBlockR
         button: {
           text: buttonData.text || '버튼 텍스트',
           url,
-          variant: buttonData.variant || 'primary',
+          variant: buttonData.variant || 'default',
           size: buttonData.size || 'md',
           external: buttonData.external || false
         }
@@ -50,7 +50,7 @@ export function ButtonBlockRenderer({ block, isEditing, onUpdate }: ButtonBlockR
     })
   }
 
-  const handleVariantChange = (variant: 'primary' | 'secondary' | 'outline') => {
+  const handleVariantChange = (variant: 'default' | 'secondary' | 'outline') => {
     onUpdate({
       data: {
         ...block.data,
@@ -72,7 +72,7 @@ export function ButtonBlockRenderer({ block, isEditing, onUpdate }: ButtonBlockR
         button: {
           text: buttonData.text || '버튼 텍스트',
           url: buttonData.url || '#',
-          variant: buttonData.variant || 'primary',
+          variant: buttonData.variant || 'default',
           size,
           external: buttonData.external || false
         }
@@ -87,7 +87,7 @@ export function ButtonBlockRenderer({ block, isEditing, onUpdate }: ButtonBlockR
         button: {
           text: buttonData.text || '버튼 텍스트',
           url: buttonData.url || '#',
-          variant: buttonData.variant || 'primary',
+          variant: buttonData.variant || 'default',
           size: buttonData.size || 'md',
           external
         }
@@ -131,16 +131,16 @@ export function ButtonBlockRenderer({ block, isEditing, onUpdate }: ButtonBlockR
           </label>
           <div className="flex space-x-2">
             {[
-              { value: 'primary', label: '기본' },
+              { value: 'default', label: '기본' },
               { value: 'secondary', label: '보조' },
               { value: 'outline', label: '외곽선' }
             ].map((variant) => (
               <button
                 key={variant.value}
-                onClick={() => handleVariantChange(variant.value as 'primary' | 'secondary' | 'outline')}
+                onClick={() => handleVariantChange(variant.value as 'default' | 'secondary' | 'outline')}
                 className={`
                   px-3 py-1 text-sm rounded border
-                  ${(buttonData.variant || 'primary') === variant.value
+                  ${(buttonData.variant || 'default') === variant.value
                     ? 'bg-blue-100 border-blue-300 text-blue-700'
                     : 'bg-white border-gray-300 text-gray-700 hover:bg-gray-50'
                   }

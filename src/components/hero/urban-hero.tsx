@@ -63,8 +63,8 @@ export default function UrbanHero() {
               transition={{ duration: 0.8, delay: 0.9 }}
             >
               <Button 
-                variant="accent" 
-                size="xl"
+                variant="default" 
+                size="lg"
                 asChild
                 className="group"
               >
@@ -76,7 +76,7 @@ export default function UrbanHero() {
               
               <Button 
                 variant="outline" 
-                size="xl"
+                size="lg"
                 asChild
                 className="bg-white/10 backdrop-blur-sm border-white/20 text-white hover:bg-white/20"
               >

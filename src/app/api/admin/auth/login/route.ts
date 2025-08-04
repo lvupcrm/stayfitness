@@ -1,9 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { cookies } from 'next/headers'
 import { 
   generateAdminToken
 } from '@/lib/admin/auth'
-import type { AdminLoginRequest, AdminPermission } from '@/types/admin'
+import type { AdminPermission } from '@/types/admin'
 
 export async function POST(request: NextRequest) {
   try {
@@ -50,7 +49,6 @@ export async function POST(request: NextRequest) {
 
     // Generate JWT token
     const token = await generateAdminToken(user)
-    const expiresAt = new Date(Date.now() + 24 * 60 * 60 * 1000) // 24 hours for convenience
 
     // Skip database operations for simple auth
     // await updateLastLogin(user.id)

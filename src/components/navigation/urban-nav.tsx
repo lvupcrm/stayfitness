@@ -119,7 +119,7 @@ export function UrbanNav() {
           {/* CTA Buttons */}
           <div className="hidden lg:flex items-center">
             <Button 
-              variant="primary"
+              variant="default"
               size="lg"
               className="stay-body-medium text-[15px] px-6 h-11 rounded-full hover:scale-105 transition-all duration-300"
               asChild
@@ -198,7 +198,7 @@ export function UrbanNav() {
                   {/* Mobile CTA */}
                   <div className="px-6 py-6 border-t border-slate-200">
                     <Button 
-                      variant="primary"
+                      variant="default"
                       size="lg"
                       className="w-full h-12 rounded-full text-base stay-body-medium"
                       asChild

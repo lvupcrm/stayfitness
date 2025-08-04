@@ -40,7 +40,7 @@ export interface ContentBlockData extends Record<string, unknown> {
   button?: {
     text: string
     url: string
-    variant: 'primary' | 'secondary' | 'outline'
+    variant: 'default' | 'secondary' | 'outline'
     size: 'sm' | 'md' | 'lg'
     external?: boolean
   }

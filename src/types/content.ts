@@ -24,7 +24,7 @@ export interface ContentBlock {
     height?: string
     padding?: string
     margin?: string
-    [key: string]: any
+    [key: string]: string | number | boolean | undefined
   }
   parentId: string // section or block id
   order: number

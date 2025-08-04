@@ -1,8 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server'
-import type { PageContent, PageSection, ContentBlock } from '@/types/content'
+import type { PageContent } from '@/types/content'
 
 // Mock data - 실제로는 데이터베이스에서 관리
-let pageContent: PageContent = {
+const pageContent: PageContent = {
   id: 'home-page',
   title: 'STAY FITNESS',
   description: '건강한 라이프스타일을 위한 최고의 선택',
