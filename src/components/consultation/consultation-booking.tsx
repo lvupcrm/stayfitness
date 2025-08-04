@@ -17,8 +17,8 @@ const consultationSchema = yup.object({
   email: yup.string().email('올바른 이메일을 입력해주세요').required('이메일을 입력해주세요'),
   consultationType: yup.string().required('상담 유형을 선택해주세요'),
   preferredTime: yup.string().required('희망 시간을 선택해주세요'),
-  message: yup.string().max(500, '메시지는 500자 이내로 입력해주세요')
-})
+  message: yup.string().max(500, '메시지는 500자 이내로 입력해주세요').default('')
+}).required()
 
 type ConsultationFormData = yup.InferType<typeof consultationSchema>
 
