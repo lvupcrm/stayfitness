@@ -1,7 +1,6 @@
 'use client'
 
 import { useState, useEffect, useCallback } from 'react'
-import { useRouter } from 'next/navigation'
 import type { AdminUser, AdminLoginRequest, AdminPermission } from '@/types/admin'
 
 interface UseAdminAuthReturn {
@@ -17,7 +16,6 @@ interface UseAdminAuthReturn {
 export function useAdminAuth(): UseAdminAuthReturn {
   const [user, setUser] = useState<AdminUser | null>(null)
   const [isLoading, setIsLoading] = useState(true)
-  const router = useRouter()
 
   const hasPermission = useCallback((permission: string): boolean => {
     if (!user) return false
