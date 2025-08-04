@@ -1,10 +1,25 @@
 import { createClient } from '@supabase/supabase-js';
 
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || 'https://placeholder.supabase.co';
-const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || 'placeholder-key';
+const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
 
-if (process.env.NODE_ENV === 'production' && (!process.env.NEXT_PUBLIC_SUPABASE_URL || !process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY)) {
-  console.warn('Supabase 환경변수가 누락되었습니다. .env.local 파일을 확인하세요.');
+// Check if Supabase is properly configured
+const isSupabaseConfigured = supabaseUrl && 
+  supabaseAnonKey && 
+  supabaseUrl !== 'your_supabase_url_here' &&
+  supabaseAnonKey !== 'your_supabase_anon_key_here';
+
+// Only create client if properly configured
+export const supabase = isSupabaseConfigured 
+  ? createClient(supabaseUrl, supabaseAnonKey)
+  : null;
+
+// Warning for development
+if (!isSupabaseConfigured && process.env.NODE_ENV === 'development') {
+  console.log('ℹ️ Supabase not configured - using mock data for development');
 }
 
-export const supabase = createClient(supabaseUrl, supabaseAnonKey); 
+// Error for production
+if (!isSupabaseConfigured && process.env.NODE_ENV === 'production') {
+  console.error('❌ Supabase configuration required for production');
+} 

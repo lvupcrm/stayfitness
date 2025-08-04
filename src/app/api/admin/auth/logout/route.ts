@@ -8,23 +8,31 @@ export async function POST() {
     const token = cookieStore.get('admin_token')?.value
 
     if (token) {
-      // Invalidate session in database
-      await invalidateAdminSession(token)
+      // Check if Supabase is available
+      const hasSupabase = process.env.NEXT_PUBLIC_SUPABASE_URL && 
+                          process.env.NEXT_PUBLIC_SUPABASE_URL !== 'your_supabase_url_here'
+      
+      if (hasSupabase) {
+        // Invalidate session in database
+        await invalidateAdminSession(token)
+      }
     }
 
     // Clear the cookie
-    cookieStore.set('admin_token', '', {
+    const response = NextResponse.json({
+      success: true,
+      message: '로그아웃 되었습니다.'
+    })
+
+    response.cookies.set('admin_token', '', {
       httpOnly: true,
       secure: process.env.NODE_ENV === 'production',
       sameSite: 'lax',
       maxAge: 0, // Expire immediately
-      path: '/admin'
+      path: '/'
     })
 
-    return NextResponse.json({
-      success: true,
-      message: '로그아웃 되었습니다.'
-    })
+    return response
 
   } catch (error) {
     console.error('Admin logout error:', error)

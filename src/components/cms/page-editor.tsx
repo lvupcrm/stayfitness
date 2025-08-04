@@ -2,7 +2,7 @@
 
 import { useEffect, useState, useCallback } from 'react'
 import { useRouter } from 'next/navigation'
-import { toast } from 'react-toastify'
+import { toast } from '@/lib/toast'
 import { DndProvider } from 'react-dnd'
 import { HTML5Backend } from 'react-dnd-html5-backend'
 import { PageEditorSidebar } from './page-editor-sidebar'
@@ -27,28 +27,46 @@ export function PageEditor({ mode, slug }: PageEditorProps) {
     setCurrentPage,
     isPreview,
     isDirty,
-    resetEditor
+    resetEditor,
+    loadInitialData
   } = useCMSStore()
 
   const loadPage = useCallback(async (pageSlug: string) => {
     try {
       setIsLoading(true)
-      const response = await fetch(`/api/cms/pages/${pageSlug}`)
       
-      if (!response.ok) {
-        if (response.status === 404) {
-          toast.error('페이지를 찾을 수 없습니다')
-          router.push('/admin/cms/pages')
-          return
-        }
-        throw new Error('Failed to load page')
-      }
+      // Check if Supabase is available
+      const hasSupabase = process.env.NEXT_PUBLIC_SUPABASE_URL && 
+                          process.env.NEXT_PUBLIC_SUPABASE_URL !== 'your_supabase_url_here'
 
-      const result = await response.json()
-      if (result.success) {
-        setCurrentPage(result.data)
-        setPageTitle(result.data.title)
-        setPageSlug(result.data.slug)
+      if (hasSupabase) {
+        // Use real API
+        const response = await fetch(`/api/cms/pages/${pageSlug}`)
+        
+        if (!response.ok) {
+          if (response.status === 404) {
+            toast.error('페이지를 찾을 수 없습니다')
+            router.push('/admin/cms/pages')
+            return
+          }
+          throw new Error('Failed to load page')
+        }
+
+        const result = await response.json()
+        if (result.success) {
+          setCurrentPage(result.data)
+          setPageTitle(result.data.title)
+          setPageSlug(result.data.slug)
+        }
+      } else {
+        // Use mock data for development
+        await loadInitialData()
+        const { currentPage } = useCMSStore.getState()
+        if (currentPage) {
+          setPageTitle(currentPage.title)
+          setPageSlug(currentPage.slug)
+        }
+        console.log('✅ Mock page data loaded in editor')
       }
     } catch (error) {
       console.error('Error loading page:', error)
@@ -56,7 +74,7 @@ export function PageEditor({ mode, slug }: PageEditorProps) {
     } finally {
       setIsLoading(false)
     }
-  }, [router, setCurrentPage, setPageTitle, setPageSlug])
+  }, [router, setCurrentPage, setPageTitle, setPageSlug, loadInitialData])
 
   const createNewPage = useCallback(() => {
     const newPage: Page = {

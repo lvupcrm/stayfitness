@@ -16,27 +16,39 @@ export async function POST(request: NextRequest) {
     }
 
     // 상담 예약 데이터 저장
-    const { error } = await supabase
-      .from('consultations')
-      .insert([
-        {
-          name,
-          phone,
-          email,
-          consultation_type: consultationType,
-          preferred_time: preferredTime,
-          message: message || '',
-          status: 'pending',
-          created_at: createdAt
-        }
-      ])
+    if (supabase) {
+      const { error } = await supabase
+        .from('consultations')
+        .insert([
+          {
+            name,
+            phone,
+            email,
+            consultation_type: consultationType,
+            preferred_time: preferredTime,
+            message: message || '',
+            status: 'pending',
+            created_at: createdAt
+          }
+        ])
 
-    if (error) {
-      console.error('Supabase error:', error)
-      return NextResponse.json(
-        { error: '상담 예약 저장 중 오류가 발생했습니다.' },
-        { status: 500 }
-      )
+      if (error) {
+        console.error('Supabase error:', error)
+        return NextResponse.json(
+          { error: '상담 예약 저장 중 오류가 발생했습니다.' },
+          { status: 500 }
+        )
+      }
+    } else {
+      // Mock save for development
+      console.log('Mock consultation save:', {
+        name,
+        phone,
+        email,
+        consultationType,
+        preferredTime,
+        message
+      })
     }
 
     // 성공 응답과 함께 추가 정보 제공

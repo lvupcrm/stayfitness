@@ -1,6 +1,7 @@
 import { Suspense } from 'react'
 import { CMSSidebar } from '@/components/cms/cms-sidebar'
 import { CMSHeader } from '@/components/cms/cms-header'
+import { CMSInitializer } from '@/components/cms/cms-initializer'
 
 export default function CMSLayout({
   children,
@@ -9,6 +10,7 @@ export default function CMSLayout({
 }) {
   return (
     <div className="min-h-screen bg-gray-50">
+      <CMSInitializer />
       <CMSHeader />
       <div className="flex">
         <CMSSidebar />

@@ -19,6 +19,7 @@ interface CMSStore extends EditorState {
   isDeleting: boolean
   
   // Actions
+  loadInitialData: () => Promise<void>
   setCurrentPage: (page: Page | null) => void
   setPages: (pages: Page[]) => void
   setSelectedBlock: (blockId: string | null) => void
@@ -81,6 +82,37 @@ export const useCMSStore = create<CMSStore>()(
         set({ currentPage: page })
         if (page) {
           get().addToHistory(page)
+        }
+      },
+
+      // Load initial data
+      loadInitialData: async () => {
+        const { currentPage } = get()
+        if (currentPage) return // Already loaded
+
+        set({ isLoading: true })
+        
+        try {
+          // Check if Supabase is available
+          const hasSupabase = process.env.NEXT_PUBLIC_SUPABASE_URL && 
+                              process.env.NEXT_PUBLIC_SUPABASE_URL !== 'your_supabase_url_here'
+
+          if (!hasSupabase) {
+            // Use mock data for development
+            const { mockPageData, mockPagesList } = await import('@/lib/mock-cms-data')
+            
+            set({ 
+              currentPage: mockPageData,
+              pages: mockPagesList,
+              isLoading: false 
+            })
+            
+            get().addToHistory(mockPageData)
+            console.log('✅ Mock data loaded successfully')
+          }
+        } catch (error) {
+          console.error('Error loading initial data:', error)
+          set({ isLoading: false })
         }
       },
 
@@ -226,32 +258,50 @@ export const useCMSStore = create<CMSStore>()(
         set({ isSaving: true })
 
         try {
-          const response = await fetch(`/api/cms/pages/${currentPage.slug}`, {
-            method: 'PUT',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-              title: currentPage.title,
-              description: currentPage.description,
-              meta_title: currentPage.meta_title,
-              meta_description: currentPage.meta_description,
-              meta_keywords: currentPage.meta_keywords,
-              status: currentPage.status,
-              blocks: currentPage.blocks
-            }),
-          })
+          // Check if Supabase is available
+          const hasSupabase = process.env.NEXT_PUBLIC_SUPABASE_URL && 
+                              process.env.NEXT_PUBLIC_SUPABASE_URL !== 'your_supabase_url_here'
 
-          if (!response.ok) {
-            throw new Error('Failed to save page')
+          if (hasSupabase) {
+            // Use real API
+            const response = await fetch(`/api/cms/pages/${currentPage.slug}`, {
+              method: 'PUT',
+              headers: {
+                'Content-Type': 'application/json',
+              },
+              body: JSON.stringify({
+                title: currentPage.title,
+                description: currentPage.description,
+                meta_title: currentPage.meta_title,
+                meta_description: currentPage.meta_description,
+                meta_keywords: currentPage.meta_keywords,
+                status: currentPage.status,
+                blocks: currentPage.blocks
+              }),
+            })
+
+            if (!response.ok) {
+              throw new Error('Failed to save page')
+            }
+
+            const result = await response.json()
+            
+            set({ 
+              isDirty: false,
+              currentPage: { ...currentPage, ...result.data }
+            })
+          } else {
+            // Use mock save for development
+            const { mockSavePage } = await import('@/lib/mock-cms-data')
+            const savedPage = await mockSavePage(currentPage)
+            
+            set({ 
+              isDirty: false,
+              currentPage: savedPage
+            })
+            
+            console.log('✅ Mock save successful:', savedPage.title)
           }
-
-          const result = await response.json()
-          
-          set({ 
-            isDirty: false,
-            currentPage: { ...currentPage, ...result.data }
-          })
 
         } catch (error) {
           console.error('Error saving page:', error)

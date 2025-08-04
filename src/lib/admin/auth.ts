@@ -66,6 +66,12 @@ export async function verifyAdminToken(token: string): Promise<AdminUser | null>
  */
 export async function authenticateAdmin(credentials: AdminLoginRequest): Promise<AdminUser | null> {
   try {
+    // If no Supabase connection, skip database authentication
+    if (!supabase) {
+      console.log('ℹ️ Supabase not available - skipping database authentication')
+      return null
+    }
+
     const passwordHash = hashPassword(credentials.password)
     
     const { data, error } = await supabase
@@ -107,6 +113,8 @@ export async function authenticateAdmin(credentials: AdminLoginRequest): Promise
  */
 export async function updateLastLogin(userId: string): Promise<void> {
   try {
+    if (!supabase) return
+    
     await supabase
       .from('admin_users')
       .update({ last_login: new Date().toISOString() })
@@ -126,6 +134,8 @@ export async function createAdminSession(
   userAgent?: string
 ): Promise<void> {
   try {
+    if (!supabase) return
+    
     const tokenHash = createHash('sha256').update(token).digest('hex')
     const expiresAt = new Date(Date.now() + 15 * 60 * 1000) // 15 minutes
     
@@ -149,6 +159,8 @@ export async function createAdminSession(
  */
 export async function invalidateAdminSession(token: string): Promise<void> {
   try {
+    if (!supabase) return
+    
     const tokenHash = createHash('sha256').update(token).digest('hex')
     
     await supabase
@@ -165,6 +177,8 @@ export async function invalidateAdminSession(token: string): Promise<void> {
  */
 export async function isAdminSessionValid(token: string): Promise<boolean> {
   try {
+    if (!supabase) return false
+    
     const tokenHash = createHash('sha256').update(token).digest('hex')
     
     const { data, error } = await supabase
@@ -191,6 +205,8 @@ export async function isAdminSessionValid(token: string): Promise<boolean> {
  */
 export async function getAdminUser(userId: string): Promise<AdminUser | null> {
   try {
+    if (!supabase) return null
+    
     const { data, error } = await supabase
       .from('admin_users')
       .select('*')
@@ -227,6 +243,11 @@ export async function getAdminUser(userId: string): Promise<AdminUser | null> {
  */
 export async function createDefaultAdmin(): Promise<void> {
   try {
+    if (!supabase) {
+      console.log('ℹ️ Supabase not available - skipping default admin creation')
+      return
+    }
+    
     const defaultEmail = 'admin@stayfitness.com'
     const defaultPassword = 'StayFitness2024!'
     const passwordHash = hashPassword(defaultPassword)

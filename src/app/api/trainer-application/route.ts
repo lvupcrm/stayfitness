@@ -29,33 +29,43 @@ export async function POST(request: NextRequest) {
     }
 
     // 트레이너 지원서 데이터 저장
-    const { error } = await supabase
-      .from('trainer_applications')
-      .insert([
-        {
-          name,
-          phone,
-          email,
-          experience_level: experience,
-          specializations: JSON.stringify(specialization),
-          certifications: certification || '',
-          introduction,
-          motivation,
-          available_times: JSON.stringify(availableTime),
-          portfolio_url: portfolio || '',
-          work_style: workStyle,
-          status: 'pending',
-          application_type: 'direct', // direct or talent_pool
-          created_at: createdAt
-        }
-      ])
+    if (supabase) {
+      const { error } = await supabase
+        .from('trainer_applications')
+        .insert([
+          {
+            name,
+            phone,
+            email,
+            experience_level: experience,
+            specializations: JSON.stringify(specialization),
+            certifications: certification || '',
+            introduction,
+            motivation,
+            available_times: JSON.stringify(availableTime),
+            portfolio_url: portfolio || '',
+            work_style: workStyle,
+            status: 'pending',
+            application_type: 'direct', // direct or talent_pool
+            created_at: createdAt
+          }
+        ])
 
-    if (error) {
-      console.error('Supabase error:', error)
-      return NextResponse.json(
-        { error: '트레이너 지원서 저장 중 오류가 발생했습니다.' },
-        { status: 500 }
-      )
+      if (error) {
+        console.error('Supabase error:', error)
+        return NextResponse.json(
+          { error: '트레이너 지원서 저장 중 오류가 발생했습니다.' },
+          { status: 500 }
+        )
+      }
+    } else {
+      // Mock save for development
+      console.log('Mock trainer application save:', {
+        name,
+        experience,
+        specialization,
+        workStyle
+      })
     }
 
     // 성공 응답
@@ -91,31 +101,36 @@ export async function PUT(request: NextRequest) {
     const { name, phone, email, interests, message } = body
 
     // Talent Pool 데이터 저장
-    const { error } = await supabase
-      .from('trainer_applications')
-      .insert([
-        {
-          name,
-          phone,
-          email,
-          introduction: message || '인재풀 등록',
-          motivation: interests || '향후 기회를 위한 등록',
-          experience_level: 'not_specified',
-          specializations: JSON.stringify([]),
-          available_times: JSON.stringify([]),
-          work_style: 'flexible',
-          status: 'talent_pool',
-          application_type: 'talent_pool',
-          created_at: new Date().toISOString()
-        }
-      ])
+    if (supabase) {
+      const { error } = await supabase
+        .from('trainer_applications')
+        .insert([
+          {
+            name,
+            phone,
+            email,
+            introduction: message || '인재풀 등록',
+            motivation: interests || '향후 기회를 위한 등록',
+            experience_level: 'not_specified',
+            specializations: JSON.stringify([]),
+            available_times: JSON.stringify([]),
+            work_style: 'flexible',
+            status: 'talent_pool',
+            application_type: 'talent_pool',
+            created_at: new Date().toISOString()
+          }
+        ])
 
-    if (error) {
-      console.error('Talent Pool error:', error)
-      return NextResponse.json(
-        { error: '인재풀 등록 중 오류가 발생했습니다.' },
-        { status: 500 }
-      )
+      if (error) {
+        console.error('Talent Pool error:', error)
+        return NextResponse.json(
+          { error: '인재풀 등록 중 오류가 발생했습니다.' },
+          { status: 500 }
+        )
+      }
+    } else {
+      // Mock save for development
+      console.log('Mock talent pool save:', { name, phone, email, interests, message })
     }
 
     return NextResponse.json({

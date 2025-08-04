@@ -9,9 +9,14 @@ export async function POST(req: NextRequest) {
     }
 
     // Supabase에 lead 데이터 저장
-    const { error } = await supabase.from('lead').insert([{ name, phone, program }]);
-    if (error) {
-      return NextResponse.json({ error: 'DB 저장 중 오류가 발생했습니다.' }, { status: 500 });
+    if (supabase) {
+      const { error } = await supabase.from('lead').insert([{ name, phone, program }]);
+      if (error) {
+        return NextResponse.json({ error: 'DB 저장 중 오류가 발생했습니다.' }, { status: 500 });
+      }
+    } else {
+      // Mock save for development
+      console.log('Mock lead save:', { name, phone, program });
     }
 
     // Slack Webhook 호출

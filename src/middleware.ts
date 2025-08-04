@@ -8,6 +8,7 @@ const JWT_SECRET = new TextEncoder().encode(
 // Admin routes that require authentication
 const ADMIN_ROUTES = [
   '/admin',
+  '/admin/cms',
   '/admin/consultations',
   '/admin/trainers',
   '/admin/users',
