@@ -45,6 +45,12 @@ export async function GET() {
       updatedAt: new Date().toISOString()
     }
 
+    // Set response headers for no-cache to prevent stale auth state
+    const headers = new Headers({
+      'Cache-Control': 'no-store, no-cache, must-revalidate',
+      'Pragma': 'no-cache'
+    })
+
     return NextResponse.json({
       success: true,
       data: {
@@ -58,7 +64,8 @@ export async function GET() {
         isActive: user.isActive,
         createdAt: user.createdAt,
         updatedAt: user.updatedAt
-      }
+      },
+      { headers }
     })
 
   } catch (error) {
