@@ -5,9 +5,15 @@ import { useEffect } from 'react'
 
 export default function AdminLoginPage() {
   const [mounted, setMounted] = useState(false)
+  const [initialized, setInitialized] = useState(false)
 
   useEffect(() => {
     setMounted(true)
+    
+    // Reset form state when component mounts
+    setError(null)
+    setIsLoading(false)
+    setInitialized(true)
   }, [])
   const [error, setError] = useState<string | null>(null)
   const [isLoading, setIsLoading] = useState(false)
@@ -57,30 +63,37 @@ export default function AdminLoginPage() {
     }
   }
 
-  if (!mounted) {
-    return null
+  if (!mounted || !initialized) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-slate-900 to-slate-800 p-6 flex items-center justify-center">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto mb-4"></div>
+          <p className="text-slate-400">로딩 중...</p>
+        </div>
+      </div>
+    )
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 to-slate-800 p-6 flex items-center justify-center">
+    <main role="main" className="min-h-screen bg-gradient-to-br from-slate-900 to-slate-800 p-6 flex items-center justify-center">
       <div className="w-full max-w-md">
         <div className="text-center mb-8">
-          <h1 className="text-4xl font-bold mb-2">
+          <h1 className="text-4xl font-bold mb-2" id="login-title">
             <span className="bg-gradient-to-r from-blue-500 to-purple-500 bg-clip-text text-transparent">STAY</span>
             <span className="text-slate-300">FITNESS</span>
           </h1>
           <p className="text-slate-400 text-sm">관리자 로그인</p>
         </div>
 
-        <div className="bg-white/95 rounded-xl p-8 shadow-2xl">
+        <div className="bg-white/95 rounded-xl p-8 shadow-2xl" role="dialog" aria-labelledby="login-title">
           <div className="text-center mb-6">
             <h2 className="text-2xl font-bold text-slate-800 mb-2">CMS 접속</h2>
-            <p className="text-slate-500 text-sm">홈페이지 콘텐츠를 쉽게 편집하세요</p>
+            <p className="text-slate-500 text-sm" id="login-description">홈페이지 콘텐츠를 쉽게 편집하세요</p>
           </div>
 
           {error && (
-            <div className="flex items-center gap-2 p-3 bg-red-50 border border-red-200 rounded-lg mb-4 text-red-600 text-sm">
-              ⚠️ {error}
+            <div className="flex items-center gap-2 p-3 bg-red-50 border border-red-200 rounded-lg mb-4 text-red-600 text-sm" role="alert">
+              <span aria-hidden="true">⚠️</span> {error}
             </div>
           )}
 
@@ -95,9 +108,14 @@ export default function AdminLoginPage() {
                 name="password"
                 placeholder="패스워드를 입력하세요"
                 className="w-full px-4 py-3 border-2 border-slate-200 rounded-lg focus:outline-none focus:border-blue-500"
+                autoComplete="current-password"
                 autoFocus
                 required
+                aria-describedby="password-description"
               />
+              <div id="password-description" className="sr-only">
+                관리자 계정 접속을 위한 패스워드를 입력하세요
+              </div>
             </div>
 
             <button
