@@ -49,32 +49,30 @@ export default function AdminLoginPage() {
         data: data
       })
 
-      if (!response.ok) {
-        throw new Error(data.error || '서버 오류가 발생했습니다.')
-      }
-
-      if (!data.success) {
+      if (!response.ok || !data.success) {
         throw new Error(data.error || '로그인에 실패했습니다.')
       }
 
       // Verify authentication before redirect
-      const verifyResponse = await fetch('/api/admin/auth/verify', {
-        credentials: 'include'
-      })
-      
-      const verifyData = await verifyResponse.json()
-      console.log('Verify response:', verifyData)
-      
-      if (!verifyData.success) {
-        throw new Error('인증에 실패했습니다.')
-      }
+      try {
+        const verifyResponse = await fetch('/api/admin/auth/verify', {
+          credentials: 'include'
+        })
+        
+        const verifyData = await verifyResponse.json()
+        console.log('Verify response:', verifyData)
+        
+        if (!verifyData.success) {
+          throw new Error('인증에 실패했습니다.')
+        }
 
-      console.log('Login successful, redirecting to /admin')
+        console.log('Login successful, redirecting to /admin')
         const urlParams = new URLSearchParams(window.location.search)
         const redirectUrl = urlParams.get('redirect')
         window.location.href = redirectUrl || '/admin'
-      } else {
-        setError(data.error || '패스워드가 올바르지 않습니다.')
+      } catch (verifyError) {
+        console.error('Verification error:', verifyError)
+        throw new Error('인증 확인 중 오류가 발생했습니다.')
       }
     } catch (error) {
       console.error('Login error:', error)
