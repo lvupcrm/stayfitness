@@ -57,16 +57,13 @@ export async function POST(request: NextRequest) {
     // await createAdminSession(user.id, token, ipAddress, userAgent)
 
     // Set HTTP-only cookie with extended session
-    const cookieStore = await cookies()
-    cookieStore.set('admin_token', token, {
-      httpOnly: true,
-      secure: process.env.NODE_ENV === 'production',
-      sameSite: 'lax',
-      maxAge: 24 * 60 * 60, // 24 hours
-      path: '/'
-    })
-
-    return NextResponse.json({
+    const cookieStore = cookies()
+    
+    // Set authentication cookie
+    const cookieHeader = `admin_token=${token}; Path=/; HttpOnly; SameSite=Lax; Max-Age=${24 * 60 * 60}`
+    
+    // Create response with cookie
+    const response = NextResponse.json({
       success: true,
       message: '로그인 성공',
       data: {
@@ -85,6 +82,11 @@ export async function POST(request: NextRequest) {
         expiresAt: expiresAt.toISOString()
       }
     })
+
+    // Append cookie to response headers
+    response.headers.set('Set-Cookie', cookieHeader)
+
+    return response
 
   } catch (error) {
     console.error('Admin login error:', error)

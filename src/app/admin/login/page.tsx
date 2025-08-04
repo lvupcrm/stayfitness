@@ -33,6 +33,8 @@ export default function AdminLoginPage() {
 
       const data = await response.json()
       console.log('Login response:', data)
+      console.log('Response status:', response.status)
+      console.log('Cookies:', document.cookie)
 
       if (data.success) {
         const urlParams = new URLSearchParams(window.location.search)
