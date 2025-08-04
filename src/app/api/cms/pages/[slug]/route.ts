@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { createClient } from '@/lib/supabase/server'
+import { mockPageData, mockPagesList } from '@/lib/mock-cms-data'
 import type { ContentBlockData, ContentBlockStyles } from '@/types/cms'
 
 interface DatabaseBlock {
@@ -47,6 +48,36 @@ export async function GET(
 ) {
   const params = await context.params
   try {
+    // Check if Supabase is available
+    const hasSupabase = process.env.NEXT_PUBLIC_SUPABASE_URL && 
+                        process.env.NEXT_PUBLIC_SUPABASE_URL !== 'your_supabase_url_here'
+
+    if (!hasSupabase) {
+      // Use mock data when Supabase is not configured
+      console.log('🔧 Using mock CMS data for API endpoint')
+      
+      if (params.slug === 'home') {
+        return NextResponse.json({
+          success: true,
+          data: mockPageData
+        })
+      }
+      
+      // Find mock page by slug
+      const mockPage = mockPagesList.find(p => p.slug === params.slug)
+      if (mockPage) {
+        return NextResponse.json({
+          success: true,
+          data: mockPage
+        })
+      }
+      
+      return NextResponse.json(
+        { error: 'Page not found' },
+        { status: 404 }
+      )
+    }
+
     const supabase = await createClient()
     const { searchParams } = new URL(request.url)
     const includeBlocks = searchParams.get('include_blocks') !== 'false'
@@ -115,7 +146,7 @@ export async function GET(
         ?.sort((a: DatabaseBlock, b: DatabaseBlock) => a.block_order - b.block_order)
         ?.map((block: DatabaseBlock) => ({
           id: block.id,
-          type: block.type as 'text' | 'image' | 'video' | 'button' | 'section' | 'hero' | 'card' | 'testimonial',
+          type: block.type as 'text' | 'image' | 'video' | 'button' | 'section' | 'hero' | 'card' | 'testimonial' | 'problem_awareness' | 'solution' | 'social_proof' | 'urgency' | 'faq',
           order: block.block_order,
           data: block.data as ContentBlockData,
           styles: block.styles as ContentBlockStyles | undefined,
