@@ -10,7 +10,7 @@ import type { LeadFormData } from '@/types';
 const schema = yup.object({
   name: yup.string().required('이름을 입력하세요.'),
   phone: yup.string().required('전화번호를 입력하세요.'),
-  program: yup.string().optional().nullable().default(undefined),
+  program: yup.string().nullable().default(null),
 }).required();
 
 

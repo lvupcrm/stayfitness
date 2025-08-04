@@ -3,5 +3,5 @@
 export interface LeadFormData {
   name: string;
   phone: string;
-  program?: string;
+  program: string | null;
 }
