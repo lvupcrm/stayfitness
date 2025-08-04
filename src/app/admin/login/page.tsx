@@ -149,6 +149,6 @@ export default function AdminLoginPage() {
           © 2024 Stay Fitness. All rights reserved.
         </div>
       </div>
-    </div>
+    </main>
   )
 }
