@@ -7,7 +7,8 @@ import type { AdminLoginRequest, AdminPermission } from '@/types/admin'
 
 export async function POST(request: NextRequest) {
   try {
-    const body: AdminLoginRequest = await request.json()
+    const body = await request.json()
+    console.log('Login request body:', body)
     
     // Validate input
     if (!body.password) {

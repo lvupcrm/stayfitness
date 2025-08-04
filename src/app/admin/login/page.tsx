@@ -20,18 +20,19 @@ export default function AdminLoginPage() {
     setError(null)
 
     try {
+      console.log('Attempting login with password:', password)
       const response = await fetch('/api/admin/auth/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          email: 'admin@stayfitness.com',
           password: password
         })
       })
 
       const data = await response.json()
+      console.log('Login response:', data)
 
       if (data.success) {
         const urlParams = new URLSearchParams(window.location.search)
