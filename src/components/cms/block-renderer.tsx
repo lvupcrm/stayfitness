@@ -39,9 +39,10 @@ interface BlockRendererProps {
   block: ContentBlock
   isEditing: boolean
   isHovered: boolean
+  onUpdate?: (updates: Partial<ContentBlock>) => void
 }
 
-export function BlockRenderer({ block, isEditing, isHovered }: BlockRendererProps) {
+export function BlockRenderer({ block, isEditing, isHovered, onUpdate }: BlockRendererProps) {
   const [showToolbar, setShowToolbar] = useState(false)
   
   const {
@@ -66,7 +67,13 @@ export function BlockRenderer({ block, isEditing, isHovered }: BlockRendererProp
   }
 
   const handleUpdate = (updates: Partial<ContentBlock>) => {
-    updateBlock(block.id, updates)
+    if (onUpdate) {
+      // Use external update handler for live editing
+      onUpdate(updates)
+    } else {
+      // Use CMS store for editor mode
+      updateBlock(block.id, updates)
+    }
   }
 
   const handleDelete = () => {

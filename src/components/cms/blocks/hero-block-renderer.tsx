@@ -6,6 +6,7 @@ import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import type { ContentBlock } from '@/types/cms'
 import { OptimizedCmsImage } from './optimized-cms-image'
+import { InlineEditor, InlineImageEditor } from '@/components/cms/inline-editor'
 
 interface HeroBlockRendererProps {
   block: ContentBlock
@@ -15,6 +16,7 @@ interface HeroBlockRendererProps {
 
 export function HeroBlockRenderer({ block, isEditing, onUpdate }: HeroBlockRendererProps) {
   const [isUploading, setIsUploading] = useState(false)
+  const [editingField, setEditingField] = useState<string | null>(null)
   const heroData = block.data.hero || {
     title: '메인 제목',
     subtitle: '부제목을 입력하세요',
@@ -280,7 +282,7 @@ export function HeroBlockRenderer({ block, isEditing, onUpdate }: HeroBlockRende
     )
   }
 
-  // Preview mode
+  // Preview mode with inline editing
   return (
     <div
       className="relative bg-gradient-to-r from-blue-600 to-purple-600 text-white py-20 px-6 text-center"
@@ -295,28 +297,98 @@ export function HeroBlockRenderer({ block, isEditing, onUpdate }: HeroBlockRende
         <div className="absolute inset-0 bg-black bg-opacity-40"></div>
       )}
       
+      {/* Background Image Inline Editor (CMS edit mode only) */}
+      {isEditing && (
+        <div className="absolute top-4 right-4 z-20">
+          <InlineImageEditor
+            src={heroData.backgroundImage || ''}
+            alt="히어로 배경 이미지"
+            onSave={(newSrc, newAlt) => {
+              handleBackgroundImageChange(newSrc)
+              setEditingField(null)
+            }}
+            isEditing={editingField === 'backgroundImage'}
+            onToggleEdit={() => 
+              setEditingField(editingField === 'backgroundImage' ? null : 'backgroundImage')
+            }
+            className="bg-white/10 backdrop-blur-sm rounded-lg p-2"
+          />
+        </div>
+      )}
+      
       <div className="relative z-10 max-w-4xl mx-auto">
-        <h1 className="text-4xl md:text-6xl font-bold mb-6">
-          {heroData.title || '메인 제목을 입력하세요'}
-        </h1>
+        {/* Title with Inline Editing */}
+        <div className="mb-6">
+          <InlineEditor
+            value={heroData.title || ''}
+            onSave={handleTitleChange}
+            isEditing={editingField === 'title'}
+            onToggleEdit={() => 
+              setEditingField(editingField === 'title' ? null : 'title')
+            }
+            type="title"
+            placeholder="메인 제목을 입력하세요"
+            className="text-4xl md:text-6xl font-bold text-white"
+          />
+        </div>
         
-        {heroData.subtitle && (
-          <p className="text-xl md:text-2xl opacity-90 mb-8 max-w-2xl mx-auto">
-            {heroData.subtitle}
-          </p>
-        )}
+        {/* Subtitle with Inline Editing */}
+        <div className="mb-8 max-w-2xl mx-auto">
+          <InlineEditor
+            value={heroData.subtitle || ''}
+            onSave={handleSubtitleChange}
+            isEditing={editingField === 'subtitle'}
+            onToggleEdit={() => 
+              setEditingField(editingField === 'subtitle' ? null : 'subtitle')
+            }
+            type="textarea"
+            multiline
+            placeholder="부제목을 입력하세요"
+            className="text-xl md:text-2xl opacity-90 text-white"
+          />
+        </div>
         
-        {heroData.ctaButton?.text && heroData.ctaButton?.url && (
-          <Button 
-            variant="secondary" 
-            size="lg"
-            asChild
-            className="text-lg px-8 py-3"
-          >
-            <a href={heroData.ctaButton.url}>
-              {heroData.ctaButton.text}
-            </a>
-          </Button>
+        {/* CTA Button with Inline Editing */}
+        {(heroData.ctaButton?.text || isEditing) && (
+          <div className="inline-block">
+            {isEditing ? (
+              <div className="space-y-2">
+                <InlineEditor
+                  value={heroData.ctaButton?.text || ''}
+                  onSave={(value) => handleCtaChange('text', value)}
+                  isEditing={editingField === 'ctaText'}
+                  onToggleEdit={() => 
+                    setEditingField(editingField === 'ctaText' ? null : 'ctaText')
+                  }
+                  placeholder="버튼 텍스트"
+                  className="inline-block"
+                />
+                <InlineEditor
+                  value={heroData.ctaButton?.url || ''}
+                  onSave={(value) => handleCtaChange('url', value)}
+                  isEditing={editingField === 'ctaUrl'}
+                  onToggleEdit={() => 
+                    setEditingField(editingField === 'ctaUrl' ? null : 'ctaUrl')
+                  }
+                  placeholder="버튼 링크 (https://...)"
+                  className="inline-block ml-2"
+                />
+              </div>
+            ) : (
+              heroData.ctaButton?.text && heroData.ctaButton?.url && (
+                <Button 
+                  variant="secondary" 
+                  size="lg"
+                  asChild
+                  className="text-lg px-8 py-3"
+                >
+                  <a href={heroData.ctaButton.url}>
+                    {heroData.ctaButton.text}
+                  </a>
+                </Button>
+              )
+            )}
+          </div>
         )}
       </div>
     </div>

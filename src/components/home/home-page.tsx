@@ -5,13 +5,28 @@ import { usePathname } from 'next/navigation'
 import { trackPageView } from '@/lib/analytics'
 import { BlockRenderer } from '@/components/cms/block-renderer'
 import { SectionLoading } from '@/components/loading/section-loading'
+import { LiveEditToggle } from '@/components/cms/live-edit-toggle'
+import { useCMSAutoSave } from '@/hooks/useCMSAutoSave'
 import { mockPageData } from '@/lib/mock-cms-data'
-import type { Page } from '@/types/cms'
+import type { Page, ContentBlock } from '@/types/cms'
 
 export function HomePage() {
   const pathname = usePathname()
   const [pageData, setPageData] = useState<Page | null>(null)
   const [isLoading, setIsLoading] = useState(true)
+  const [isEditing, setIsEditing] = useState(false)
+
+  // Auto-save functionality for live editing
+  const { saveNow, isSaving, hasUnsavedChanges } = useCMSAutoSave({
+    page: pageData,
+    enabled: isEditing && !!pageData,
+    onSaveSuccess: (savedPage) => {
+      setPageData(savedPage)
+    },
+    onSaveError: (error) => {
+      console.error('Live editing auto-save error:', error)
+    }
+  })
   
   useEffect(() => {
     trackPageView(pathname)
@@ -55,6 +70,25 @@ export function HomePage() {
 
     loadPageData()
   }, [])
+
+  // Handle block updates for live editing
+  const handleBlockUpdate = (blockId: string, updates: Partial<ContentBlock>) => {
+    if (!pageData) return
+
+    const updatedBlocks = pageData.blocks.map(block => 
+      block.id === blockId 
+        ? { ...block, ...updates, updated_at: new Date().toISOString() }
+        : block
+    )
+
+    const updatedPage = {
+      ...pageData,
+      blocks: updatedBlocks,
+      updated_at: new Date().toISOString()
+    }
+
+    setPageData(updatedPage)
+  }
   
   if (isLoading) {
     return (
@@ -84,10 +118,20 @@ export function HomePage() {
           <BlockRenderer
             key={block.id}
             block={block}
-            isEditing={false}
+            isEditing={isEditing}
             isHovered={false}
+            onUpdate={(updates) => handleBlockUpdate(block.id, updates)}
           />
         ))}
+
+      {/* Live Edit Toggle */}
+      <LiveEditToggle
+        isEditing={isEditing}
+        onToggleEdit={() => setIsEditing(!isEditing)}
+        onSave={saveNow}
+        hasUnsavedChanges={hasUnsavedChanges}
+        isSaving={isSaving}
+      />
     </div>
   )
 }

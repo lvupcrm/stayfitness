@@ -27,6 +27,9 @@ interface PageEditorToolbarProps {
   onSave: () => Promise<void>
   onPublish: () => Promise<void>
   canSave: boolean
+  isSaving?: boolean
+  hasUnsavedChanges?: boolean
+  lastSaved?: Date
 }
 
 export function PageEditorToolbar({
@@ -37,10 +40,13 @@ export function PageEditorToolbar({
   onSlugChange,
   onSave,
   onPublish,
-  canSave
+  canSave,
+  isSaving = false,
+  hasUnsavedChanges = false,
+  lastSaved
 }: PageEditorToolbarProps) {
   const router = useRouter()
-  const [isSaving, setIsSaving] = useState(false)
+  const [isLocalSaving, setIsLocalSaving] = useState(false)
   const [isPublishing, setIsPublishing] = useState(false)
   const [showSettings, setShowSettings] = useState(false)
   
@@ -55,11 +61,11 @@ export function PageEditorToolbar({
   } = useCMSStore()
 
   const handleSave = async () => {
-    setIsSaving(true)
+    setIsLocalSaving(true)
     try {
       await onSave()
     } finally {
-      setIsSaving(false)
+      setIsLocalSaving(false)
     }
   }
 
@@ -177,7 +183,40 @@ export function PageEditorToolbar({
         </div>
 
         {/* Right Section */}
-        <div className="flex items-center space-x-2">
+        <div className="flex items-center space-x-3">
+          {/* Auto-save Status */}
+          {mode === 'edit' && (
+            <div className="flex items-center space-x-2 text-sm text-gray-600">
+              {isSaving ? (
+                <div className="flex items-center space-x-2">
+                  <div className="w-3 h-3 border-2 border-blue-500 border-t-transparent rounded-full animate-spin"></div>
+                  <span>저장 중...</span>
+                </div>
+              ) : hasUnsavedChanges ? (
+                <div className="flex items-center space-x-2">
+                  <div className="w-2 h-2 bg-orange-500 rounded-full"></div>
+                  <span>저장되지 않음</span>
+                </div>
+              ) : lastSaved ? (
+                <div className="flex items-center space-x-2">
+                  <div className="w-2 h-2 bg-green-500 rounded-full"></div>
+                  <span>
+                    {new Intl.DateTimeFormat('ko-KR', {
+                      hour: '2-digit',
+                      minute: '2-digit',
+                      second: '2-digit'
+                    }).format(lastSaved)}에 저장됨
+                  </span>
+                </div>
+              ) : (
+                <div className="flex items-center space-x-2">
+                  <div className="w-2 h-2 bg-gray-400 rounded-full"></div>
+                  <span>준비됨</span>
+                </div>
+              )}
+            </div>
+          )}
+
           {/* Page Settings */}
           <Button
             variant="ghost"
@@ -190,13 +229,13 @@ export function PageEditorToolbar({
           {/* Save Button */}
           <Button
             onClick={handleSave}
-            disabled={!canSave || isSaving}
+            disabled={!canSave || isLocalSaving}
             size="sm"
             variant="outline"
             className="flex items-center space-x-2"
           >
             <Save className="w-4 h-4" />
-            <span>{isSaving ? '저장 중...' : '저장'}</span>
+            <span>{isLocalSaving ? '저장 중...' : '저장'}</span>
           </Button>
 
           {/* Publish Button */}

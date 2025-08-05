@@ -9,6 +9,7 @@ import { PageEditorSidebar } from './page-editor-sidebar'
 import { PageCanvas } from './page-canvas'
 import { PageEditorToolbar } from './page-editor-toolbar'
 import { useCMSStore } from '@/hooks/useCMSStore'
+import { useCMSAutoSave } from '@/hooks/useCMSAutoSave'
 import type { Page } from '@/types/cms'
 
 interface PageEditorProps {
@@ -30,6 +31,18 @@ export function PageEditor({ mode, slug }: PageEditorProps) {
     resetEditor,
     loadInitialData
   } = useCMSStore()
+
+  // Auto-save functionality
+  const { saveNow, isSaving, hasUnsavedChanges } = useCMSAutoSave({
+    page: currentPage,
+    enabled: mode === 'edit' && !!currentPage && currentPage.id !== `temp_${Date.now()}`,
+    onSaveSuccess: (savedPage) => {
+      setCurrentPage(savedPage)
+    },
+    onSaveError: (error) => {
+      console.error('Auto-save error:', error)
+    }
+  })
 
   const loadPage = useCallback(async (pageSlug: string) => {
     try {
@@ -209,6 +222,9 @@ export function PageEditor({ mode, slug }: PageEditorProps) {
           onSave={handleSaveAndContinue}
           onPublish={handlePublish}
           canSave={mode === 'create' ? !!pageTitle : isDirty}
+          isSaving={isSaving}
+          hasUnsavedChanges={hasUnsavedChanges}
+          lastSaved={currentPage?.updated_at ? new Date(currentPage.updated_at) : undefined}
         />
 
         {/* Main Editor */}
