@@ -323,7 +323,7 @@ export interface ContentTemplate {
   updated_at: string
 }
 
-export interface ContentVersion {
+export interface CmsContentVersion {
   id: string
   page_id: string
   version_number: number
