@@ -14,6 +14,7 @@ import Footer from '@/components/layout/footer';
 import AdminFloatingButton from '@/components/navigation/admin-floating-button';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { GoogleAnalytics } from '@/components/analytics/google-analytics';
 
 // 메인 폰트 - 가독성과 현대적 느낌
 const interFont = Inter({
@@ -101,32 +102,15 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         
-        {/* GA4 스크립트 */}
-        {process.env.NEXT_PUBLIC_GA_ID && (
-          <>
-            <script async src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GA_ID}`}></script>
-            <script
-              dangerouslySetInnerHTML={{
-                __html: `
-                  window.dataLayer = window.dataLayer || [];
-                  function gtag(){dataLayer.push(arguments);}
-                  gtag('js', new Date());
-                  gtag('config', '${process.env.NEXT_PUBLIC_GA_ID}', { 
-                    page_path: window.location.pathname,
-                    custom_map: {
-                      'custom_parameter_consultation': 'consultation_type',
-                      'custom_parameter_trainer_application': 'application_type'
-                    }
-                  });
-                `,
-              }}
-            />
-          </>
-        )}
       </head>
       <body
         className={`${interFont.variable} ${outfitFont.variable} ${jetBrainsMono.variable} antialiased`}
       >
+        {/* Google Analytics */}
+        {process.env.NEXT_PUBLIC_GA_ID && (
+          <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_ID} />
+        )}
+        
         {/* Urban Field 스타일 구조화 데이터 */}
         <BusinessStructuredData />
         <WebsiteStructuredData />

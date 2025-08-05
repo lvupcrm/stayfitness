@@ -21,7 +21,7 @@ export default function UrbanHero() {
             webm: '/videos/hero-bg.webm',
             mp4: '/videos/hero-bg.mp4'
           }}
-          posterImage="/images/hero-poster.jpg"
+          posterImage="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=1920&h=1080&fit=crop"
           priority
         />
         

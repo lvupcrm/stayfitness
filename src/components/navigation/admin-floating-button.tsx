@@ -1,18 +1,21 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Shield, Settings, Lock } from 'lucide-react'
 
 export default function AdminFloatingButton() {
   const [isVisible, setIsVisible] = useState(false)
+  const [shouldShow, setShouldShow] = useState(false)
 
-  // Only show in development or on deployment domains
-  const shouldShow = process.env.NODE_ENV === 'development' || 
-    (typeof window !== 'undefined' && 
-     (window.location.hostname.includes('vercel.app') || 
-      window.location.hostname.includes('netlify.app')))
+  useEffect(() => {
+    // Check if we should show the button after hydration
+    const show = process.env.NODE_ENV === 'development' || 
+      window.location.hostname.includes('vercel.app') || 
+      window.location.hostname.includes('netlify.app')
+    setShouldShow(show)
+  }, [])
 
   if (!shouldShow) return null
 

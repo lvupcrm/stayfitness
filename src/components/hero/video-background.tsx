@@ -21,10 +21,10 @@ export function VideoBackground({
   priority = false
 }: VideoBackgroundProps) {
   const [isLoaded, setIsLoaded] = useState(false)
-  const [isMobile, setIsMobile] = useState(false)
+  const [isMobile, setIsMobile] = useState(true) // Default to true for SSR
 
   useEffect(() => {
-    // Check if device is mobile
+    // Check if device is mobile after hydration
     const checkMobile = () => {
       setIsMobile(window.innerWidth <= 768)
     }
