@@ -283,7 +283,7 @@ export function UrbanNav() {
       </div>
 
       {/* Admin Access Modal */}
-      <AnimatePresence>
+      <AnimatePresence mode="wait">
         {showAdminAccess && (
           <>
             {/* Backdrop */}
