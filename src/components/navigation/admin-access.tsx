@@ -22,7 +22,7 @@ export default function AdminAccess() {
     return () => clearTimeout(timer)
   }, [lastClickTime])
 
-  const handleLogoClick = () => {
+  const handleLogoClick = (e: React.MouseEvent) => {
     const now = Date.now()
     
     // Reset if too much time has passed
@@ -36,9 +36,12 @@ export default function AdminAccess() {
 
     // Show admin access after 5 rapid clicks
     if (clickCount >= 4) {
+      e.preventDefault() // Only prevent navigation when triggering admin access
+      e.stopPropagation()
       setShowAdminAccess(true)
       setClickCount(0)
     }
+    // For normal clicks (less than 5), let the event bubble up for normal navigation
   }
 
   const handleAdminLogin = () => {
@@ -66,10 +69,10 @@ export default function AdminAccess() {
 
   return (
     <>
-      {/* Hidden admin trigger - attach to logo */}
+      {/* Small invisible admin trigger area - positioned at corner to not interfere with logo link */}
       <div 
         onClick={handleLogoClick}
-        className="absolute inset-0 z-10 cursor-pointer"
+        className="absolute -right-2 -top-2 w-4 h-4 cursor-pointer opacity-0"
         title="관리자 접근: 로고 5회 클릭 또는 Ctrl+Shift+A"
       />
 
