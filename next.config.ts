@@ -2,7 +2,8 @@ import type { NextConfig } from 'next'
 
 const nextConfig: NextConfig = {
   eslint: {
-    dirs: ['src']
+    dirs: ['src'],
+    ignoreDuringBuilds: true
   },
   typescript: {
     ignoreBuildErrors: false

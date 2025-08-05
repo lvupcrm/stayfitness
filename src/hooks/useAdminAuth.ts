@@ -2,6 +2,8 @@
 
 import { useState, useEffect, useCallback } from 'react'
 import type { AdminUser, AdminLoginRequest, AdminPermission } from '@/types/admin'
+import { apiClient, getErrorMessage } from '@/lib/api-client'
+import { showToast } from '@/lib/toast'
 
 interface UseAdminAuthReturn {
   user: AdminUser | null
@@ -24,18 +26,10 @@ export function useAdminAuth(): UseAdminAuthReturn {
 
   const refreshAuth = useCallback(async () => {
     try {
-      const response = await fetch('/api/admin/auth/verify', {
-        method: 'GET',
-        credentials: 'include',
-      })
-
-      if (response.ok) {
-        const data = await response.json()
-        if (data.success && data.data) {
-          setUser(data.data)
-        } else {
-          setUser(null)
-        }
+      const response = await apiClient.get<AdminUser>('/api/admin/auth/verify')
+      
+      if (response.success && response.data) {
+        setUser(response.data)
       } else {
         setUser(null)
       }
@@ -51,26 +45,20 @@ export function useAdminAuth(): UseAdminAuthReturn {
     try {
       setIsLoading(true)
       
-      const response = await fetch('/api/admin/auth/login', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        credentials: 'include',
-        body: JSON.stringify(credentials),
-      })
+      const response = await apiClient.post<{ user: AdminUser }>('/api/admin/auth/login', credentials)
 
-      const data = await response.json()
-
-      if (data.success && data.data) {
-        setUser(data.data.user)
+      if (response.success && response.data) {
+        setUser(response.data.user)
+        showToast.success('로그인되었습니다.')
         return true
       } else {
         setUser(null)
+        showToast.error('로그인에 실패했습니다.')
         return false
       }
     } catch (error) {
       console.error('Login failed:', error)
+      showToast.error(getErrorMessage(error))
       setUser(null)
       return false
     } finally {
@@ -80,12 +68,11 @@ export function useAdminAuth(): UseAdminAuthReturn {
 
   const logout = useCallback(async () => {
     try {
-      await fetch('/api/admin/auth/logout', {
-        method: 'POST',
-        credentials: 'include',
-      })
+      await apiClient.post('/api/admin/auth/logout')
+      showToast.success('로그아웃되었습니다.')
     } catch (error) {
       console.error('Logout request failed:', error)
+      showToast.error('로그아웃 중 오류가 발생했습니다.')
     } finally {
       setUser(null)
       window.location.href = '/static-login'

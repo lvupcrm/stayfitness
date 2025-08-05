@@ -42,3 +42,6 @@ export const toast = {
   error: (message: string) => createToast(message, 'error'),
   info: (message: string) => createToast(message, 'info')
 }
+
+// 호환성을 위한 showToast export
+export const showToast = toast

@@ -1,4 +1,5 @@
 // CMS 콘텐츠 관리 시스템 타입 정의
+import type { MediaFile } from './common'
 
 export interface ContentBlock {
   id: string
@@ -309,22 +310,6 @@ export interface Page {
   version_number: number
 }
 
-export interface MediaFile {
-  id: string
-  filename: string
-  original_name: string
-  mime_type: string
-  size: number
-  url: string
-  alt_text?: string
-  caption?: string
-  width?: number
-  height?: number
-  folder?: string
-  uploaded_by: string
-  created_at: string
-  updated_at: string
-}
 
 export interface ContentTemplate {
   id: string
@@ -390,15 +375,8 @@ export interface ContentAPIResponse<T> {
   error?: string
 }
 
-export interface PaginatedResponse<T> {
-  data: T[]
-  pagination: {
-    page: number
-    limit: number
-    total: number
-    totalPages: number
-  }
-}
+// PaginatedResponse는 common.ts에서 import해서 사용
+// 중복 제거됨
 
 // CMS 편집기 상태
 export interface EditorState {

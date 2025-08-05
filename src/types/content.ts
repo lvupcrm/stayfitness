@@ -12,7 +12,7 @@ export interface PageSection {
   updatedAt: string
 }
 
-export interface ContentBlock {
+export interface PageContentBlock {
   id: string
   type: 'text' | 'image' | 'video' | 'button' | 'form'
   content: string
@@ -39,7 +39,7 @@ export interface PageContent {
   metaTitle?: string
   metaDescription?: string
   sections: PageSection[]
-  blocks: ContentBlock[]
+  blocks: PageContentBlock[]
   isPublished: boolean
   publishedAt?: string
   updatedAt: string
@@ -47,14 +47,14 @@ export interface PageContent {
 
 export interface ContentUpdate {
   id: string
-  changes: Partial<PageSection | ContentBlock>
+  changes: Partial<PageSection | PageContentBlock>
 }
 
 export interface ContentVersion {
   id: string
   contentId: string
   type: 'section' | 'block'
-  data: PageSection | ContentBlock
+  data: PageSection | PageContentBlock
   createdAt: string
   createdBy: string
 }
@@ -64,7 +64,7 @@ export type ContentAction =
   | { type: 'UPDATE_SECTION'; id: string; changes: Partial<PageSection> }
   | { type: 'DELETE_SECTION'; id: string }
   | { type: 'REORDER_SECTIONS'; ids: string[] }
-  | { type: 'ADD_BLOCK'; block: Omit<ContentBlock, 'id'> }
-  | { type: 'UPDATE_BLOCK'; id: string; changes: Partial<ContentBlock> }
+  | { type: 'ADD_BLOCK'; block: Omit<PageContentBlock, 'id'> }
+  | { type: 'UPDATE_BLOCK'; id: string; changes: Partial<PageContentBlock> }
   | { type: 'DELETE_BLOCK'; id: string }
   | { type: 'REORDER_BLOCKS'; ids: string[] }
