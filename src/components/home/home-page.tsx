@@ -7,6 +7,7 @@ import { BlockRenderer } from '@/components/cms/block-renderer'
 import { SectionLoading } from '@/components/loading/section-loading'
 import { LiveEditToggle } from '@/components/cms/live-edit-toggle'
 import { useCMSAutoSave } from '@/hooks/useCMSAutoSave'
+import { useAdminAuth } from '@/hooks/useAdminAuth'
 import { mockPageData } from '@/lib/mock-cms-data'
 import type { Page, ContentBlock } from '@/types/cms'
 
@@ -15,6 +16,10 @@ export function HomePage() {
   const [pageData, setPageData] = useState<Page | null>(null)
   const [isLoading, setIsLoading] = useState(true)
   const [isEditing, setIsEditing] = useState(false)
+  const { isAuthenticated, hasPermission } = useAdminAuth()
+  
+  // Check if user has permission to edit CMS content
+  const canEdit = isAuthenticated && (hasPermission('manage_content') || hasPermission('write_content'))
 
   // Auto-save functionality for live editing
   const { saveNow, isSaving, hasUnsavedChanges } = useCMSAutoSave({
@@ -118,20 +123,22 @@ export function HomePage() {
           <BlockRenderer
             key={block.id}
             block={block}
-            isEditing={isEditing}
+            isEditing={isEditing && canEdit}
             isHovered={false}
             onUpdate={(updates) => handleBlockUpdate(block.id, updates)}
           />
         ))}
 
-      {/* Live Edit Toggle */}
-      <LiveEditToggle
-        isEditing={isEditing}
-        onToggleEdit={() => setIsEditing(!isEditing)}
-        onSave={saveNow}
-        hasUnsavedChanges={hasUnsavedChanges}
-        isSaving={isSaving}
-      />
+      {/* Live Edit Toggle - Only show for authenticated users with CMS permissions */}
+      {canEdit && (
+        <LiveEditToggle
+          isEditing={isEditing}
+          onToggleEdit={() => setIsEditing(!isEditing)}
+          onSave={saveNow}
+          hasUnsavedChanges={hasUnsavedChanges}
+          isSaving={isSaving}
+        />
+      )}
     </div>
   )
 }
