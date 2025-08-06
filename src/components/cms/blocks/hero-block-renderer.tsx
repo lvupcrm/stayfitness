@@ -318,40 +318,52 @@ export function HeroBlockRenderer({ block, isEditing, onUpdate }: HeroBlockRende
       )}
       
       <div className="relative z-10 max-w-4xl mx-auto">
-        {/* Title with Inline Editing */}
+        {/* Title */}
         <div className="mb-6">
-          <InlineEditor
-            value={heroData.title || ''}
-            onSave={handleTitleChange}
-            isEditing={isEditing && editingField === 'title'}
-            onToggleEdit={isEditing ? () => 
-              setEditingField(editingField === 'title' ? null : 'title')
-            : () => {}}
-            type="title"
-            placeholder="메인 제목을 입력하세요"
-            className="text-4xl md:text-6xl font-bold text-white"
-            disabled={!isEditing}
-          />
+          {isEditing ? (
+            <InlineEditor
+              value={heroData.title || ''}
+              onSave={handleTitleChange}
+              isEditing={editingField === 'title'}
+              onToggleEdit={() => 
+                setEditingField(editingField === 'title' ? null : 'title')
+              }
+              type="title"
+              placeholder="메인 제목을 입력하세요"
+              className="text-4xl md:text-6xl font-bold text-white"
+            />
+          ) : (
+            <h1 className="text-4xl md:text-6xl font-bold text-white">
+              {heroData.title || '메인 제목'}
+            </h1>
+          )}
         </div>
         
-        {/* Subtitle with Inline Editing */}
+        {/* Subtitle */}
         <div className="mb-8 max-w-2xl mx-auto">
-          <InlineEditor
-            value={heroData.subtitle || ''}
-            onSave={handleSubtitleChange}
-            isEditing={isEditing && editingField === 'subtitle'}
-            onToggleEdit={isEditing ? () => 
-              setEditingField(editingField === 'subtitle' ? null : 'subtitle')
-            : () => {}}
-            type="textarea"
-            multiline
-            placeholder="부제목을 입력하세요"
-            className="text-xl md:text-2xl opacity-90 text-white"
-            disabled={!isEditing}
-          />
+          {isEditing ? (
+            <InlineEditor
+              value={heroData.subtitle || ''}
+              onSave={handleSubtitleChange}
+              isEditing={editingField === 'subtitle'}
+              onToggleEdit={() => 
+                setEditingField(editingField === 'subtitle' ? null : 'subtitle')
+              }
+              type="textarea"
+              multiline
+              placeholder="부제목을 입력하세요"
+              className="text-xl md:text-2xl opacity-90 text-white"
+            />
+          ) : (
+            heroData.subtitle && (
+              <p className="text-xl md:text-2xl opacity-90 text-white">
+                {heroData.subtitle}
+              </p>
+            )
+          )}
         </div>
         
-        {/* CTA Button with Inline Editing */}
+        {/* CTA Button */}
         {(heroData.ctaButton?.text || isEditing) && (
           <div className="inline-block">
             {isEditing ? (
@@ -359,24 +371,22 @@ export function HeroBlockRenderer({ block, isEditing, onUpdate }: HeroBlockRende
                 <InlineEditor
                   value={heroData.ctaButton?.text || ''}
                   onSave={(value) => handleCtaChange('text', value)}
-                  isEditing={isEditing && editingField === 'ctaText'}
-                  onToggleEdit={isEditing ? () => 
+                  isEditing={editingField === 'ctaText'}
+                  onToggleEdit={() => 
                     setEditingField(editingField === 'ctaText' ? null : 'ctaText')
-                  : () => {}}
+                  }
                   placeholder="버튼 텍스트"
                   className="inline-block"
-                  disabled={!isEditing}
                 />
                 <InlineEditor
                   value={heroData.ctaButton?.url || ''}
                   onSave={(value) => handleCtaChange('url', value)}
-                  isEditing={isEditing && editingField === 'ctaUrl'}
-                  onToggleEdit={isEditing ? () => 
+                  isEditing={editingField === 'ctaUrl'}
+                  onToggleEdit={() => 
                     setEditingField(editingField === 'ctaUrl' ? null : 'ctaUrl')
-                  : () => {}}
+                  }
                   placeholder="버튼 링크 (https://...)"
                   className="inline-block ml-2"
-                  disabled={!isEditing}
                 />
               </div>
             ) : (
