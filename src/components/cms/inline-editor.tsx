@@ -14,6 +14,7 @@ interface InlineEditorProps {
   className?: string
   placeholder?: string
   multiline?: boolean
+  disabled?: boolean
 }
 
 export function InlineEditor({
@@ -25,7 +26,8 @@ export function InlineEditor({
   type = 'text',
   className = '',
   placeholder = '텍스트를 입력하세요...',
-  multiline = false
+  multiline = false,
+  disabled = false
 }: InlineEditorProps) {
   const [editValue, setEditValue] = useState(value)
   const inputRef = useRef<HTMLInputElement | HTMLTextAreaElement>(null)
@@ -65,6 +67,15 @@ export function InlineEditor({
   }
 
   if (!isEditing) {
+    // If disabled, render as plain text without any editing capabilities
+    if (disabled) {
+      return (
+        <div className={className}>
+          {value || <span className="text-gray-400 italic">{placeholder}</span>}
+        </div>
+      )
+    }
+
     return (
       <div 
         className={`group relative ${className}`}
@@ -144,6 +155,7 @@ interface InlineImageEditorProps {
   isEditing: boolean
   onToggleEdit: () => void
   className?: string
+  disabled?: boolean
 }
 
 export function InlineImageEditor({
@@ -152,7 +164,8 @@ export function InlineImageEditor({
   onSave,
   isEditing,
   onToggleEdit,
-  className = ''
+  className = '',
+  disabled = false
 }: InlineImageEditorProps) {
   const [editSrc, setEditSrc] = useState(src)
   const [editAlt, setEditAlt] = useState(alt)
@@ -174,6 +187,17 @@ export function InlineImageEditor({
   }
 
   if (!isEditing) {
+    // If disabled, render as plain image without any editing capabilities
+    if (disabled) {
+      return (
+        <img 
+          src={src} 
+          alt={alt} 
+          className={`rounded ${className}`}
+        />
+      )
+    }
+
     return (
       <div className={`group relative ${className}`} onClick={onToggleEdit}>
         <img 

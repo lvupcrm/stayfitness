@@ -312,6 +312,7 @@ export function HeroBlockRenderer({ block, isEditing, onUpdate }: HeroBlockRende
               setEditingField(editingField === 'backgroundImage' ? null : 'backgroundImage')
             }
             className="bg-white/10 backdrop-blur-sm rounded-lg p-2"
+            disabled={!isEditing}
           />
         </div>
       )}
@@ -329,6 +330,7 @@ export function HeroBlockRenderer({ block, isEditing, onUpdate }: HeroBlockRende
             type="title"
             placeholder="메인 제목을 입력하세요"
             className="text-4xl md:text-6xl font-bold text-white"
+            disabled={!isEditing}
           />
         </div>
         
@@ -345,6 +347,7 @@ export function HeroBlockRenderer({ block, isEditing, onUpdate }: HeroBlockRende
             multiline
             placeholder="부제목을 입력하세요"
             className="text-xl md:text-2xl opacity-90 text-white"
+            disabled={!isEditing}
           />
         </div>
         
@@ -362,6 +365,7 @@ export function HeroBlockRenderer({ block, isEditing, onUpdate }: HeroBlockRende
                   }
                   placeholder="버튼 텍스트"
                   className="inline-block"
+                  disabled={!isEditing}
                 />
                 <InlineEditor
                   value={heroData.ctaButton?.url || ''}
@@ -372,6 +376,7 @@ export function HeroBlockRenderer({ block, isEditing, onUpdate }: HeroBlockRende
                   }
                   placeholder="버튼 링크 (https://...)"
                   className="inline-block ml-2"
+                  disabled={!isEditing}
                 />
               </div>
             ) : (
