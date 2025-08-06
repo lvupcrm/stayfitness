@@ -5,33 +5,13 @@ import { usePathname } from 'next/navigation'
 import { trackPageView } from '@/lib/analytics'
 import { BlockRenderer } from '@/components/cms/block-renderer'
 import { SectionLoading } from '@/components/loading/section-loading'
-import { LiveEditToggle } from '@/components/cms/live-edit-toggle'
-import { useCMSAutoSave } from '@/hooks/useCMSAutoSave'
-import { useAdminAuth } from '@/hooks/useAdminAuth'
 import { mockPageData } from '@/lib/mock-cms-data'
-import type { Page, ContentBlock } from '@/types/cms'
+import type { Page } from '@/types/cms'
 
 export function HomePage() {
   const pathname = usePathname()
   const [pageData, setPageData] = useState<Page | null>(null)
   const [isLoading, setIsLoading] = useState(true)
-  const [isEditing, setIsEditing] = useState(false)
-  const { isAuthenticated, hasPermission } = useAdminAuth()
-  
-  // Check if user has permission to edit CMS content
-  const canEdit = isAuthenticated && (hasPermission('manage_content') || hasPermission('write_content'))
-
-  // Auto-save functionality for live editing
-  const { saveNow, isSaving, hasUnsavedChanges } = useCMSAutoSave({
-    page: pageData,
-    enabled: isEditing && !!pageData,
-    onSaveSuccess: (savedPage) => {
-      setPageData(savedPage)
-    },
-    onSaveError: (error) => {
-      console.error('Live editing auto-save error:', error)
-    }
-  })
   
   useEffect(() => {
     trackPageView(pathname)
@@ -76,24 +56,6 @@ export function HomePage() {
     loadPageData()
   }, [])
 
-  // Handle block updates for live editing
-  const handleBlockUpdate = (blockId: string, updates: Partial<ContentBlock>) => {
-    if (!pageData) return
-
-    const updatedBlocks = pageData.blocks.map(block => 
-      block.id === blockId 
-        ? { ...block, ...updates, updated_at: new Date().toISOString() }
-        : block
-    )
-
-    const updatedPage = {
-      ...pageData,
-      blocks: updatedBlocks,
-      updated_at: new Date().toISOString()
-    }
-
-    setPageData(updatedPage)
-  }
   
   if (isLoading) {
     return (
@@ -123,22 +85,12 @@ export function HomePage() {
           <BlockRenderer
             key={block.id}
             block={block}
-            isEditing={isEditing && canEdit}
+            isEditing={false}
             isHovered={false}
-            onUpdate={(updates) => handleBlockUpdate(block.id, updates)}
+            onUpdate={() => {}} // No editing allowed on homepage
           />
         ))}
 
-      {/* Live Edit Toggle - Only show for authenticated users with CMS permissions */}
-      {canEdit && (
-        <LiveEditToggle
-          isEditing={isEditing}
-          onToggleEdit={() => setIsEditing(!isEditing)}
-          onSave={saveNow}
-          hasUnsavedChanges={hasUnsavedChanges}
-          isSaving={isSaving}
-        />
-      )}
     </div>
   )
 }
