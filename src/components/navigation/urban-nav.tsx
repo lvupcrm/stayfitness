@@ -10,6 +10,7 @@ import { cn } from '@/lib/utils'
 import { motion, AnimatePresence } from 'framer-motion'
 
 const navigation = [
+  { name: '홈', href: '/' },
   { name: '소개', href: '/about' },
   { name: '지점', href: '/locations' },
   { name: '프로그램', href: '/programs' },
