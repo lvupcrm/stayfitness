@@ -27,7 +27,7 @@ export function UrbanNav() {
   const router = useRouter()
 
   // Pages with light/white hero sections that need dark navigation text
-  const lightHeroPages = ['/about', '/programs', '/reviews', '/locations']
+  const lightHeroPages = ['/about', '/programs', '/reviews']
   const hasLightHero = lightHeroPages.includes(pathname)
 
   useEffect(() => {

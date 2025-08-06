@@ -80,7 +80,7 @@ export default function LocationsPage() {
   }
 
   return (
-    <div className="min-h-screen bg-stone-50">
+    <div className="min-h-screen bg-stone-50 pt-20">
       {/* Page Meta */}
       {pageData.meta_title && (
         <title>{pageData.meta_title}</title>
