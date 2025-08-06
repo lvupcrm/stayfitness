@@ -307,10 +307,10 @@ export function HeroBlockRenderer({ block, isEditing, onUpdate }: HeroBlockRende
               handleBackgroundImageChange(newSrc)
               setEditingField(null)
             }}
-            isEditing={editingField === 'backgroundImage'}
-            onToggleEdit={() => 
+            isEditing={isEditing && editingField === 'backgroundImage'}
+            onToggleEdit={isEditing ? () => 
               setEditingField(editingField === 'backgroundImage' ? null : 'backgroundImage')
-            }
+            : () => {}}
             className="bg-white/10 backdrop-blur-sm rounded-lg p-2"
             disabled={!isEditing}
           />
@@ -323,10 +323,10 @@ export function HeroBlockRenderer({ block, isEditing, onUpdate }: HeroBlockRende
           <InlineEditor
             value={heroData.title || ''}
             onSave={handleTitleChange}
-            isEditing={editingField === 'title'}
-            onToggleEdit={() => 
+            isEditing={isEditing && editingField === 'title'}
+            onToggleEdit={isEditing ? () => 
               setEditingField(editingField === 'title' ? null : 'title')
-            }
+            : () => {}}
             type="title"
             placeholder="메인 제목을 입력하세요"
             className="text-4xl md:text-6xl font-bold text-white"
@@ -339,10 +339,10 @@ export function HeroBlockRenderer({ block, isEditing, onUpdate }: HeroBlockRende
           <InlineEditor
             value={heroData.subtitle || ''}
             onSave={handleSubtitleChange}
-            isEditing={editingField === 'subtitle'}
-            onToggleEdit={() => 
+            isEditing={isEditing && editingField === 'subtitle'}
+            onToggleEdit={isEditing ? () => 
               setEditingField(editingField === 'subtitle' ? null : 'subtitle')
-            }
+            : () => {}}
             type="textarea"
             multiline
             placeholder="부제목을 입력하세요"
@@ -359,10 +359,10 @@ export function HeroBlockRenderer({ block, isEditing, onUpdate }: HeroBlockRende
                 <InlineEditor
                   value={heroData.ctaButton?.text || ''}
                   onSave={(value) => handleCtaChange('text', value)}
-                  isEditing={editingField === 'ctaText'}
-                  onToggleEdit={() => 
+                  isEditing={isEditing && editingField === 'ctaText'}
+                  onToggleEdit={isEditing ? () => 
                     setEditingField(editingField === 'ctaText' ? null : 'ctaText')
-                  }
+                  : () => {}}
                   placeholder="버튼 텍스트"
                   className="inline-block"
                   disabled={!isEditing}
@@ -370,10 +370,10 @@ export function HeroBlockRenderer({ block, isEditing, onUpdate }: HeroBlockRende
                 <InlineEditor
                   value={heroData.ctaButton?.url || ''}
                   onSave={(value) => handleCtaChange('url', value)}
-                  isEditing={editingField === 'ctaUrl'}
-                  onToggleEdit={() => 
+                  isEditing={isEditing && editingField === 'ctaUrl'}
+                  onToggleEdit={isEditing ? () => 
                     setEditingField(editingField === 'ctaUrl' ? null : 'ctaUrl')
-                  }
+                  : () => {}}
                   placeholder="버튼 링크 (https://...)"
                   className="inline-block ml-2"
                   disabled={!isEditing}
