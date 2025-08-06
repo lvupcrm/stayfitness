@@ -26,6 +26,10 @@ export function UrbanNav() {
   const pathname = usePathname()
   const router = useRouter()
 
+  // Pages with light/white hero sections that need dark navigation text
+  const lightHeroPages = ['/about', '/programs', '/reviews', '/locations']
+  const hasLightHero = lightHeroPages.includes(pathname)
+
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 20)
@@ -98,7 +102,9 @@ export function UrbanNav() {
       'fixed top-0 left-0 right-0 z-50 transition-all duration-500',
       isScrolled 
         ? 'bg-white/95 backdrop-blur-xl border-b border-slate-200 stay-glow-soft' 
-        : 'bg-transparent'
+        : hasLightHero
+          ? 'bg-transparent' // Light pages still have transparent nav
+          : 'bg-transparent'
     )}>
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         <div className="flex items-center justify-between h-20">
@@ -116,13 +122,21 @@ export function UrbanNav() {
               >
                 <span className={cn(
                   "transition-colors duration-300",
-                  isScrolled ? "stay-text-gradient" : "text-white"
+                  isScrolled 
+                    ? "stay-text-gradient" 
+                    : hasLightHero && !isScrolled 
+                      ? "stay-text-gradient" // Dark color on light pages
+                      : "text-white"
                 )}>
                   STAY
                 </span>
                 <span className={cn(
                   "transition-colors duration-300",
-                  isScrolled ? "text-slate-600" : "text-slate-300"
+                  isScrolled 
+                    ? "text-slate-600" 
+                    : hasLightHero && !isScrolled
+                      ? "text-slate-600" // Dark color on light pages
+                      : "text-slate-300"
                 )}>FITNESS</span>
               </motion.div>
             </Link>
@@ -144,9 +158,13 @@ export function UrbanNav() {
                       ? isActive 
                         ? 'text-slate-900' 
                         : 'text-slate-700 hover:text-slate-900'
-                      : isActive
-                        ? 'text-white'
-                        : 'text-white/90 hover:text-white'
+                      : hasLightHero && !isScrolled
+                        ? isActive
+                          ? 'text-slate-900' // Dark text on light pages
+                          : 'text-slate-700 hover:text-slate-900'
+                        : isActive
+                          ? 'text-white'
+                          : 'text-white/90 hover:text-white'
                   )}>
                     {item.name}
                   </span>
@@ -164,7 +182,11 @@ export function UrbanNav() {
                   <motion.div
                     className={cn(
                       "absolute bottom-0 left-5 right-5 h-0.5 rounded-full",
-                      isScrolled ? "bg-slate-300" : "bg-white/50"
+                      isScrolled 
+                        ? "bg-slate-300" 
+                        : hasLightHero && !isScrolled
+                          ? "bg-slate-300" // Dark hover line on light pages
+                          : "bg-white/50"
                     )}
                     initial={{ scaleX: 0 }}
                     whileHover={{ scaleX: 1 }}
@@ -196,8 +218,12 @@ export function UrbanNav() {
                   variant="ghost" 
                   size="icon"
                   className={cn(
-                    "rounded-full transition-colors duration-300 hover:bg-white/10",
-                    isScrolled ? "text-slate-900 hover:bg-slate-100" : "text-white"
+                    "rounded-full transition-colors duration-300",
+                    isScrolled 
+                      ? "text-slate-900 hover:bg-slate-100" 
+                      : hasLightHero && !isScrolled
+                        ? "text-slate-900 hover:bg-slate-100" // Dark button on light pages
+                        : "text-white hover:bg-white/10"
                   )}
                 >
                   <Menu className="w-6 h-6" />
