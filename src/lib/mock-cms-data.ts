@@ -12,7 +12,7 @@ export const mockPageData: Page = {
   meta_keywords: ['체형교정', '통증개선', '피트니스', '스테이피트니스', '강남', '홍대', '잠실'],
   status: 'published',
   template: 'default',
-  featured_image: '/images/hero-poster.jpg',
+  featured_image: '/images/home-hero.jpg',
   blocks: [
     {
       id: 'hero-block-1',
@@ -22,8 +22,8 @@ export const mockPageData: Page = {
         hero: {
           title: 'Not just fitness, It\'s transformation',
           subtitle: '체형교정과 통증개선의 새로운 기준\n스테이피트니스에서 시작하세요',
-          backgroundVideo: '/videos/hero-bg.mp4',
-          backgroundImage: '/images/hero-poster.jpg',
+          backgroundVideo: '',
+          backgroundImage: '/images/home-hero.jpg',
           ctaButton: {
             text: '무료 체험 신청하기',
             url: '/consultation'
